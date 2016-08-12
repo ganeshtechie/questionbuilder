@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <style type="text/css">
+        .hide
+        { 
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="datawizard">
+
+        <div data-role="toggle-view">
+
+            <div data-role="preview-section">
+
+                <!-- Preview -->
+                <div data-name="question" data-id="1">
+                    <div>
+                        <p>
+                            jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend that you check out the jQuery Learning Center.
+                        </p>
+                    </div>
+                    <div data-role="radio">
+                        <label><input type="radio" /> Yes</label>
+                        <label><input type="radio" /> No</label>
+                    </div>
+                    <div data-role="toolset">
+                        <ul>
+                            <li><a data-name="action-buttons" data-action="edit">Edit</a></li>
+                            <li><a data-name="action-buttons" data-action="delete">Delete</a></li>
+                            <li><a data-name="action-buttons" data-action="moveup">Move Up</a></li>
+                            <li><a data-name="action-buttons" data-action="movedown">Move Down</a></li>
+                        </ul>
+                    </div>
+
+                    <div data-role="toolset-insert">
+                        <a>Insert Questions</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div data-role="edit-section">
+                <div>
+                    <textarea rows="10" cols="50"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div data-role="toggle-view">
+
+            <div data-role="preview-section">
+
+                <!-- Preview -->
+                <div data-name="question" data-id="1">
+                    <div>
+                        <p>
+                            jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. If you're new to jQuery, we recommend that you check out the jQuery Learning Center.
+                        </p>
+                    </div>
+                    <div data-role="radio">
+                        <label><input type="radio" /> Yes</label>
+                        <label><input type="radio" /> No</label>
+                    </div>
+                    <div data-role="toolset">
+                        <ul>
+                            <li><a data-name="action-buttons" data-action="edit">Edit</a></li>
+                            <li><a data-name="action-buttons" data-action="delete">Delete</a></li>
+                            <li><a data-name="action-buttons" data-action="moveup">Move Up</a></li>
+                            <li><a data-name="action-buttons" data-action="movedown">Move Down</a></li>
+                        </ul>
+                    </div>
+
+                    <div data-role="toolset-insert">
+                        <a>Insert Questions</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div data-role="edit-section">
+
+
+            </div>
+
+        </div>
+
+
+        
+
+    </div>
+
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="../src/core.js"></script>
+    <script src="../src/dw.question.js"></script>
+
+</body>
+</html>

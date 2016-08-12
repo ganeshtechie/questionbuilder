@@ -1,0 +1,6 @@
+C:\tfs\BlenderFamily\Libraries\InHouse\DataWizard\AssessmentApp\bin\AssessmentApp.dll.config
+C:\tfs\BlenderFamily\Libraries\InHouse\DataWizard\AssessmentApp\bin\AssessmentApp.dll
+C:\tfs\BlenderFamily\Libraries\InHouse\DataWizard\AssessmentApp\bin\AssessmentApp.pdb
+C:\tfs\BlenderFamily\Libraries\InHouse\DataWizard\AssessmentApp\obj\Debug\AssessmentApp.csprojResolveAssemblyReference.cache
+C:\tfs\BlenderFamily\Libraries\InHouse\DataWizard\AssessmentApp\obj\Debug\AssessmentApp.dll
+C:\tfs\BlenderFamily\Libraries\InHouse\DataWizard\AssessmentApp\obj\Debug\AssessmentApp.pdb

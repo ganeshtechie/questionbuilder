@@ -1,0 +1,51 @@
+﻿<div data-container="question-editor">
+  <div data-section="question">
+    <div class="form-group" data-role="question">
+      <textarea class="form-control" data-name="title" placeholder="Type your question here..."></textarea>
+    </div>
+
+    <div data-section="scoring">
+      <div class="form-group">
+        <label>Have scores on: </label>
+        <select class="form-control" data-name="scoring-method">
+          {{#each allowed_scoring_methods }}
+          <option value="{{ value }}">{{ title }}</option>
+          {{/each }}
+        </select>      
+      </div>
+      <div class="form-group" data-section="question-scoring">
+        <input type="text" class="form-control" data-name="question-score" placeholder="Enter your score" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <select data-name="choice-types" class="form-control">
+        {{#each allowed_choice_types}}
+        <option value="{{ value }}">{{ title }}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <div data-section="choice">
+      </div>
+    </div>
+  </div>
+  <div data-section="tagging">
+    <div class="form-group">
+      <!-- Tags should go here -->
+      <h5>Tag Question:</h5>
+      <select class="form-control" data-name="tags" placeholder="Type the tag name and press 'Enter'" multiple=""></select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>
+      <input type="checkbox" data-name="required" /> Required
+    </label>
+    <label>
+      <input type="checkbox" data-name="shuffle" /> Randomize Choice
+    </label>
+  </div>
+  <div class="form-group">
+    <button class="btn btn-primary" data-name="save-question">Save</button>
+  </div>
+</div>

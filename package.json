@@ -1,0 +1,23 @@
+{
+  "name": "datawizard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ganesh NR",
+  "license": "MIT",
+  "dependencies": {
+    "bower": "^1.7.9",
+    "choices.js": "^1.0.60",
+    "grunt": "^1.0.1",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-handlebars": "^1.0.0",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}
