@@ -1,4 +1,4 @@
-﻿<div data-role="toggle"  data-name="question-shell" data-qid="{{ id }}">
+<div data-role="toggle"  data-name="question-shell" data-qid="{{ id }}">
 
   <div data-view="">
     <div data-container="question" data-role="checkbox-question-type" data-value="{{ id }}">
@@ -9,7 +9,7 @@
         {{#each choices}}
         <div class="checkbox">
           <label>
-            <input type="radio" data-value="{{ id }}" name="question{{ ../id  }}" /> {{ title }}
+            <input type="checkbox" data-value="{{ id }}" name="question{{ ../id  }}" /> {{ title }}
           </label>
         </div>
         {{/each }}

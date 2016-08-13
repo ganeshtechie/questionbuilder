@@ -1,11 +1,9 @@
 (function() {
 
 
-    function reload() {
-        $("[data-role='toggle']").dwToggle();
-    }
 
     $.widget("dw.shell", {
+
 
         options: {
 
@@ -13,9 +11,16 @@
 
             description: "A Basic health assessment", // wizard description
 
-            allowed_choice_types: ["checkbox", "radiobutton", "textbox", "datepicker", "email", "integer", "richtext"], // load the different plugins based on the question types needed for the wizard
+            // load the different plugins based on the question types needed for the wizard
+            allowed_choice_types: [
+                { title: "Multiple Choice", value: "checkbox" },
+                { title: "Single Choice", value: "radiobutton" },
+                { title: "Single Line", value: "singleline" },
+                { title: "Multie Line", value: "multiline" },
+            ],
 
-            default_question: "radiobutton",
+            // the default questions will be of this choice type. 
+            default_choice_type: "checkbox",
 
             minimum_no_of_questions_required: 1, // specifies the minimum no of questions required. Default is "1"
 
@@ -38,15 +43,21 @@
 
             tagging: "yes", // enables the ui to tag questions with the given tags
 
-            tags: ["depression", "anxiety" ], // tags which can be added to a question
+            tags: ["depression", "anxiety"], // tags which can be added to a question
 
-            allowed_scoring_methods: ["choice", "question"], // enables the ui to add scores either on question / choices
+            allowed_scoring_methods: [{ title: "Question", value: "question" }, { title: "Choice", value: "choice" }], // enables the ui to add scores either on question / choices
 
+            default_scoring_method: "question",
 
             /* only the allowed options will be enabled in the UI. leave it as empty to allow all the possible options
              * like "edit", "delete", "insert", "move"
              */
-            allowed_options: ["edit", "delete"]
+            allowed_options: ["edit", "delete"],
+
+            // this is a default question which will appear when user clicks on insert button
+            default_question: "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+
+            datasource: []
 
         },
 
@@ -55,20 +66,53 @@
 
         _create: function() {
 
+            this.datasource = this.options.datasource;
+
             this._bind();
 
-            var html = window.dw.templates.shell({});
-
-            var question = window.questionFactory(this.options.default_question);
-
-            this.datasource.push(question);
-
-            html += window.renderEngine(question);
+            var html = window.dw.templates.shell({
+                title: this.options.title,
+                description: this.options.description
+            });
 
             this.element.append(html);
 
-            reload();
+            if (this.options.datasource.length === 0)
+                this._initialSetup();
+            else
+                this._bindData();
 
+            this.reload();
+
+        },
+
+        _getNewQuestion: function(choiceType){
+            var question = window.questionFactory(choiceType);
+            question.title = this.options.default_question;
+            return question;
+        },
+
+        _initialSetup: function() {
+            var html = "";
+            var question = this._getNewQuestion(this.options.default_choice_type);
+            this.datasource.push(question);
+            html = window.renderEngine(question);
+            //this.element.append(html);
+            this._addQuestion(html);
+        },
+
+        // initialize all your plugins here
+        reload: function() {
+            this.element.find("[data-role='toggle']").dwToggle();
+        },
+
+        // in edit mode, present the data at first
+        _bindData: function() {
+            var html = "";
+            for (var i = 0; i < this.datasource.length; i++) {
+                html += window.renderEngine(this.datasource[i]);
+            }
+            this.element.append(html);
         },
 
 
@@ -88,7 +132,11 @@
 
                 "click [data-action='delete']": this._deleteQuestion,
 
-                "click [data-name='save-question']": this._saveQuestion,
+                "click [data-action='save']": this._save,
+
+                "click [data-action='save-as-draft']": this._saveAsDraft,
+
+                "click [data-action='cancel']": this._cancel,
 
                 "questionbuildersavequestion  [data-container='edit']": this._onQuestionSaved
 
@@ -96,15 +144,25 @@
 
         },
 
+        _save: function() {
+
+            $(window).trigger("assessment:save", { data: this.datasource });
+
+        },
+
+        _saveAsDraft: function() {},
+
+        _cancel: function() {},
+
         _editQuestion: function(event) {
 
-            _.forEach(this.datasource, function(q){ q.edit = false; });
+            _.forEach(this.datasource, function(q) { q.edit = false; });
 
             var $element = $(event.target);
 
             var questionId = this._getQuestionId($element);
 
-            var question = _.find(this.datasource, { "id" : questionId });
+            var question = _.find(this.datasource, { "id": questionId });
 
             question.edit = true;
 
@@ -118,11 +176,15 @@
 
             var questionId = this._getQuestionId($element);
 
-            var question = _.remove(this.datasource, function(q){  return q.id === questionId; });
+            var question = _.remove(this.datasource, function(q) {
+                return q.id === questionId;
+            });
 
             var questions = this.element.find("[data-name='question-shell']");
 
-            question = _.find(questions, function(obj){  return $(obj).data("qid") === questionId; });
+            question = _.find(questions, function(obj) {
+                return $(obj).data("qid") === questionId;
+            });
 
             question.remove();
 
@@ -136,7 +198,7 @@
 
             var index = _.findIndex(this.datasource, { id: questionId });
 
-            var question = window.questionFactory(this.options.default_question);
+            var question = this._getNewQuestion(this.options.default_choice_type);
 
             question.id = this._getNewQuestionId();
 
@@ -147,13 +209,13 @@
 
             html = $(html);
 
-            var currentQuestion = _.find(this.element.find("[data-name='question-shell']"), function(q){
+            var currentQuestion = _.find(this.element.find("[data-name='question-shell']"), function(q) {
                 return $(q).data("qid") === questionId;
             });
 
             html.insertAfter(currentQuestion);
 
-            reload();
+            this.reload();
 
         },
 
@@ -177,8 +239,6 @@
 
         },
 
-
-
         _saveQuestion: function(event) {
 
             var $element = $(event.target);
@@ -190,19 +250,24 @@
 
             console.log(args.data);
 
+            //_.forEach(this.datasource, function(q){ q.edit = false; });
+
             this._replaceWithNewView(args.data);
         },
 
         _replaceWithNewView: function(question) {
 
-            var html = window.renderEngine(question);
+            var index = _.findIndex(this.datasource, _.find(this.datasource, { id: question.id }));
 
+            this.datasource.splice(index, 1, question);
+
+            var html = window.renderEngine(question);
 
             var questionToReplace = this.element.find("[data-name='question-shell'][data-qid='" + question.id + "']");
 
             questionToReplace.replaceWith($(html));
 
-            reload();
+            this.reload();
 
         },
 
@@ -223,9 +288,7 @@
                 container = element.closest("[data-container='question']");
             var editView = toggler.find("[data-view]:last");
 
-            var config = _.pick(this.options, [ "allowed_choice_types", "scoring", "default_score", "allowed_scoring_methods", "tagging", "tags" ]);
-
-            console.log(config);
+            var config = _.pick(this.options, ["allowed_choice_types", "scoring", "default_score", "allowed_scoring_methods", "default_scoring_method", "tagging", "tags"]);
 
             config.data = question;
 
@@ -234,24 +297,24 @@
             toggler.data("dwToggle").toggle();
         },
 
-
-
-        _addNewQuestion: function() {
-
-            var question = window.questionFactory("checkbox");
-
-            var html = window.renderEngine(question);
-
-            this.element.append(html);
-
-            reload();
-
+        _addQuestion: function(html) {
+            this.element.find("[data-section='body']").append(html);
         }
-
 
     });
 
-    $("[data-role='shell']").shell({});
+    $("[data-role='shell']").shell({
+        scoring: "yes",
+        allowed_scoring_methods: [{ title: "Choice Level", value: "choice" }, { title: "Question Level", value: "question" }],
+        allowed_choice_types: [{ title: "Radio Buttons", value: "radiobutton" }],
+        default_choice_type: "radiobutton"
+    });
+
+    $(window).on("assessment:save", function(event, args) {
+
+        console.log(args);
+
+    });
 
 
 })();

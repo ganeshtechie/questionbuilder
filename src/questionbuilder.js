@@ -34,8 +34,8 @@
             allowed_choice_types: [
                 { title: "Multiple Choice", value: "checkbox" },
                 { title: "Single Choice", value: "radiobutton" },
-                { title: "Single Line", value: "textbox" },
-                { title: "Multie Line", value: "textarea" },
+                { title: "Single Line", value: "singleline" },
+                { title: "Multie Line", value: "multiline" },
             ],
 
             // scoring 
@@ -59,7 +59,10 @@
         },
 
         _hideScore: function() {
-            if (this.options.scoring === "no" || _.find(this.options.allowed_scoring_methods, { value: "question" }).length === 0) {
+
+            var isScoringMethodIsQuestion = _.find(this.options.allowed_scoring_methods, { value: "question" });
+
+            if (this.options.scoring === "no" || !isScoringMethodIsQuestion) {
                 this.element.find(this.options.selectors.scoringSection).hide();
             } else {
                 this.scoringMethod = this.options.default_scoring_method;
@@ -87,9 +90,7 @@
                     });
 
                     callback(source, "title", "title");
-
                 });
-
             }
         },
 
@@ -109,10 +110,9 @@
             this.element.find("[data-name='choice-types']").trigger("change");
 
             this._bindData();
-
         },
 
-        
+
 
 
         _bind: function() {
@@ -146,30 +146,36 @@
             this.element.find(this.options.selectors.choiceTypes).trigger("change");
         },
 
-        _onchoiceTypeChanges: function(event) {
+        _onchoiceTypeChanges: function(event, args) {
+
             this.choiceType = $(event.target).val();
 
             var choice = this.element.find(this.options.selectors.choiceSection);
 
-            var pluginName = choice.data("name");
+            var pluginName = choice.data("pluginName");
 
-            if (pluginName) choice.data(pluginName).destroy();
+            if (pluginName && choice.data(pluginName))
+                choice.data(pluginName).destroy();
+
+            if (args) choice.data("value", args.value);
 
             var settings = {
                 name: "qbCheckbox",
                 add_more_choice: this.options.add_more_choice,
                 max_no_of_chocies: this.options.max_no_of_chocies,
-                enable_score: (this.scoringMethod === "choice" && this.options.scoring === "yes") ? "yes" : "no" 
+                enable_score: (this.scoringMethod === "choice" && this.options.scoring === "yes") ? "yes" : "no",
+                persist_value: true
             };
 
             switch (this.choiceType) {
                 case "checkbox":
-                    settings.name = "qbCheckbox";
                     this.choice = choice.qbCheckbox(settings).data("qbCheckbox");
                     break;
                 case "radiobutton":
-                    settings.name = "qbRadiobutton";
                     this.choice = choice.qbRadiobutton(settings).data("qbRadiobutton");
+                    break;
+                case "singleline":
+                    this.choice = choice.qbSingleLine(settings).data("qbSingleLine");
                     break;
                 default:
                     break;
@@ -182,7 +188,7 @@
 
             var question = {};
 
-            question.id = 1;
+            question.id = this.options.data ? this.options.data.id: 1 ;
 
             question.required = this.element.find("[data-name='required']").is(":checked");
             question.randomizeChoice = this.element.find("[data-name='shuffle']").is(":checked");
@@ -215,29 +221,25 @@
 
         _bindData: function() {
 
-            if (typeof this.options.data === "object") {
+            if (this.options.data) {
 
                 var question = this.options.data,
                     selectors = this.options.selectors;
 
-                this.element.find(selectors.choiceSection).data("value", question.choices);
+                //this.element.find(selectors.choiceSection).data("value", question.choices);
 
                 this.element.find(selectors.questionTitle).val(question.title);
 
                 this.element.find(selectors.scoringMethod).val(question.scoringMethod).trigger("change");
 
-                this.element.find(selectors.choiceTypes).val(question.type).trigger("change");
+                this.element.find(selectors.choiceTypes).val(question.type).trigger("change", { value: question.choices });
 
                 if (question.scoringMethod === "question")
                     this.element.find(selectors.questionScore).val(question.score);
 
-                
-
-
-                if (question.tags.length > 0) {
+                if (question.tags && question.tags.length > 0) {
                     // set the tags
                 }
-
 
                 this.element.find(selectors.required).prop("checked", question.required);
                 this.element.find(selectors.shuffle).prop("checked", question.randomizeChoice);
@@ -251,20 +253,33 @@
 
     });
 
-
     $("[data-section='question-edit']").questionbuilder({
         data: {
-            title: "Sample Question",
-            type: "checkbox",
-            scoringMethod: "choice",
-            score: 10,
-            choices: [{ id: 1, title: "simple question", score: 10 }, { id: 2, title: "test 2", score: 20 }],
-            randomizeChoice: false,
-            tags: [],
-            required: false
+            "type": "radiobutton",
+            "title": "Sample Question",
+            "id": 2,
+            "scoringMethod": "choice",
+            "choices": [{ "id": 1, "title": "Yes", "score": 10 }, { "id": 2, "title": "No", "score": 0 }],
+            "edit": true
         }
     });
 
+
+    /*
+
+        $("[data-section='question-edit']").questionbuilder({
+            data: {
+                title: "Sample Question",
+                type: "checkbox",
+                scoringMethod: "choice",
+                score: 10,
+                choices: [{ id: 1, title: "simple question", score: 10 }, { id: 2, title: "test 2", score: 20 }],
+                randomizeChoice: false,
+                tags: [],
+                required: false
+            }
+        });
+    */
     //$("[data-action='edit']").on("click", function () {
 
     //    $(this).closest("[data-role='toggle']").data("dwToggle").toggle();
