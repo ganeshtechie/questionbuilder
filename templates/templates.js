@@ -145,6 +145,10 @@ this["dw"]["templates"]["shell_radiobutton"] = Handlebars.template({"1":function
     + "\" /> "
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "\r\n          </label>\r\n        </div>\r\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "        <span class=\"label label-info\">"
+    + container.escapeExpression(container.lambda(depth0, depth0))
+    + "</span>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
@@ -156,6 +160,8 @@ this["dw"]["templates"]["shell_radiobutton"] = Handlebars.template({"1":function
     + ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "</p>\r\n      </div>\r\n      <div>\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.choices : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "      </div>\r\n      <div>\r\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.tags : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </div>\r\n      <div>\r\n        <ul>\r\n          <li>\r\n            <a data-action=\"edit\">Edit</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"delete\">Delete</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"insert\">Insert</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"moveup\">Move Up</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"movedown\">Move Down</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div data-view=\"\">\r\n\r\n    <h2>Edit Question</h2>\r\n\r\n    <div data-container=\"edit\">\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n</div>";
 },"useData":true,"useDepths":true});
 

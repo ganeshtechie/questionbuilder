@@ -1,20 +1,27 @@
-(function(){
-	
-	"use strict";
+(function() {
 
-	$.fn.arrangeActionButtons = function(){
+    "use strict";
 
-		var first = this.find("[data-name='question-shell']:first"),
-			last = this.find("[data-name='question-shell']:last");
+    $.fn.arrangeActionButtons = function() {
 
-			console.log(first);console.log(last);
+        console.log("rearranging...");
 
-			first.find("[data-action='moveup']").closest("li").hide();
-			last.find("[data-action='movedown']").closest("li").hide();
+        var first = this.find("[data-name='question-shell']:first"),
+            last = this.find("[data-name='question-shell']:last");
+
+        this.find("[data-name='question-shell']").each(function() {
+            $(this).find("[data-action]").each(function() {
+                $(this).closest("li").show();
+            });
+        });
+
+
+        first.find("[data-action='moveup']").closest("li").hide();
+        last.find("[data-action='movedown']").closest("li").hide();
 
 
 
 
-	};
+    };
 
 })();

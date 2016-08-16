@@ -15,6 +15,11 @@
         {{/each }}
       </div>
       <div>
+        {{#each tags}}
+        <span class="label label-info">{{ . }}</span>
+        {{/each}}
+      </div>
+      <div>
         <ul>
           <li>
             <a data-action="edit">Edit</a>

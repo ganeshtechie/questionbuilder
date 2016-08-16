@@ -189,6 +189,8 @@
 
         _deleteQuestion: function(event) {
 
+            if(this.datasource.length === 1) return;
+
             var $element = $(event.target);
 
             var questionId = this._getQuestionId($element);
@@ -205,9 +207,13 @@
 
             question.remove();
 
+            this.reload();
+
         },
 
         _insertQuestion: function(event) {
+
+            if(this.options.maximum_no_of_questions_allowed <= this.datasource.length) return;
 
             var $element = $(event.target);
 
@@ -325,7 +331,8 @@
         allowed_scoring_methods: [{ title: "Choice Level", value: "choice" }, { title: "Question Level", value: "question" }],
         allowed_choice_types: [{ title: "Radio Buttons", value: "radiobutton" }],
         default_choice_type: "radiobutton",
-        datasource: [{"id":1,"required":false,"randomizeChoice":false,"title":"Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.","type":"radiobutton","scoringMethod":"choice","score":null,"choices":[{"score":10,"correct":false,"title":"Yes222","id":1},{"score":0,"correct":false,"title":"No3333","id":2}],"tags":["depression"]},{"type":"radiobutton","title":"Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.","id":2,"scoringMethod":"choice","choices":[{"id":1,"title":"Yes","score":10},{"id":2,"title":"No","score":0}],"edit":false}]
+        maximum_no_of_questions_allowed: 3,
+        datasource: [{ "id":1,"required":false,"randomizeChoice":false,"title":"Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.","type":"radiobutton","scoringMethod":"choice","score":null,"choices":[{"score":10,"correct":false,"title":"Yes222","id":1},{"score":0,"correct":false,"title":"No3333","id":2}],"tags":["depression"]},{"type":"radiobutton","title":"Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.","id":2,"scoringMethod":"choice","choices":[{"id":1,"title":"Yes","score":10},{"id":2,"title":"No","score":0}],"edit":false}],
     });
 
     $(window).on("assessment:save", function(event, args) {
