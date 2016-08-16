@@ -1,12 +1,12 @@
-<div data-name="play-question">
+<div data-name="play-question" data-qid="{{ id }}">
     <div>
         <p>{{{title}}}</p>
     </div>
     <div data-choice-type="{{ type }}">
-    	{{#each choices}}
+        {{#each choices}}
         <div class="radio" data-choice-item data-value="{{ id }}">
-            <label class="isclickable">
-                <input type="radio" class="isclickable" value="{{ id }}"> {{ ./title }}
+            <label>
+                <input type="radio" class="clickable" name="question{{ ../id }}" value="{{ id }}"> {{ ./title }}
             </label>
         </div>
         {{/each }}

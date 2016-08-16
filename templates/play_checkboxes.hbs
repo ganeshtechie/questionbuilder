@@ -1,11 +1,11 @@
-<div data-name="play-question">
+<div data-name="play-question" data-qid="{{ id }}">
     <div>
         <p>{{{title}}}</p>
     </div>
     <div data-choice-type="{{ type }}">
     	{{#each choices}}
         <div class="checkbox" data-choice-item data-value="{{ id }}">
-            <label class="clickable">
+            <label>
                 <input type="checkbox" class="clickable" value="{{ id }}"> {{ ./title }}
             </label>
         </div>
