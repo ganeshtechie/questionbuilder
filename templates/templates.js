@@ -80,7 +80,7 @@ this["dw"]["templates"]["play_singleline"] = Handlebars.template({"compiler":[7,
     + ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "</p>\r\n    </div>\r\n    <div data-choice-type=\""
     + alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"type","hash":{},"data":data}) : helper)))
-    + "\">\r\n        <div class=\"checkbox\" data-choice-item>\r\n           <input type=\"text\" class=\"form-control\"  />\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+    + "\">\r\n        <div class=\"form-group\" data-choice-item>\r\n           <input type=\"text\" class=\"form-control\"  />\r\n        </div>\r\n    </div>\r\n</div>\r\n";
 },"useData":true});
 
 this["dw"]["templates"]["questioneditor"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -118,7 +118,7 @@ this["dw"]["templates"]["radiobutton"] = Handlebars.template({"1":function(conta
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div data-role=\"choice-item\" class=\"form-group form-inline ui-state-default\">\r\n  <input type=\"hidden\" data-name=\"uniqueid\" value=\""
+  return "<div class=\"ui-state-default\">\r\n<div class=\"pull-left\"><a href=\"#\"><i class=\"fa fa-ellipsis-v\" aria-hidden=\"true\"></i></a></div>\r\n<div data-role=\"choice-item\" class=\"form-group form-inline\">\r\n  <input type=\"hidden\" data-name=\"uniqueid\" value=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" />\r\n  <input type=\"radio\" name=\"question"
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
@@ -126,7 +126,7 @@ this["dw"]["templates"]["radiobutton"] = Handlebars.template({"1":function(conta
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</textarea>  \r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.enable_scoring : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  <label>..</label>\r\n  <a data-role=\"delete-choice\">X</a>\r\n</div>";
+    + "  <div class=\"pull-right\"><a data-role=\"delete-choice\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a></div>\r\n</div>\r\n\r\n</div>\r\n";
 },"useData":true});
 
 this["dw"]["templates"]["shell_checkbox"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
@@ -183,6 +183,20 @@ this["dw"]["templates"]["shell_radiobutton"] = Handlebars.template({"1":function
     + "      </div>\r\n      <div>\r\n        <ul>\r\n          <li>\r\n            <a data-action=\"edit\">Edit</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"delete\">Delete</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"insert\">Insert</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"moveup\">Move Up</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"movedown\">Move Down</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div data-view=\"\">\r\n\r\n    <h2>Edit Question</h2>\r\n\r\n    <div data-container=\"edit\">\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n</div>";
 },"useData":true,"useDepths":true});
 
+this["dw"]["templates"]["shell_singleline"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "<div data-role=\"toggle\"  data-name=\"question-shell\" data-qid=\""
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\r\n\r\n  <div data-view=\"\">\r\n    <div data-container=\"question\" data-role=\"checkbox-question-type\" data-value=\""
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\r\n      <div>\r\n        <p>"
+    + ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "</p>\r\n      </div>\r\n      <div>\r\n        <div class=\"form-group\">\r\n          <input type=\"text\" class=\"form-control\" data-role=\""
+    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.choices : depth0)) != null ? stack1.fieldformat : stack1), depth0))
+    + "\" />\r\n        </div>\r\n      </div>\r\n      <div>\r\n        <ul>\r\n          <li>\r\n            <a data-action=\"edit\">Edit</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"delete\">Delete</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"insert\">Insert</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"moveup\">Move Up</a>\r\n          </li>\r\n          <li>\r\n            <a data-action=\"movedown\">Move Down</a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <div data-view=\"\">\r\n\r\n    <h2>Edit Question</h2>\r\n\r\n    <div data-container=\"edit\">\r\n\r\n    </div>\r\n\r\n  </div>\r\n\r\n</div>";
+},"useData":true});
+
 this["dw"]["templates"]["shell"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function";
 
@@ -204,7 +218,7 @@ this["dw"]["templates"]["singleline"] = Handlebars.template({"1":function(contai
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div>\r\n    <div class=\"form-group\">\r\n        <label>Choose the format:</label>\r\n        <select class=\"form-control\" data-name=\"field-format\">\r\n"
+  return "<div>\r\n    <div class=\"form-group form-inline\">\r\n        <label>Choose the format of response:</label>\r\n        <select class=\"form-control\" data-name=\"field-format\">\r\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.supported_formats : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "        </select>\r\n    </div>\r\n    <div class=\"form-group\">\r\n        <input class=\"form-control\" type=\"text\" />\r\n    </div>\r\n</div>\r\n";
+    + "        </select>\r\n    </div>\r\n    <div class=\"form-group form-inline\" data-section=\"max-len\">\r\n        <label>Maximum Length:</label>\r\n        <input class=\"form-control\" data-name='max-len' type=\"text\" />\r\n    </div>\r\n</div>\r\n";
 },"useData":true});

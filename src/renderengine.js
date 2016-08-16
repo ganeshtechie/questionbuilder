@@ -9,7 +9,10 @@
             html = window.dw.templates.shell_radiobutton(config);
         }else if (config.type === "checkbox") {
             html = window.dw.templates.shell_checkbox(config);
+        }else if (config.type === "singleline") {
+            html = window.dw.templates.shell_singleline(config);
         }
+
 
         return html;
     };

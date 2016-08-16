@@ -143,7 +143,18 @@
 
             this.element.find(this.options.selectors.questionScore).val("");
 
-            this.element.find(this.options.selectors.choiceTypes).trigger("change");
+
+            var previousState = null;
+
+            var pluginName = this.element.find(this.options.selectors.choiceSection).data("pluginName");
+
+            if (pluginName) {
+
+                previousState = this.element.find(this.options.selectors.choiceSection).data(pluginName).val();
+
+            }
+
+            this.element.find(this.options.selectors.choiceTypes).trigger("change", { value: previousState });
         },
 
         _onchoiceTypeChanges: function(event, args) {
@@ -153,6 +164,7 @@
             var choice = this.element.find(this.options.selectors.choiceSection);
 
             var pluginName = choice.data("pluginName");
+
 
             if (pluginName && choice.data(pluginName))
                 choice.data(pluginName).destroy();
@@ -188,7 +200,7 @@
 
             var question = {};
 
-            question.id = this.options.data ? this.options.data.id: 1 ;
+            question.id = this.options.data ? this.options.data.id : 1;
 
             question.required = this.element.find("[data-name='required']").is(":checked");
             question.randomizeChoice = this.element.find("[data-name='shuffle']").is(":checked");

@@ -1,4 +1,6 @@
-<div data-role="choice-item" class="form-group form-inline ui-state-default">
+<div class="ui-state-default">
+<div class="pull-left"><a href="#"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a></div>
+<div data-role="choice-item" class="form-group form-inline">
   <input type="hidden" data-name="uniqueid" value="{{ id }}" />
   <input type="radio" name="question{{ id }}" />
   <textarea data-name="choice" placeholder="Type your choice here" rows="1" class="form-control">{{ title }}</textarea>  
@@ -6,6 +8,7 @@
   <label>Score</label>
   <input type="text" data-name="score" placeholder="Enter the score" value="{{ score }}"  class="form-control" />
   {{/if }}
-  <label>..</label>
-  <a data-role="delete-choice">X</a>
+  <div class="pull-right"><a data-role="delete-choice"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+</div>
+
 </div>

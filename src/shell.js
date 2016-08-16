@@ -85,7 +85,7 @@
 
         },
 
-        _getNewQuestion: function(choiceType){
+        _getNewQuestion: function(choiceType) {
             var question = window.questionFactory(choiceType);
             question.title = this.options.default_question;
             return question;
@@ -158,14 +158,14 @@
 
         _cancel: function() {},
 
-        _moveUp: function(event){
+        _moveUp: function(event) {
             event.preventDefault();
             var $element = $(event.target);
             var questionId = this._getQuestionId($element);
 
         },
 
-        _moveDown: function(event){
+        _moveDown: function(event) {
             event.preventDefault();
             var $element = $(event.target);
             var questionId = this._getQuestionId($element);
@@ -189,7 +189,7 @@
 
         _deleteQuestion: function(event) {
 
-            if(this.datasource.length === 1) return;
+            if (this.datasource.length === 1) return;
 
             var $element = $(event.target);
 
@@ -213,7 +213,7 @@
 
         _insertQuestion: function(event) {
 
-            if(this.options.maximum_no_of_questions_allowed <= this.datasource.length) return;
+            if (this.options.maximum_no_of_questions_allowed <= this.datasource.length) return;
 
             var $element = $(event.target);
 
@@ -329,10 +329,38 @@
     $("[data-role='shell']").shell({
         scoring: "yes",
         allowed_scoring_methods: [{ title: "Choice Level", value: "choice" }, { title: "Question Level", value: "question" }],
-        allowed_choice_types: [{ title: "Radio Buttons", value: "radiobutton" }],
+        allowed_choice_types: [{ title: "Radio Buttons", value: "radiobutton" }, { title: "One Line Textbox", value: "singleline" }],
         default_choice_type: "radiobutton",
         maximum_no_of_questions_allowed: 3,
-        datasource: [{ "id":1,"required":false,"randomizeChoice":false,"title":"Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.","type":"radiobutton","scoringMethod":"choice","score":null,"choices":[{"score":10,"correct":false,"title":"Yes222","id":1},{"score":0,"correct":false,"title":"No3333","id":2}],"tags":["depression"]},{"type":"radiobutton","title":"Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.","id":2,"scoringMethod":"choice","choices":[{"id":1,"title":"Yes","score":10},{"id":2,"title":"No","score":0}],"edit":false}],
+        datasource: [{
+            "id": 1,
+            "required": false,
+            "randomizeChoice": false,
+            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+            "type": "radiobutton",
+            "scoringMethod": "choice",
+            "score": null,
+            "choices": [{ "score": 10, "correct": false, "title": "Yes222", "id": 1 }, { "score": 0, "correct": false, "title": "No3333", "id": 2 }],
+            "tags": ["depression"]
+        }, {
+            "type": "radiobutton",
+            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+            "id": 2,
+            "scoringMethod": "choice",
+            "choices": [{ "id": 1, "title": "Yes", "score": 10 }, { "id": 2, "title": "No", "score": 0 }],
+            "edit": false
+        }, {
+            "id": 3,
+            "required": true,
+            "randomizeChoice": true,
+            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+            "type": "singleline",
+            "scoringMethod": "choice",
+            "score": null,
+            "choices": { "id": 1, "fieldformat": "Free Text", "maximumlength": 120 },
+            "tags": ["anxiety"]
+        }],
+
     });
 
     $(window).on("assessment:save", function(event, args) {

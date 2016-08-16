@@ -25,7 +25,6 @@
             this.element.find("[data-choice-type='radiobutton']").dwplay_radiobutton();
             this.element.find("[data-choice-type='singleline']").dwplay_singleline();
 
-
         },
 
         _bind: function() {

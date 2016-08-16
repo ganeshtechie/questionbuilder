@@ -6,7 +6,7 @@
     function SingleLine(element, options) {
 
         var defaults = {
-            supported_formats: ["Free Text", "Number", "Datepicker", "Time", "Email"]
+            supported_formats: ["Free Text", "Number", "Date", "Time", "Email"]
 
         };
 
@@ -53,28 +53,49 @@
 
         changeFormat: function(format) {
 
-
             switch (format) {
                 case "Free Text":
+                    this.showMaxlength(true);
                     break;
                 case "Number":
+                    this.showMaxlength(true);
                     break;
-                case "Datepicker":
+                case "Date":
+                    this.showMaxlength(false);
                     break;
                 case "Time":
+                    this.showMaxlength(false);
                     break;
                 case "Email":
+                    this.showMaxlength(true);
                     break;
                 default:
                     break;
             }
         },
 
+        showMaxlength: function(args) {
+
+            if (!args)
+                this.element.find("[data-section='max-len']").hide();
+            else
+                this.element.find("[data-section='max-len']").show();
+
+        },
+
         val: function() {
+
+            var format = this.element.find("[data-name='field-format']").val();
+
+            var maximumlength = null;
+
+            if (this.element.find("[data-name='max-len']").val())
+                maximumlength = parseInt(this.element.find("[data-name='max-len']").val());
 
             return {
                 id: 1,
-                fieldformat: this.element.find("[data-name='field-format']").val()                
+                fieldformat: format,
+                maximumlength: maximumlength
             };
 
         },
@@ -120,6 +141,15 @@
 
 
     $("#choices").qbSingleLine();
+
+
+    $("#getValues").on("click", function(event) {
+
+        var api = $("#choices").data("qbSingleLine");
+
+        console.log(api.val());
+
+    });
 
 
 
