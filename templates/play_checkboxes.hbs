@@ -1,0 +1,14 @@
+<div data-name="play-question">
+    <div>
+        <p>{{{title}}}</p>
+    </div>
+    <div data-choice-type="{{ type }}">
+    	{{#each choices}}
+        <div class="checkbox" data-choice-item data-value="{{ id }}">
+            <label class="clickable">
+                <input type="checkbox" class="clickable" value="{{ id }}"> {{ ./title }}
+            </label>
+        </div>
+        {{/each }}
+    </div>
+</div>
