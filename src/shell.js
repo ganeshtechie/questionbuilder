@@ -1,7 +1,6 @@
 (function() {
 
 
-
     $.widget("dw.shell", {
 
 
@@ -104,6 +103,7 @@
         // initialize all your plugins here
         reload: function() {
             this.element.find("[data-role='toggle']").dwToggle();
+            this.element.find("[data-section='body']").arrangeActionButtons();
         },
 
         // in edit mode, present the data at first
@@ -112,7 +112,7 @@
             for (var i = 0; i < this.datasource.length; i++) {
                 html += window.renderEngine(this.datasource[i]);
             }
-            this.element.append(html);
+            this._addQuestion(html);
         },
 
 
@@ -131,6 +131,10 @@
                 "click [data-action='insert']": this._insertQuestion,
 
                 "click [data-action='delete']": this._deleteQuestion,
+
+                "click [data-action='moveup']": this._moveUp,
+
+                "click [data-action='movedown']": this._moveDown,
 
                 "click [data-action='save']": this._save,
 
@@ -153,6 +157,19 @@
         _saveAsDraft: function() {},
 
         _cancel: function() {},
+
+        _moveUp: function(event){
+            event.preventDefault();
+            var $element = $(event.target);
+            var questionId = this._getQuestionId($element);
+
+        },
+
+        _moveDown: function(event){
+            event.preventDefault();
+            var $element = $(event.target);
+            var questionId = this._getQuestionId($element);
+        },
 
         _editQuestion: function(event) {
 
@@ -307,7 +324,8 @@
         scoring: "yes",
         allowed_scoring_methods: [{ title: "Choice Level", value: "choice" }, { title: "Question Level", value: "question" }],
         allowed_choice_types: [{ title: "Radio Buttons", value: "radiobutton" }],
-        default_choice_type: "radiobutton"
+        default_choice_type: "radiobutton",
+        datasource: [{"id":1,"required":false,"randomizeChoice":false,"title":"Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.","type":"radiobutton","scoringMethod":"choice","score":null,"choices":[{"score":10,"correct":false,"title":"Yes222","id":1},{"score":0,"correct":false,"title":"No3333","id":2}],"tags":["depression"]},{"type":"radiobutton","title":"Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.","id":2,"scoringMethod":"choice","choices":[{"id":1,"title":"Yes","score":10},{"id":2,"title":"No","score":0}],"edit":false}]
     });
 
     $(window).on("assessment:save", function(event, args) {
