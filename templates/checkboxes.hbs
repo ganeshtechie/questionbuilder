@@ -1,7 +1,9 @@
 ﻿<div data-role="choice-item" class="form-group form-inline ui-state-default">
   <input type="hidden" data-name="uniqueid" value="{{ id }}" />
   <input type="checkbox" name="question{{ id }}" />
-  <input type="text" data-name="choice" placeholder="Type your choice here" value="{{ title }}" class="form-control" />
+  
+  <textarea data-name="choice" placeholder="Type your choice here" rows="1" class="form-control">{{ title }}</textarea>  
+
   {{#if enable_scoring}}
   <label>Score</label>
   <input type="text" data-name="score" placeholder="Enter the score" value="{{ score }}"  class="form-control" />
