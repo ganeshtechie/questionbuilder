@@ -159,7 +159,13 @@
 
         _onchoiceTypeChanges: function(event, args) {
 
-            this.choiceType = $(event.target).val();
+            var newChoiceType = $(event.target).val();
+
+            if (this.choiceType === newChoiceType) {
+
+            }
+
+            this.choiceType = newChoiceType;
 
             var choice = this.element.find(this.options.selectors.choiceSection);
 
@@ -169,7 +175,7 @@
             if (pluginName && choice.data(pluginName))
                 choice.data(pluginName).destroy();
 
-            if (args) choice.data("value", args.value);
+            if (args && args.value) choice.data("value", args.value);
 
             var settings = {
                 name: "qbCheckbox",

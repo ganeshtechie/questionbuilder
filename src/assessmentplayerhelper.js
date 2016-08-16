@@ -27,6 +27,8 @@
 
             $this.on("click", function(event) {
 
+                event.stopPropagation();
+
                 if(!$(event.target).is(".clickable")) return;
 
                 var closestContainer = $(event.target).closest("[data-name='play-question']");
@@ -58,7 +60,7 @@
 
             var $this = $(this);
 
-            $this.on("click", function(event) {
+            $this.on("click", "input[type='radio']", function(event) {
 
                 if(!$(event.target).is(".clickable")) return;
 
