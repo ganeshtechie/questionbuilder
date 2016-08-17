@@ -56,10 +56,11 @@
             // this is a default question which will appear when user clicks on insert button
             default_question: "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
 
+            default_choice: "Untitled Choice {0}",
+
             datasource: []
 
         },
-
 
         datasource: [],
 
@@ -86,8 +87,7 @@
         },
 
         _getNewQuestion: function(choiceType) {
-            var question = window.questionFactory(choiceType);
-            question.title = this.options.default_question;
+            var question = window.questionFactory(choiceType, this.options);
             return question;
         },
 
@@ -142,7 +142,9 @@
 
                 "click [data-action='cancel']": this._cancel,
 
-                "questionbuildersavequestion  [data-container='edit']": this._onQuestionSaved
+                "questionbuildersavequestion  [data-container='edit']": this._onQuestionSaved,
+
+                "questionbuildersavequestioncancelled [data-container='edit']": this._onQuestionEditCancelled
 
             });
 
@@ -162,7 +164,6 @@
             event.preventDefault();
             var $element = $(event.target);
             var questionId = this._getQuestionId($element);
-
         },
 
         _moveDown: function(event) {
@@ -278,6 +279,22 @@
             this._replaceWithNewView(args.data);
         },
 
+        _onQuestionEditCancelled: function(event, args) {
+
+            var question = _.find(this.datasource, { edit: true });
+
+            //this.datasource.splice(index, 1, question);
+
+            var html = window.renderEngine(question);
+
+            var questionToReplace = this.element.find("[data-name='question-shell'][data-qid='" + question.id + "']");
+
+            questionToReplace.replaceWith($(html));
+
+            this.reload();
+
+        },
+
         _replaceWithNewView: function(question) {
 
             var index = _.findIndex(this.datasource, _.find(this.datasource, { id: question.id }));
@@ -305,15 +322,13 @@
 
             var question = _.find(this.datasource, "edit");
 
-            console.log(question);
-
             var toggler = element.closest("[data-role='toggle']"),
                 container = element.closest("[data-container='question']");
             var editView = toggler.find("[data-view]:last");
 
             var config = _.pick(this.options, ["allowed_choice_types", "scoring", "default_score", "allowed_scoring_methods", "default_scoring_method", "tagging", "tags"]);
 
-            config.data = question;
+            config.data = JSON.parse(JSON.stringify(question));
 
             editView.find("[data-container='edit']").questionbuilder(config);
 
@@ -327,18 +342,44 @@
     });
 
     $("[data-role='shell']").shell({
-        scoring: "yes",
-        allowed_scoring_methods: [{ title: "Choice Level", value: "choice" }, { title: "Question Level", value: "question" }],
-        allowed_choice_types: [{ title: "Radio Buttons", value: "radiobutton" }, { title: "One Line Textbox", value: "singleline" }],
+        scoring: "no",
+
+        allowed_scoring_methods: [
+            { title: "Question Level", value: "question" }
+        ],
+
+        tagging: "no",
+
+        tags: [ "hello", "world" ],
+
+        allowed_choice_types: [
+            { title: "Radio Buttons", value: "radiobutton" },
+            { title: "Textbox", value: "singleline" }
+        ],
         default_choice_type: "radiobutton",
-        maximum_no_of_questions_allowed: 3,
+
+        default_question: "Hello World",
+
+        default_choice: "Untitled Choice - {0}"
+        //maximum_no_of_questions_allowed: 3,
+        /*
         datasource: [{
+            "id": 3,
+            "required": true,
+            "randomizeChoice": true,
+            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+            "type": "singleline",
+            "scoringMethod": "question",
+            "score": 1,
+            "choices": { "id": 1, "fieldformat": "Free Text", "maximumlength": 120 },
+            "tags": ["anxiety"]
+        }, {
             "id": 1,
             "required": false,
             "randomizeChoice": false,
             "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
             "type": "radiobutton",
-            "scoringMethod": "choice",
+            "scoringMethod": "question",
             "score": null,
             "choices": [{ "score": 10, "correct": false, "title": "Yes222", "id": 1 }, { "score": 0, "correct": false, "title": "No3333", "id": 2 }],
             "tags": ["depression"]
@@ -346,20 +387,10 @@
             "type": "radiobutton",
             "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
             "id": 2,
-            "scoringMethod": "choice",
+            "scoringMethod": "question",
             "choices": [{ "id": 1, "title": "Yes", "score": 10 }, { "id": 2, "title": "No", "score": 0 }],
             "edit": false
-        }, {
-            "id": 3,
-            "required": true,
-            "randomizeChoice": true,
-            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-            "type": "singleline",
-            "scoringMethod": "choice",
-            "score": null,
-            "choices": { "id": 1, "fieldformat": "Free Text", "maximumlength": 120 },
-            "tags": ["anxiety"]
-        }],
+        }]*/
 
     });
 

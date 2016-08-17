@@ -1,8 +1,10 @@
 <div class="ui-state-default">
 <div class="pull-left"><a href="#"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a></div>
 <div data-role="choice-item" class="form-group form-inline">
+
   <input type="hidden" data-name="uniqueid" value="{{ id }}" />
-  <input type="radio" name="question{{ id }}" />
+  <input type="radio" name="question{{ unique_id }}" />
+
   <textarea data-name="choice" placeholder="Type your choice here" rows="1" class="form-control">{{ title }}</textarea>  
   {{#if enable_scoring}}
   <label>Score</label>

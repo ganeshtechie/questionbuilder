@@ -5,11 +5,7 @@
     function Toggle(element, options) {
 
         this.element = $(element);
-
-        
         this.showMainView();
-        
-
     }
 
     Toggle.prototype.showMainView = function () {

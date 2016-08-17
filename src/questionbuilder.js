@@ -74,7 +74,7 @@
         _hideTags: function() {
             var $this = this;
 
-            if (this.options.allow_tagging_questions === "no") {
+            if (this.options.tagging === "no") {
                 this.element.find(this.options.selectors.taggingSection).hide();
             } else {
 
@@ -123,9 +123,18 @@
 
                 'click [data-name="save-question"]': this._saveQuestion,
 
-                'change [data-name="scoring-method"]': this._onScoringMethodChanges
+                'change [data-name="scoring-method"]': this._onScoringMethodChanges,
+
+                'click [data-name="cancel-question"]': this._cancelChanges
 
             });
+
+        },
+
+        _cancelChanges: function(event) {
+            event.preventDefault();
+
+            this._trigger("savequestioncancelled", this);
 
         },
 
@@ -177,22 +186,37 @@
 
             if (args && args.value) choice.data("value", args.value);
 
-            var settings = {
-                name: "qbCheckbox",
-                add_more_choice: this.options.add_more_choice,
-                max_no_of_chocies: this.options.max_no_of_chocies,
-                enable_score: (this.scoringMethod === "choice" && this.options.scoring === "yes") ? "yes" : "no",
-                persist_value: true
-            };
+            var settings = null;
 
             switch (this.choiceType) {
                 case "checkbox":
+                    settings = {
+                        name: "qbCheckbox",
+                        add_more_choice: this.options.add_more_choice,
+                        max_no_of_chocies: this.options.max_no_of_chocies,
+                        scoring: this.options.scoring === "yes" & this.scoringMethod === "choice" ? "yes" : "no",
+                        persist_value: true,
+                        default_score: this.options.default_score
+                    };
                     this.choice = choice.qbCheckbox(settings).data("qbCheckbox");
                     break;
                 case "radiobutton":
+                    settings = {
+                        name: "qbCheckbox",
+                        add_more_choice: this.options.add_more_choice,
+                        max_no_of_chocies: this.options.max_no_of_chocies,
+                        scoring: this.options.scoring === "yes" & this.scoringMethod === "choice" ? "yes" : "no",
+                        persist_value: true,
+                        default_score: this.options.default_score
+                    };
                     this.choice = choice.qbRadiobutton(settings).data("qbRadiobutton");
                     break;
                 case "singleline":
+                    settings = {
+                        fieldformat: "Number",
+                        maximumlength: 10,
+                        id: 1
+                    };
                     this.choice = choice.qbSingleLine(settings).data("qbSingleLine");
                     break;
                 default:
@@ -237,6 +261,8 @@
             //this.element.closest("[data-role='toggle']").data("dwToggle").toggle();
         },
 
+
+
         _bindData: function() {
 
             if (this.options.data) {
@@ -271,6 +297,11 @@
 
     });
 
+
+
+
+
+
     $("[data-section='question-edit']").questionbuilder({
         data: {
             "type": "radiobutton",
@@ -281,10 +312,7 @@
             "edit": true
         }
     });
-
-
     /*
-
         $("[data-section='question-edit']").questionbuilder({
             data: {
                 title: "Sample Question",

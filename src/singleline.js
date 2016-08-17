@@ -25,10 +25,22 @@
 
         this.element.find("[data-name='field-format']").trigger("change");
 
+        this.bindData();
+
     }
 
 
     SingleLine.prototype = {
+
+        bindData: function(){
+
+            var value = this.element.data("value");
+
+            if(!value) return;
+
+            this.element.find("[data-name='field-format']").val(value.fieldformat).trigger("change");
+            this.element.find("[data-name='max-len']").val(value.maximumlength);
+        },
 
         bind: function() {
 
@@ -107,7 +119,7 @@
             var pluginName = this.element.data("pluginName");
 
             // this will remove all the data attributes
-            this.element.removeData([pluginName, "name"]);
+            this.element.removeData([pluginName, "name", "value"]);
 
         }
 

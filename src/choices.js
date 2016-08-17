@@ -23,11 +23,13 @@
 
             var uniqueId = this.getNewChoiceId();
 
-            var defaultScore = this.options.enable_score === "yes" ? this.options.default_score : null;
+            var choice = window.getChoiceFactory("radiobutton", this.options, [ uniqueId ])[0];
+
+            var defaultScore = this.options.scoring === "yes" ? this.options.default_score : null;
 
             var choiceObj = { id: uniqueId, title: "Untitled Choice " + uniqueId, score: defaultScore };
 
-            return choiceObj;
+            return choice;
         },
 
         addChoice: function() {
@@ -37,6 +39,8 @@
             this.choices.push(choiceObj);
 
             var data = $.extend(this.getConfigForHTML(), choiceObj);
+
+            console.log(data);
 
             var choice = this.options.templates.choice(data);
 
@@ -57,7 +61,8 @@
         getConfigForHTML: function() {
 
             return {
-                enable_scoring: this.options.enable_score === "yes"
+                enable_scoring: this.options.scoring === "yes",
+                unique_id: this.options.unique_id
             };
 
         },
@@ -69,19 +74,18 @@
 
             this.choiceContainer.find("[data-role='choice-item']").each(function() {
 
-                var value, score, uniqueid, correct, choice = {};
+                var value, score = null, uniqueid, correct, choice = {};
 
                 value = $(this).find("[data-name='choice']").val();
 
                 uniqueid = parseInt($(this).find("[data-name='uniqueid']").val());
 
-                if ($this.options.enable_score === "yes") {
+                correct = $(this).find("[type='checkbox']").is(":checked");
+                choice.correct = correct;
+
+                if ($this.options.scoring === "yes") {
                     score = $(this).find("[data-name='score']").val() === "" ? "" : parseInt($(this).find("[data-name='score']").val());
-                    correct = $(this).find("[type='checkbox']").is(":checked");
-
-
                     choice.score = score;
-                    choice.correct = correct;
                 }
 
                 choice.title = value;
@@ -155,7 +159,7 @@
 
 
             // #4 Scores must be a valid integer
-            if (this.options.enable_score === "yes") {
+            if (this.options.scoring === "yes") {
                 for (var i = 0; i < choices.length; i++) {
                     var score = choices[i].score;
 
@@ -189,8 +193,6 @@
 
     (function() {
 
-
-
         var Checkbox = function(element, options) {
 
             var $this = this;
@@ -203,10 +205,13 @@
                 min_no_of_choices: 2,
                 add_more_choice: "yes",
                 max_no_of_chocies: 4,
-                enable_score: "yes",
+                scoring: "yes",
                 persist_value: true,
-                default_score: 1
+                default_choice: "Untitled Choice - {0}",
+                default_score: 1,
+                unique_id: 1 // mostly it will be the question id, which is used to add in the name of the input elements for grouping
             };
+
 
             this.options = $.extend(defaults, options);
 
@@ -230,7 +235,9 @@
 
             // if default choices are provided, make it available in the UI for the user to modify
             for (var i = 0; i < this.choices.length; i++) {
-                this.choiceContainer.append(this.getChoiceHtml(this.choices[i]));
+                var choiceHTML = $(this.getChoiceHtml(this.choices[i]));
+                this.choiceContainer.append(choiceHTML);
+                if(this.choices[i].correct === true) choiceHTML.find("input[type='checkbox']").prop("checked", true);
             }
 
 
@@ -270,9 +277,11 @@
                 min_no_of_choices: 2,
                 add_more_choice: "yes",
                 max_no_of_chocies: 4,
-                enable_score: "yes",
+                scoring: "yes",
                 persist_value: true,
-                default_score: 1
+                default_score: 1,
+                default_choice: "Untitled Choice",
+                unique_id: 1 // mostly it will be the question id, which is used to add in the name of the input elements for grouping
             };
 
             this.options = $.extend(defaults, options);
@@ -356,7 +365,7 @@
                     return;
                 }
 
-                var radiobutton = new Radiobutton(element, options);
+                var radiobutton = new Checkbox(element, options);
 
                 element.data("pluginName", "qbRadiobutton");
 
@@ -366,16 +375,21 @@
 
         };
 
-
     })();
 
 
+    // score, title, id, correct - are the properties
 
-
-// score, title, id, correct - are the properties
+    $("#choices").data("value", [{"correct":false,"title":"Untitled Choice - 1","id":1},{"correct":true,"title":"Untitled Choice - 5","id":5},{"correct":true,"title":"Untitled Choice - 4","id":4},{"correct":true,"title":"Untitled Choice - 2","id":2},{"correct":false,"title":"Untitled Choice - 3","id":3}]);
 
     $("#choices").qbRadiobutton({
-        max_no_of_chocies: 4
+        max_no_of_chocies: 99,
+        scoring: "no",
+        allowed_scoring_methods: [{ value: "choice" }],
+        default_choice: "Untitled Choice - {0}",
+        //scoring_method: "choice",
+        default_score: 1,
+        unique_id: 1
     });
 
 
@@ -387,9 +401,9 @@
 
         checkbox.destroy();
 
-        $("#choices").qbCheckbox({
+        $("#choices")[name]({
             max_no_of_chocies: 4,
-            enable_score: "no"
+            scoring: "no"
         });
 
         console.log(checkbox);
@@ -412,6 +426,8 @@
         }
 
     });
+/*
+    */
 
 
 })();

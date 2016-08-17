@@ -12,8 +12,8 @@ this["dw"]["templates"]["checkboxes"] = Handlebars.template({"1":function(contai
 
   return "<div data-role=\"choice-item\" class=\"form-group form-inline ui-state-default\">\r\n  <input type=\"hidden\" data-name=\"uniqueid\" value=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\" />\r\n  <input type=\"checkbox\" name=\"question"
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\" />\r\n  <input type=\"checkbox\" title=\"'Check' to mark this choice as correct\" name=\"question"
+    + alias4(((helper = (helper = helpers.unique_id || (depth0 != null ? depth0.unique_id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unique_id","hash":{},"data":data}) : helper)))
     + "\" />\r\n  \r\n  <textarea data-name=\"choice\" placeholder=\"Type your choice here\" rows=\"1\" class=\"form-control\">"
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</textarea>  \r\n\r\n"
@@ -106,7 +106,7 @@ this["dw"]["templates"]["questioneditor"] = Handlebars.template({"1":function(co
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.allowed_scoring_methods : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "        </select>      \r\n      </div>\r\n      <div class=\"form-group\" data-section=\"question-scoring\">\r\n        <input type=\"text\" class=\"form-control\" data-name=\"question-score\" placeholder=\"Enter your score\" />\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\">\r\n      <select data-name=\"choice-types\" class=\"form-control\">\r\n"
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.allowed_choice_types : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "      </select>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <div data-section=\"choice\">\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div data-section=\"tagging\">\r\n    <div class=\"form-group\">\r\n      <!-- Tags should go here -->\r\n      <h5>Tag Question:</h5>\r\n      <select class=\"form-control\" data-name=\"tags\" placeholder=\"Type the tag name and press 'Enter'\" multiple=\"\"></select>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>\r\n      <input type=\"checkbox\" data-name=\"required\" /> Required\r\n    </label>\r\n    <label>\r\n      <input type=\"checkbox\" data-name=\"shuffle\" /> Randomize Choice\r\n    </label>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <button class=\"btn btn-primary\" data-name=\"save-question\">Preview Question</button>\r\n  </div>\r\n</div>";
+    + "      </select>\r\n    </div>\r\n    <div class=\"form-group\">\r\n      <div data-section=\"choice\">\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div data-section=\"tagging\">\r\n    <div class=\"form-group\">\r\n      <!-- Tags should go here -->\r\n      <h5>Tag Question:</h5>\r\n      <select class=\"form-control\" data-name=\"tags\" placeholder=\"Type the tag name and press 'Enter'\" multiple=\"\"></select>\r\n    </div>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label>\r\n      <input type=\"checkbox\" data-name=\"required\" /> Required\r\n    </label>\r\n    <label>\r\n      <input type=\"checkbox\" data-name=\"shuffle\" /> Randomize Choice\r\n    </label>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <button class=\"btn btn-primary\" data-name=\"save-question\">Preview Question</button>\r\n    <button class=\"btn btn-default\" data-name=\"cancel-question\">Reset</button>\r\n  </div>\r\n</div>";
 },"useData":true});
 
 this["dw"]["templates"]["radiobutton"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -118,11 +118,11 @@ this["dw"]["templates"]["radiobutton"] = Handlebars.template({"1":function(conta
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class=\"ui-state-default\">\r\n<div class=\"pull-left\"><a href=\"#\"><i class=\"fa fa-ellipsis-v\" aria-hidden=\"true\"></i></a></div>\r\n<div data-role=\"choice-item\" class=\"form-group form-inline\">\r\n  <input type=\"hidden\" data-name=\"uniqueid\" value=\""
+  return "<div class=\"ui-state-default\">\r\n<div class=\"pull-left\"><a href=\"#\"><i class=\"fa fa-ellipsis-v\" aria-hidden=\"true\"></i></a></div>\r\n<div data-role=\"choice-item\" class=\"form-group form-inline\">\r\n\r\n  <input type=\"hidden\" data-name=\"uniqueid\" value=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" />\r\n  <input type=\"radio\" name=\"question"
-    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\" />\r\n  <textarea data-name=\"choice\" placeholder=\"Type your choice here\" rows=\"1\" class=\"form-control\">"
+    + alias4(((helper = (helper = helpers.unique_id || (depth0 != null ? depth0.unique_id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unique_id","hash":{},"data":data}) : helper)))
+    + "\" />\r\n\r\n  <textarea data-name=\"choice\" placeholder=\"Type your choice here\" rows=\"1\" class=\"form-control\">"
     + alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</textarea>  \r\n"
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.enable_scoring : depth0),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
@@ -156,7 +156,7 @@ this["dw"]["templates"]["shell_checkbox"] = Handlebars.template({"1":function(co
 this["dw"]["templates"]["shell_radiobutton"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "        <div class=\"checkbox\">\r\n          <label>\r\n            <input type=\"radio\" data-value=\""
+  return "        <div class=\"radio\">\r\n          <label>\r\n            <input type=\"radio\" data-value=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" name=\"question"
     + alias4(container.lambda((depths[1] != null ? depths[1].id : depths[1]), depth0))

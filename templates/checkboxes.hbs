@@ -1,6 +1,6 @@
 ﻿<div data-role="choice-item" class="form-group form-inline ui-state-default">
   <input type="hidden" data-name="uniqueid" value="{{ id }}" />
-  <input type="checkbox" name="question{{ id }}" />
+  <input type="checkbox" title="'Check' to mark this choice as correct" name="question{{ unique_id }}" />
   
   <textarea data-name="choice" placeholder="Type your choice here" rows="1" class="form-control">{{ title }}</textarea>  
 
