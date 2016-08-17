@@ -30,37 +30,6 @@
 
             },
 
-
-            allowed_choice_types: [{
-                title: "Multiple Choice",
-                value: "checkbox"
-            }, {
-                title: "Single Choice",
-                value: "radiobutton"
-            }, {
-                title: "Single Line",
-                value: "singleline"
-            }, {
-                title: "Multie Line",
-                value: "multiline"
-            }, ],
-
-            // scoring 
-            scoring: "yes",
-            default_scoring_method: "choice",
-            default_score: 1, // not used
-            allowed_scoring_methods: [{
-                title: "Question",
-                value: "question"
-            }, {
-                title: "Choice",
-                value: "choice"
-            }],
-
-            // tags
-            tagging: "yes",
-            tags: ["depression", "anxitey", "fear"],
-
             // choices
             add_more_choice: "yes",
             max_no_of_chocies: 10
@@ -68,6 +37,14 @@
 
 
         _create: function() {
+
+            this.options = $.extend({}, $.dw.base_configurations, this.options);
+
+
+
+
+
+
             this._bind();
         },
 
@@ -214,20 +191,19 @@
                         add_more_choice: this.options.add_more_choice,
                         max_no_of_chocies: this.options.max_no_of_chocies,
                         scoring: this.options.scoring === "yes" & this.scoringMethod === "choice" ? "yes" : "no",
-                        persist_value: true,
-                        default_score: this.options.default_score
+                        persist_value: true
                     };
                     this.choice = choice.qbCheckbox(settings).data("qbCheckbox");
                     break;
                 case "radiobutton":
                     settings = {
-                        name: "qbCheckbox",
+                        name: "qbRadiobutton",
                         add_more_choice: this.options.add_more_choice,
                         max_no_of_chocies: this.options.max_no_of_chocies,
                         scoring: this.options.scoring === "yes" & this.scoringMethod === "choice" ? "yes" : "no",
-                        persist_value: true,
-                        default_score: this.options.default_score
+                        persist_value: true
                     };
+
                     this.choice = choice.qbRadiobutton(settings).data("qbRadiobutton");
                     break;
                 case "singleline":

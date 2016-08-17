@@ -25,14 +25,6 @@
 
             var choice = window.getChoiceFactory("radiobutton", this.options, [uniqueId])[0];
 
-            var defaultScore = this.options.scoring === "yes" ? this.options.default_score : null;
-
-            var choiceObj = {
-                id: uniqueId,
-                title: "Untitled Choice " + uniqueId,
-                score: defaultScore
-            };
-
             return choice;
         },
 
@@ -216,7 +208,7 @@
             };
 
 
-            this.options = $.extend(defaults, options);
+            this.options = $.extend({}, defaults, $.dw.base_configurations, options);
 
             // declaration
             this.choices = options.choices || [];
@@ -267,76 +259,76 @@
         };
 
         Checkbox.prototype = baseMethods;
+        /*
+                var Radiobutton = function(element, options) {
 
-        var Radiobutton = function(element, options) {
+                    var $this = this;
 
-            var $this = this;
+                    var defaults = {
+                        templates: {
+                            layout: '<div data-role="choice-list"></div><div><div><a data-name="add-more-choice">Add more choices</a></div></div>',
+                            choice: window.dw.templates.radiobutton
+                        },
+                        min_no_of_choices: 2,
+                        add_more_choice: "yes",
+                        max_no_of_chocies: 4,
+                        scoring: "yes",
+                        persist_value: true,
+                        default_score: 1,
+                        default_choice: "Untitled Choice",
+                        unique_id: 1 // mostly it will be the question id, which is used to add in the name of the input elements for grouping
+                    };
 
-            var defaults = {
-                templates: {
-                    layout: '<div data-role="choice-list"></div><div><div><a data-name="add-more-choice">Add more choices</a></div></div>',
-                    choice: window.dw.templates.radiobutton
-                },
-                min_no_of_choices: 2,
-                add_more_choice: "yes",
-                max_no_of_chocies: 4,
-                scoring: "yes",
-                persist_value: true,
-                default_score: 1,
-                default_choice: "Untitled Choice",
-                unique_id: 1 // mostly it will be the question id, which is used to add in the name of the input elements for grouping
-            };
+                    this.options = $.extend(defaults, options);
 
-            this.options = $.extend(defaults, options);
+                    // declaration
+                    this.choices = options.choices || [];
+                    this.element = element;
+                    this.element.append(this.options.templates.layout);
+                    this.addMoreChoice = this.element.find("[data-name='add-more-choice']");
+                    this.choiceContainer = this.element.find("[data-role='choice-list']");
 
-            // declaration
-            this.choices = options.choices || [];
-            this.element = element;
-            this.element.append(this.options.templates.layout);
-            this.addMoreChoice = this.element.find("[data-name='add-more-choice']");
-            this.choiceContainer = this.element.find("[data-role='choice-list']");
+                    // execution
+                    // you can set the state of the plugin before initialzing, by setting the data-value property
+                    this.choices = element.data("value") || [];
 
-            // execution
-            // you can set the state of the plugin before initialzing, by setting the data-value property
-            this.choices = element.data("value") || [];
+                    if (this.options.persist_value === false) element.removeData("value");
 
-            if (this.options.persist_value === false) element.removeData("value");
+                    if (this.choices.length === 0) {
+                        this.choices.push(this.getChoiceObject());
+                        this.choices.push(this.getChoiceObject());
+                    }
 
-            if (this.choices.length === 0) {
-                this.choices.push(this.getChoiceObject());
-                this.choices.push(this.getChoiceObject());
-            }
-
-            // if default choices are provided, make it available in the UI for the user to modify
-            for (var i = 0; i < this.choices.length; i++) {
-                this.choiceContainer.append(this.getChoiceHtml(this.choices[i]));
-            }
+                    // if default choices are provided, make it available in the UI for the user to modify
+                    for (var i = 0; i < this.choices.length; i++) {
+                        this.choiceContainer.append(this.getChoiceHtml(this.choices[i]));
+                    }
 
 
-            this.element.on("click", "[data-role='delete-choice']", function(event) {
-                event.preventDefault();
-                $this.deleteChoice(this);
-            });
+                    this.element.on("click", "[data-role='delete-choice']", function(event) {
+                        event.preventDefault();
+                        $this.deleteChoice(this);
+                    });
 
-            if (this.options.add_more_choice === "yes") {
+                    if (this.options.add_more_choice === "yes") {
 
-                this.updateAddMoreChoice();
+                        this.updateAddMoreChoice();
 
-                this.addMoreChoice.click(function(event) {
-                    event.preventDefault();
-                    $this.addChoice();
-                });
+                        this.addMoreChoice.click(function(event) {
+                            event.preventDefault();
+                            $this.addChoice();
+                        });
 
-            } else if (this.options.add_more_choice === "no" || this.options.max_no_of_chocies === 1) {
-                this.addMoreChoice.addClass("hide");
-            }
+                    } else if (this.options.add_more_choice === "no" || this.options.max_no_of_chocies === 1) {
+                        this.addMoreChoice.addClass("hide");
+                    }
 
-            this.choiceContainer.sortable();
+                    this.choiceContainer.sortable();
 
-        };
+                };
 
-        Radiobutton.prototype = baseMethods;
-
+                Radiobutton.prototype = baseMethods;
+        */
 
         $.fn.qbCheckbox = function(options) {
 
@@ -405,9 +397,9 @@
         "id": 3
     }]);
 
-    $("#choices").qbRadiobutton({
+    $("#choices").qbCheckbox({
         max_no_of_chocies: 99,
-        scoring: "no",
+        scoring: "yes",
         allowed_scoring_methods: [{
             value: "choice"
         }],
@@ -447,7 +439,7 @@
         if (response instanceof Error) {
 
         } else {
-
+            console.log(response); /*RemoveLogging:skip*/
         }
 
     });

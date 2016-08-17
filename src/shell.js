@@ -79,6 +79,8 @@
 
         _create: function() {
 
+            this.options = $.extend($.dw.base_configurations, this.options);
+
             this.datasource = this.options.datasource;
 
             this._bind();
@@ -350,8 +352,17 @@
             var toggler = element.closest("[data-role='toggle']"),
                 container = element.closest("[data-container='question']");
             var editView = toggler.find("[data-view]:last");
+            /*
+                        var config = _.pick(this.options, ["allowed_choice_types",
+                            "scoring", "default_score",
+                            "allowed_scoring_methods",
+                            "default_scoring_method",
+                            "tagging", "tags",
+                            "default_choice"
+                        ]);
+            */
 
-            var config = _.pick(this.options, ["allowed_choice_types", "scoring", "default_score", "allowed_scoring_methods", "default_scoring_method", "tagging", "tags"]);
+            var config = {};
 
             config.data = JSON.parse(JSON.stringify(question));
 

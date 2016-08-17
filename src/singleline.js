@@ -10,7 +10,7 @@
 
         };
 
-        $.extend(options, defaults);
+        options = $.extend({}, defaults, $.dw.base_configurations, options);
 
         this.options = options;
 

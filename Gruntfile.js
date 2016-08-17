@@ -31,7 +31,7 @@
                     amd: false,
                     processName: function(filePath) {
                         return filePath.replace(/^templates\//, '').replace(/\.hbs$/, '');
-                    }
+                }
                 },
                 files: {
                     'templates/templates.js': ['templates/*.hbs']
