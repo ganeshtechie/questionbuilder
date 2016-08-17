@@ -23,11 +23,15 @@
 
             var uniqueId = this.getNewChoiceId();
 
-            var choice = window.getChoiceFactory("radiobutton", this.options, [ uniqueId ])[0];
+            var choice = window.getChoiceFactory("radiobutton", this.options, [uniqueId])[0];
 
             var defaultScore = this.options.scoring === "yes" ? this.options.default_score : null;
 
-            var choiceObj = { id: uniqueId, title: "Untitled Choice " + uniqueId, score: defaultScore };
+            var choiceObj = {
+                id: uniqueId,
+                title: "Untitled Choice " + uniqueId,
+                score: defaultScore
+            };
 
             return choice;
         },
@@ -39,8 +43,6 @@
             this.choices.push(choiceObj);
 
             var data = $.extend(this.getConfigForHTML(), choiceObj);
-
-            console.log(data);
 
             var choice = this.options.templates.choice(data);
 
@@ -74,7 +76,8 @@
 
             this.choiceContainer.find("[data-role='choice-item']").each(function() {
 
-                var value, score = null, uniqueid, correct, choice = {};
+                var value, score = null,
+                    uniqueid, correct, choice = {};
 
                 value = $(this).find("[data-name='choice']").val();
 
@@ -237,7 +240,7 @@
             for (var i = 0; i < this.choices.length; i++) {
                 var choiceHTML = $(this.getChoiceHtml(this.choices[i]));
                 this.choiceContainer.append(choiceHTML);
-                if(this.choices[i].correct === true) choiceHTML.find("input[type='checkbox']").prop("checked", true);
+                if (this.choices[i].correct === true) choiceHTML.find("input[type='checkbox']").prop("checked", true);
             }
 
 
@@ -380,12 +383,34 @@
 
     // score, title, id, correct - are the properties
 
-    $("#choices").data("value", [{"correct":false,"title":"Untitled Choice - 1","id":1},{"correct":true,"title":"Untitled Choice - 5","id":5},{"correct":true,"title":"Untitled Choice - 4","id":4},{"correct":true,"title":"Untitled Choice - 2","id":2},{"correct":false,"title":"Untitled Choice - 3","id":3}]);
+    $("#choices").data("value", [{
+        "correct": false,
+        "title": "Untitled Choice - 1",
+        "id": 1
+    }, {
+        "correct": true,
+        "title": "Untitled Choice - 5",
+        "id": 5
+    }, {
+        "correct": true,
+        "title": "Untitled Choice - 4",
+        "id": 4
+    }, {
+        "correct": true,
+        "title": "Untitled Choice - 2",
+        "id": 2
+    }, {
+        "correct": false,
+        "title": "Untitled Choice - 3",
+        "id": 3
+    }]);
 
     $("#choices").qbRadiobutton({
         max_no_of_chocies: 99,
         scoring: "no",
-        allowed_scoring_methods: [{ value: "choice" }],
+        allowed_scoring_methods: [{
+            value: "choice"
+        }],
         default_choice: "Untitled Choice - {0}",
         //scoring_method: "choice",
         default_score: 1,
@@ -406,7 +431,7 @@
             scoring: "no"
         });
 
-        console.log(checkbox);
+
 
     });
 
@@ -420,14 +445,14 @@
         var response = choices.val();
 
         if (response instanceof Error) {
-            console.error(response);
+
         } else {
-            console.log(response);
+
         }
 
     });
-/*
-    */
+    /*
+     */
 
 
 })();

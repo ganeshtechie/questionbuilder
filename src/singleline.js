@@ -16,7 +16,9 @@
 
         this.element = element;
 
-        this.element.append(window.dw.templates.singleline({ supported_formats: this.options.supported_formats }));
+        this.element.append(window.dw.templates.singleline({
+            supported_formats: this.options.supported_formats
+        }));
 
         this.element.data("pluginName", "qbSingleLine");
         this.element.data("qbSingleLine", this);
@@ -32,11 +34,11 @@
 
     SingleLine.prototype = {
 
-        bindData: function(){
+        bindData: function() {
 
             var value = this.element.data("value");
 
-            if(!value) return;
+            if (!value) return;
 
             this.element.find("[data-name='field-format']").val(value.fieldformat).trigger("change");
             this.element.find("[data-name='max-len']").val(value.maximumlength);
@@ -159,7 +161,7 @@
 
         var api = $("#choices").data("qbSingleLine");
 
-        console.log(api.val());
+
 
     });
 

@@ -74,7 +74,10 @@
                 var questionId = parseInt($(this).data("qid"));
 
                 if ($(this).data("value"))
-                    responses.push({ questionId: questionId, responses: $(this).data("value") });
+                    responses.push({
+                        questionId: questionId,
+                        responses: $(this).data("value")
+                    });
             });
 
             return responses;
@@ -84,7 +87,7 @@
         _submitResponse: function() {
             var responses = this._getAllResponses();
 
-            console.log(responses);
+
         }
 
 
@@ -97,18 +100,33 @@
             title: "Remove the default list-style and left margin on list items (immediate children only). This only applies to immediate children list items, meaning you will need to add the class for any nested lists as well.",
             id: 1,
             type: "radiobutton",
-            choices: [{ id: 1, title: "Yes" }, { id: 2, title: "No" }]
+            choices: [{
+                id: 1,
+                title: "Yes"
+            }, {
+                id: 2,
+                title: "No"
+            }]
         }, {
             title: "Remove the default list-style and left margin on list items (immediate children only). This only applies to immediate children list items, meaning you will need to add the class for any nested lists as well.",
             id: 2,
             type: "checkbox",
-            choices: [{ id: 1, title: "Yes" }, { id: 2, title: "No" }]
+            choices: [{
+                id: 1,
+                title: "Yes"
+            }, {
+                id: 2,
+                title: "No"
+            }]
         }, {
             title: "Remove the default list-style and left margin on list items (immediate children only). This only applies to immediate children list items, meaning you will need to add the class for any nested lists as well.",
             id: 3,
             type: "singleline",
             format: "plaintext",
-            choices: [{ id: 1, title: "" }]
+            choices: [{
+                id: 1,
+                title: ""
+            }]
         }]
     });
 

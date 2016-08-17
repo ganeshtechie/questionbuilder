@@ -1,54 +1,29 @@
-﻿<div data-role="toggle"  data-name="question-shell" data-qid="{{ id }}">
-
-  <div data-view="">
-    <div data-container="question" data-role="checkbox-question-type" data-value="{{ id }}">
-      <div>
-        <p>{{{ title }}}</p>
-      </div>
-      <div>
-        {{#each choices}}
-        <div class="radio">
-          <label>
-            <input type="radio" data-value="{{ id }}" name="question{{ ../id  }}" /> {{ title }}
-          </label>
+<div data-role="toggle" data-name="question-shell" data-qid="{{ id }}">
+    <div data-view="">
+        <div data-container="question" data-role="checkbox-question-type" data-value="{{ id }}">
+            <div>
+                <p>{{{ title }}}</p>
+            </div>
+            <div> {{#each choices}}
+                <div class="radio">
+                    <label>
+                        <input type="radio" data-value="{{ id }}" name="question{{ ../id  }}" /> {{ title }} </label>
+                </div> {{/each }} </div>
+            <div> {{#each tags}}
+                <span class="label label-info">{{ . }}</span> {{/each}} </div>
+            <div>
+                <ul>
+                    <li> <a data-action="edit">Edit</a> </li>
+                    <li> <a data-action="delete">Delete</a> </li>
+                    <li> <a data-action="insert">Insert</a> </li>
+                    <li> <a data-action="moveup">Move Up</a> </li>
+                    <li> <a data-action="movedown">Move Down</a> </li>
+                </ul>
+            </div>
         </div>
-        {{/each }}
-      </div>
-      <div>
-        {{#each tags}}
-        <span class="label label-info">{{ . }}</span>
-        {{/each}}
-      </div>
-      <div>
-        <ul>
-          <li>
-            <a data-action="edit">Edit</a>
-          </li>
-          <li>
-            <a data-action="delete">Delete</a>
-          </li>
-          <li>
-            <a data-action="insert">Insert</a>
-          </li>
-          <li>
-            <a data-action="moveup">Move Up</a>
-          </li>
-          <li>
-            <a data-action="movedown">Move Down</a>
-          </li>
-        </ul>
-      </div>
     </div>
-  </div>
-
-  <div data-view="">
-
-    <h2>Edit Question</h2>
-
-    <div data-container="edit">
-
+    <div data-view="">
+        <h2>Edit Question</h2>
+        <div data-container="edit"> </div>
     </div>
-
-  </div>
-
 </div>

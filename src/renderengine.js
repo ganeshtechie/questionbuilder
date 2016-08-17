@@ -54,7 +54,7 @@
 
         $.extend(Question, defaults);
 
-        console.log(Question);
+
 
 
         return Question;

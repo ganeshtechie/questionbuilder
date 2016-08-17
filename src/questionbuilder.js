@@ -31,18 +31,31 @@
             },
 
 
-            allowed_choice_types: [
-                { title: "Multiple Choice", value: "checkbox" },
-                { title: "Single Choice", value: "radiobutton" },
-                { title: "Single Line", value: "singleline" },
-                { title: "Multie Line", value: "multiline" },
-            ],
+            allowed_choice_types: [{
+                title: "Multiple Choice",
+                value: "checkbox"
+            }, {
+                title: "Single Choice",
+                value: "radiobutton"
+            }, {
+                title: "Single Line",
+                value: "singleline"
+            }, {
+                title: "Multie Line",
+                value: "multiline"
+            }, ],
 
             // scoring 
             scoring: "yes",
             default_scoring_method: "choice",
             default_score: 1, // not used
-            allowed_scoring_methods: [{ title: "Question", value: "question" }, { title: "Choice", value: "choice" }],
+            allowed_scoring_methods: [{
+                title: "Question",
+                value: "question"
+            }, {
+                title: "Choice",
+                value: "choice"
+            }],
 
             // tags
             tagging: "yes",
@@ -60,7 +73,9 @@
 
         _hideScore: function() {
 
-            var isScoringMethodIsQuestion = _.find(this.options.allowed_scoring_methods, { value: "question" });
+            var isScoringMethodIsQuestion = _.find(this.options.allowed_scoring_methods, {
+                value: "question"
+            });
 
             if (this.options.scoring === "no" || !isScoringMethodIsQuestion) {
                 this.element.find(this.options.selectors.scoringSection).hide();
@@ -86,7 +101,9 @@
                 }).ajax(function(callback) {
 
                     var source = _.map($this.options.tags, function(tag) {
-                        return { title: tag };
+                        return {
+                            title: tag
+                        };
                     });
 
                     callback(source, "title", "title");
@@ -163,7 +180,9 @@
 
             }
 
-            this.element.find(this.options.selectors.choiceTypes).trigger("change", { value: previousState });
+            this.element.find(this.options.selectors.choiceTypes).trigger("change", {
+                value: previousState
+            });
         },
 
         _onchoiceTypeChanges: function(event, args) {
@@ -249,14 +268,18 @@
 
             if (choice instanceof Error) { /* show this error in the page  */
                 return;
-            } else { question.choices = choice; }
+            } else {
+                question.choices = choice;
+            }
 
             if (this.options.tagging === "yes")
                 question.tags = this.tag.getValue(true);
 
-            console.log(question);
 
-            this._trigger("savequestion", this, { data: question });
+
+            this._trigger("savequestion", this, {
+                data: question
+            });
 
             //this.element.closest("[data-role='toggle']").data("dwToggle").toggle();
         },
@@ -276,7 +299,9 @@
 
                 this.element.find(selectors.scoringMethod).val(question.scoringMethod).trigger("change");
 
-                this.element.find(selectors.choiceTypes).val(question.type).trigger("change", { value: question.choices });
+                this.element.find(selectors.choiceTypes).val(question.type).trigger("change", {
+                    value: question.choices
+                });
 
                 if (question.scoringMethod === "question")
                     this.element.find(selectors.questionScore).val(question.score);
@@ -308,7 +333,15 @@
             "title": "Sample Question",
             "id": 2,
             "scoringMethod": "choice",
-            "choices": [{ "id": 1, "title": "Yes", "score": 10 }, { "id": 2, "title": "No", "score": 0 }],
+            "choices": [{
+                "id": 1,
+                "title": "Yes",
+                "score": 10
+            }, {
+                "id": 2,
+                "title": "No",
+                "score": 0
+            }],
             "edit": true
         }
     });

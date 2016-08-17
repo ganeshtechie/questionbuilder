@@ -1,4 +1,4 @@
-﻿(function () {
+(function() {
     window.dw = {};
 
     window.dw.config = {};
@@ -50,9 +50,9 @@
         scoring_method: ["choice", "question"], // enables the ui to add scores either on question / choices
 
         /* only the allowed options will be enabled in the UI. leave it as empty to allow all the possible options
-        * like "edit", "delete", "insert", "move"
-        */
-        allowed_options: [ "edit", "delete" ]
+         * like "edit", "delete", "insert", "move"
+         */
+        allowed_options: ["edit", "delete"]
     };
 
 

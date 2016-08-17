@@ -1,4 +1,4 @@
-﻿(function () {
+(function() {
 
     var plugin = "dwToggle";
 
@@ -8,10 +8,10 @@
         this.showMainView();
     }
 
-    Toggle.prototype.showMainView = function () {
+    Toggle.prototype.showMainView = function() {
 
         var div1 = this.element.find("[data-view]:first"),
-               div2 = this.element.find("[data-view]:last");
+            div2 = this.element.find("[data-view]:last");
 
         div2.hide();
         div1.show();
@@ -19,7 +19,7 @@
         this.element.attr("data-active", false);
     };
 
-    Toggle.prototype.toggle = function () {
+    Toggle.prototype.toggle = function() {
         var firstView = this.element.find("[data-view]:first"),
             lastView = this.element.find("[data-view]:last");
 
@@ -27,11 +27,13 @@
 
 
         if (firstView.is(":visible")) {
-            firstView.hide(); lastView.show();
+            firstView.hide();
+            lastView.show();
             this.element.attr("data-active", true);
             activeView = lastView;
         } else {
-            firstView.show(); lastView.hide();
+            firstView.show();
+            lastView.hide();
             this.element.attr("data-active", false);
             activeView = firstView;
         }
@@ -42,9 +44,9 @@
 
 
 
-    $.fn[plugin] = function (options) {
+    $.fn[plugin] = function(options) {
 
-        return this.each(function () {
+        return this.each(function() {
 
             var element = $(this);
 

@@ -1,18 +1,18 @@
-﻿(function () {
+(function() {
 
-    $.fn.radiobutton = function (options) {
+    $.fn.radiobutton = function(options) {
         this.wrap("<div class='choices'></div>");
         this.find("input[type='radio']").attr("name", options.name);
     };
 
-    $.fn.checkbox = function (options) {
+    $.fn.checkbox = function(options) {
         this.wrap("<div class='choices'></div>");
         this.find("input[type='checkbox']").attr("name", options.name);
     };
 
-    $.fn.questiontoolset = function () {
+    $.fn.questiontoolset = function() {
 
-        return this.each(function (i, e) {
+        return this.each(function(i, e) {
 
             var edit_button = $(e).find("[data-action='edit']"),
                 delete_button = $(e).find("[data-action='delete']"),
@@ -45,33 +45,41 @@
         // behaviours
         function editQuestion(event, args) {
             var questionId = getQuestionId(this);
-            $(this).closest("[data-role='toggle-view']").trigger("toggle", [{ questionid: questionId }]);
+            $(this).closest("[data-role='toggle-view']").trigger("toggle", [{
+                questionid: questionId
+            }]);
         }
 
         function deleteQuestion(event, args) {
             var questionId = getQuestionId(this);
-            triggerEvent(this, "dw.question.delete", [{ questionId: questionId }]);
+            triggerEvent(this, "dw.question.delete", [{
+                questionId: questionId
+            }]);
         }
 
         function moveUpQuestion(event, args) {
             var questionId = getQuestionId(this);
-            triggerEvent(this, "dw.question.moveup", [{ questionId: questionId }]);
+            triggerEvent(this, "dw.question.moveup", [{
+                questionId: questionId
+            }]);
         }
 
         function moveDownQuestion(event, args) {
             var questionId = getQuestionId(this);
-            triggerEvent(this, "dw.question.movedown", [{ questionId: questionId }]);
+            triggerEvent(this, "dw.question.movedown", [{
+                questionId: questionId
+            }]);
         }
 
     };
 
-    $.fn.toolset_insert = function () {
+    $.fn.toolset_insert = function() {
 
     };
 
-    $.fn.question = function () {
+    $.fn.question = function() {
 
-        this.each(function (i, e) {
+        this.each(function(i, e) {
 
             var questionid = $(e).data("id");
 
@@ -89,13 +97,13 @@
 
     };
 
-    $.fn.toggleview = function () {
+    $.fn.toggleview = function() {
 
-        return this.each(function (i, e) {
+        return this.each(function(i, e) {
 
             $(e).find('[data-role="edit-section"]').addClass("hide");
 
-            $(e).on("toggle", function () {
+            $(e).on("toggle", function() {
                 if ($(this).find('[data-role="edit-section"]').has(".hide")) {
                     $(this).find('[data-role="edit-section"]').removeClass("hide");
                     $(this).find('[data-role="preview-section"]').addClass("hide");
@@ -112,7 +120,7 @@
 
     $.widget("blender.assessmentbuilder", {
 
-        _init: function () {
+        _init: function() {
 
             this.element.find("[data-role='toggle-view']").toggleview();
 
@@ -120,7 +128,7 @@
 
         },
 
-        _create: function () {
+        _create: function() {
 
 
 

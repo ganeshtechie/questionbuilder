@@ -4,7 +4,7 @@
 
     $.fn.arrangeActionButtons = function() {
 
-        console.log("rearranging...");
+
 
         var first = this.find("[data-name='question-shell']:first"),
             last = this.find("[data-name='question-shell']:last");

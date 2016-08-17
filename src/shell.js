@@ -11,12 +11,19 @@
             description: "A Basic health assessment", // wizard description
 
             // load the different plugins based on the question types needed for the wizard
-            allowed_choice_types: [
-                { title: "Multiple Choice", value: "checkbox" },
-                { title: "Single Choice", value: "radiobutton" },
-                { title: "Single Line", value: "singleline" },
-                { title: "Multie Line", value: "multiline" },
-            ],
+            allowed_choice_types: [{
+                title: "Multiple Choice",
+                value: "checkbox"
+            }, {
+                title: "Single Choice",
+                value: "radiobutton"
+            }, {
+                title: "Single Line",
+                value: "singleline"
+            }, {
+                title: "Multie Line",
+                value: "multiline"
+            }, ],
 
             // the default questions will be of this choice type. 
             default_choice_type: "checkbox",
@@ -44,7 +51,13 @@
 
             tags: ["depression", "anxiety"], // tags which can be added to a question
 
-            allowed_scoring_methods: [{ title: "Question", value: "question" }, { title: "Choice", value: "choice" }], // enables the ui to add scores either on question / choices
+            allowed_scoring_methods: [{
+                title: "Question",
+                value: "question"
+            }, {
+                title: "Choice",
+                value: "choice"
+            }], // enables the ui to add scores either on question / choices
 
             default_scoring_method: "question",
 
@@ -152,7 +165,9 @@
 
         _save: function() {
 
-            $(window).trigger("assessment:save", { data: this.datasource });
+            $(window).trigger("assessment:save", {
+                data: this.datasource
+            });
 
         },
 
@@ -174,13 +189,17 @@
 
         _editQuestion: function(event) {
 
-            _.forEach(this.datasource, function(q) { q.edit = false; });
+            _.forEach(this.datasource, function(q) {
+                q.edit = false;
+            });
 
             var $element = $(event.target);
 
             var questionId = this._getQuestionId($element);
 
-            var question = _.find(this.datasource, { "id": questionId });
+            var question = _.find(this.datasource, {
+                "id": questionId
+            });
 
             question.edit = true;
 
@@ -220,7 +239,9 @@
 
             var questionId = this._getQuestionId($element);
 
-            var index = _.findIndex(this.datasource, { id: questionId });
+            var index = _.findIndex(this.datasource, {
+                id: questionId
+            });
 
             var question = this._getNewQuestion(this.options.default_choice_type);
 
@@ -272,7 +293,7 @@
 
         _onQuestionSaved: function(event, args) {
 
-            console.log(args.data);
+
 
             //_.forEach(this.datasource, function(q){ q.edit = false; });
 
@@ -281,7 +302,9 @@
 
         _onQuestionEditCancelled: function(event, args) {
 
-            var question = _.find(this.datasource, { edit: true });
+            var question = _.find(this.datasource, {
+                edit: true
+            });
 
             //this.datasource.splice(index, 1, question);
 
@@ -297,7 +320,9 @@
 
         _replaceWithNewView: function(question) {
 
-            var index = _.findIndex(this.datasource, _.find(this.datasource, { id: question.id }));
+            var index = _.findIndex(this.datasource, _.find(this.datasource, {
+                id: question.id
+            }));
 
             this.datasource.splice(index, 1, question);
 
@@ -344,59 +369,63 @@
     $("[data-role='shell']").shell({
         scoring: "no",
 
-        allowed_scoring_methods: [
-            { title: "Question Level", value: "question" }
-        ],
+        allowed_scoring_methods: [{
+            title: "Question Level",
+            value: "question"
+        }],
 
         tagging: "no",
 
-        tags: [ "hello", "world" ],
+        tags: ["hello", "world"],
 
-        allowed_choice_types: [
-            { title: "Radio Buttons", value: "radiobutton" },
-            { title: "Textbox", value: "singleline" }
-        ],
+        allowed_choice_types: [{
+            title: "Radio Buttons",
+            value: "radiobutton"
+        }, {
+            title: "Textbox",
+            value: "singleline"
+        }],
         default_choice_type: "radiobutton",
 
         default_question: "Hello World",
 
         default_choice: "Untitled Choice - {0}"
-        //maximum_no_of_questions_allowed: 3,
-        /*
-        datasource: [{
-            "id": 3,
-            "required": true,
-            "randomizeChoice": true,
-            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-            "type": "singleline",
-            "scoringMethod": "question",
-            "score": 1,
-            "choices": { "id": 1, "fieldformat": "Free Text", "maximumlength": 120 },
-            "tags": ["anxiety"]
-        }, {
-            "id": 1,
-            "required": false,
-            "randomizeChoice": false,
-            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-            "type": "radiobutton",
-            "scoringMethod": "question",
-            "score": null,
-            "choices": [{ "score": 10, "correct": false, "title": "Yes222", "id": 1 }, { "score": 0, "correct": false, "title": "No3333", "id": 2 }],
-            "tags": ["depression"]
-        }, {
-            "type": "radiobutton",
-            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-            "id": 2,
-            "scoringMethod": "question",
-            "choices": [{ "id": 1, "title": "Yes", "score": 10 }, { "id": 2, "title": "No", "score": 0 }],
-            "edit": false
-        }]*/
+            //maximum_no_of_questions_allowed: 3,
+            /*
+            datasource: [{
+                "id": 3,
+                "required": true,
+                "randomizeChoice": true,
+                "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+                "type": "singleline",
+                "scoringMethod": "question",
+                "score": 1,
+                "choices": { "id": 1, "fieldformat": "Free Text", "maximumlength": 120 },
+                "tags": ["anxiety"]
+            }, {
+                "id": 1,
+                "required": false,
+                "randomizeChoice": false,
+                "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+                "type": "radiobutton",
+                "scoringMethod": "question",
+                "score": null,
+                "choices": [{ "score": 10, "correct": false, "title": "Yes222", "id": 1 }, { "score": 0, "correct": false, "title": "No3333", "id": 2 }],
+                "tags": ["depression"]
+            }, {
+                "type": "radiobutton",
+                "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+                "id": 2,
+                "scoringMethod": "question",
+                "choices": [{ "id": 1, "title": "Yes", "score": 10 }, { "id": 2, "title": "No", "score": 0 }],
+                "edit": false
+            }]*/
 
     });
 
     $(window).on("assessment:save", function(event, args) {
 
-        console.log(args);
+
 
     });
 

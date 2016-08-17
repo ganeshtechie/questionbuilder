@@ -2,13 +2,9 @@
     <div>
         <p>{{{title}}}</p>
     </div>
-    <div data-choice-type="{{ type }}">
-    	{{#each choices}}
+    <div data-choice-type="{{ type }}"> {{#each choices}}
         <div class="checkbox" data-choice-item data-value="{{ id }}">
             <label>
-                <input type="checkbox" class="clickable" value="{{ id }}"> {{ ./title }}
-            </label>
-        </div>
-        {{/each }}
-    </div>
+                <input type="checkbox" class="clickable" value="{{ id }}"> {{ ./title }} </label>
+        </div> {{/each }} </div>
 </div>
