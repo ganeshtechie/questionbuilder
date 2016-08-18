@@ -67,11 +67,17 @@
             allowed_options: ["edit", "delete"],
 
             // this is a default question which will appear when user clicks on insert button
-            default_question: "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+            default_question: "{0}) Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
 
             default_choice: "Untitled Choice {0}",
 
-            datasource: []
+            datasource: [],
+
+            // if "yes", a feedback message will be shown to the user after completing the assessment
+            feedback: "yes",
+
+            // if feedback option is enabled, this messgae will be used to show the feedback.
+            feedback_message: "Thank you for participating!"
 
         },
 
@@ -97,6 +103,13 @@
             else
                 this._bindData();
 
+            if (this.options.feedback === "no")
+                this.element.find("[data-section='feedback']").hide();
+            else
+                this.element.find("[data-name='feedback-message']").val(this.options.feedback_message);
+
+
+
             this.reload();
 
         },
@@ -119,6 +132,7 @@
         reload: function() {
             this.element.find("[data-role='toggle']").dwToggle();
             this.element.find("[data-section='body']").arrangeActionButtons();
+            this.element.find("[data-role='singleline-question']").basicInput();
         },
 
         // in edit mode, present the data at first
@@ -157,11 +171,38 @@
 
                 "click [data-action='cancel']": this._cancel,
 
+                "click [data-action='feedback']": this._feedback,
+
+                "click [data-action='save-feedback']": this._saveFeedback,
+
                 "questionbuildersavequestion  [data-container='edit']": this._onQuestionSaved,
 
                 "questionbuildersavequestioncancelled [data-container='edit']": this._onQuestionEditCancelled
 
             });
+
+        },
+
+        _feedback: function(element) {
+
+            var section = $(element.target).closest("[data-section='feedback']");
+
+            var feedbackArea = section.find("[data-section='feedback-form']");
+
+            feedbackArea.show();
+
+
+        },
+
+        _saveFeedback: function(element) {
+
+            var feedbackform = $(element.target).closest("[data-section='feedback-form']");
+
+            var feedbackMessage = feedbackform.find("[data-name='feedback-message']").val();
+
+            this.options.feedback_message = feedbackMessage;
+
+            feedbackform.hide();
 
         },
 
@@ -181,12 +222,72 @@
             event.preventDefault();
             var $element = $(event.target);
             var questionId = this._getQuestionId($element);
+
+            var question = _.find(this.datasource, {
+                "id": questionId
+            });
+
+
+
+            var index = _.findIndex(this.datasource, question);
+
+            if (index > 0) {
+                var previousQuestion = this.datasource[index - 1];
+
+                this.datasource.splice(index, 1);
+                this.datasource.splice(index - 1, 0, question);
+                this._removeQuestionFromDOM(question);
+
+                var questionDOM = this._getQuestionDOM(previousQuestion.id);
+
+                var html = window.renderEngine(question);
+                html = $(html);
+                html.insertBefore(questionDOM);
+
+                this.reload();
+            }
+
         },
+
+        _removeQuestionFromDOM: function(question) {
+            var questionselector = "[data-name='question-shell'][data-qid='{0}']";
+            var questionDOM = this.element.find(questionselector.replace(/\{0\}/, question.id));
+            questionDOM.remove();
+        },
+
+
 
         _moveDown: function(event) {
             event.preventDefault();
             var $element = $(event.target);
             var questionId = this._getQuestionId($element);
+
+            var question = _.find(this.datasource, {
+                "id": questionId
+            });
+
+
+
+            var index = _.findIndex(this.datasource, question);
+
+            if (index <= this.datasource.length - 2) {
+
+                var nextQuestion = this.datasource[index + 1];
+
+                this.datasource.splice(index, 1);
+
+                this.datasource.splice(index + 1, 0, question);
+                this._removeQuestionFromDOM(question);
+
+                var questionDOM = this._getQuestionDOM(nextQuestion.id);
+
+                var html = window.renderEngine(question);
+                html = $(html);
+                html.insertAfter(questionDOM);
+                this.reload();
+            }
+
+
         },
 
         _editQuestion: function(event) {
@@ -256,14 +357,21 @@
 
             html = $(html);
 
-            var currentQuestion = _.find(this.element.find("[data-name='question-shell']"), function(q) {
-                return $(q).data("qid") === questionId;
-            });
+            var currentQuestion = this._getQuestionDOM(questionId);
 
             html.insertAfter(currentQuestion);
 
             this.reload();
 
+        },
+
+        _getQuestionDOM: function(questionId) {
+
+            var currentQuestion = _.find(this.element.find("[data-name='question-shell']"), function(q) {
+                return $(q).data("qid") === questionId;
+            });
+
+            return currentQuestion;
         },
 
         _getNewQuestionId: function() {
@@ -378,14 +486,17 @@
     });
 
     $("[data-role='shell']").shell({
-        scoring: "no",
+
+        scoring: "yes",
 
         allowed_scoring_methods: [{
-            title: "Question Level",
-            value: "question"
+            title: "Choice Level",
+            value: "choice"
         }],
 
-        tagging: "no",
+        default_scoring_method: "choice",
+
+        tagging: "yes",
 
         tags: ["hello", "world"],
 
@@ -396,9 +507,12 @@
             title: "Textbox",
             value: "singleline"
         }],
+
         default_choice_type: "radiobutton",
 
-        default_question: "Hello World",
+        feedback: "yes",
+
+        feedback_message: "Thank you for participating",
 
         default_choice: "Untitled Choice - {0}"
             //maximum_no_of_questions_allowed: 3,

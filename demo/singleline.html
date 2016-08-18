@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <title></title>
-
     <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <style type="text/css">
-        .hide {
-            display: none;
-        }
+    .hide {
+        display: none;
+    }
     </style>
 </head>
+
 <body>
-
-    <div id="choices">        
-
+    <div id="choices">
     </div>
-
+    <div data-section="single-line">
+        <div class="form-group">
+            <input type="text" class="form-control" data-role="freetext">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" data-role="date">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" data-role="email">
+        </div>
+    </div>
     <button class="btn btn-primary" id="getValues">Get Value</button>
-
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/jquery-ui/jquery-ui.js"></script>
     <script src="../node_modules/q/q.js"></script>
     <script src="../bower_components/handlebars/handlebars.runtime.js"></script>
     <script src="../templates/templates.js"></script>
     <script src="../bower_components/lodash/dist/lodash.js"></script>
+    <script src="../src/core.js"></script>
     <script src="../src/singleline.js"></script>
-
 </body>
+
 </html>

@@ -40,11 +40,6 @@
 
             this.options = $.extend({}, $.dw.base_configurations, this.options);
 
-
-
-
-
-
             this._bind();
         },
 
@@ -54,7 +49,9 @@
                 value: "question"
             });
 
-            if (this.options.scoring === "no" || !isScoringMethodIsQuestion) {
+            debugger;
+
+            if (this.options.scoring === "no") {
                 this.element.find(this.options.selectors.scoringSection).hide();
             } else {
                 this.scoringMethod = this.options.default_scoring_method;
@@ -145,7 +142,6 @@
             }
 
             this.element.find(this.options.selectors.questionScore).val("");
-
 
             var previousState = null;
 
@@ -250,8 +246,6 @@
 
             if (this.options.tagging === "yes")
                 question.tags = this.tag.getValue(true);
-
-
 
             this._trigger("savequestion", this, {
                 data: question

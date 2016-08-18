@@ -20,6 +20,7 @@
     "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-jsbeautifier": "^0.2.13",
-    "grunt-remove-logging": "^0.2.0"
+    "grunt-remove-logging": "^0.2.0",
+    "grunt-strip-debug": "^1.1.0"
   }
 }

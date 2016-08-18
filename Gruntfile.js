@@ -31,7 +31,7 @@
                     amd: false,
                     processName: function(filePath) {
                         return filePath.replace(/^templates\//, '').replace(/\.hbs$/, '');
-                }
+                    }
                 },
                 files: {
                     'templates/templates.js': ['templates/*.hbs']
@@ -102,6 +102,7 @@
     grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks("grunt-remove-logging");
     grunt.loadNpmTasks("grunt-jsbeautifier");
+    grunt.loadNpmTasks("grunt-strip-debug");
 
     grunt.registerTask("default", ["watch"]);
 

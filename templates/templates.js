@@ -10,7 +10,7 @@ this["dw"]["templates"]["checkboxes"] = Handlebars.template({"1":function(contai
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class=\"ui-state-default\">\n    <div class=\"pull-left\"><a href=\"#\"><i class=\"fa fa-ellipsis-v\" aria-hidden=\"true\"></i></a></div>\n    <div data-role=\"choice-item\" class=\"form-group form-inline\">\n        <input type=\"hidden\" data-name=\"uniqueid\" value=\""
+  return "<div data-role=\"choice-item\"  class=\"ui-state-default\">\n    <div class=\"pull-left\"><a href=\"#\"><i class=\"fa fa-ellipsis-v\" aria-hidden=\"true\"></i></a></div>\n    <div class=\"form-group form-inline\">\n        <input type=\"hidden\" data-name=\"uniqueid\" value=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" />\n        <input type=\"checkbox\" title=\"'Check' to mark this choice as correct\" name=\"question"
     + alias4(((helper = (helper = helpers.unique_id || (depth0 != null ? depth0.unique_id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unique_id","hash":{},"data":data}) : helper)))
@@ -118,7 +118,7 @@ this["dw"]["templates"]["radiobutton"] = Handlebars.template({"1":function(conta
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
-  return "<div class=\"ui-state-default\">\n    <div class=\"pull-left\"><a href=\"#\"><i class=\"fa fa-ellipsis-v\" aria-hidden=\"true\"></i></a></div>\n    <div data-role=\"choice-item\" class=\"form-group form-inline\">\n        <input type=\"hidden\" data-name=\"uniqueid\" value=\""
+  return "<div data-role=\"choice-item\" class=\"ui-state-default\">\n    <div class=\"pull-left\"><a href=\"#\"><i class=\"fa fa-ellipsis-v\" aria-hidden=\"true\"></i></a></div>\n    <div class=\"form-group form-inline\">\n        <input type=\"hidden\" data-name=\"uniqueid\" value=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\" />\n        <input type=\"radio\" title=\"'Check' to mark this choice as correct\" name=\"question"
     + alias4(((helper = (helper = helpers.unique_id || (depth0 != null ? depth0.unique_id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"unique_id","hash":{},"data":data}) : helper)))
@@ -184,16 +184,18 @@ this["dw"]["templates"]["shell_radiobutton"] = Handlebars.template({"1":function
 },"useData":true,"useDepths":true});
 
 this["dw"]["templates"]["shell_singleline"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression, alias5=container.lambda;
 
   return "<div data-role=\"toggle\" data-name=\"question-shell\" data-qid=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\n    <div data-view=\"\">\n        <div data-container=\"question\" data-role=\"checkbox-question-type\" data-value=\""
+    + "\">\n    <div data-view=\"\">\n        <div data-container=\"question\" data-role=\"singleline-question\" data-value=\""
     + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
     + "\">\n            <div>\n                <p>"
     + ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "</p>\n            </div>\n            <div>\n                <div class=\"form-group\">\n                    <input type=\"text\" class=\"form-control\" data-role=\""
-    + alias4(container.lambda(((stack1 = (depth0 != null ? depth0.choices : depth0)) != null ? stack1.fieldformat : stack1), depth0))
+    + "</p>\n            </div>\n            <div>\n                <div class=\"form-group\">\n                    <input type=\"text\" class=\"form-control\" data-max-len=\""
+    + alias4(alias5(((stack1 = (depth0 != null ? depth0.choices : depth0)) != null ? stack1.maximumlength : stack1), depth0))
+    + "\" data-role=\""
+    + alias4(alias5(((stack1 = (depth0 != null ? depth0.choices : depth0)) != null ? stack1.fieldformat : stack1), depth0))
     + "\" /> </div>\n            </div>\n            <div>\n                <ul>\n                    <li> <a data-action=\"edit\">Edit</a> </li>\n                    <li> <a data-action=\"delete\">Delete</a> </li>\n                    <li> <a data-action=\"insert\">Insert</a> </li>\n                    <li> <a data-action=\"moveup\">Move Up</a> </li>\n                    <li> <a data-action=\"movedown\">Move Down</a> </li>\n                </ul>\n            </div>\n        </div>\n    </div>\n    <div data-view=\"\">\n        <h2>Edit Question</h2>\n        <div data-container=\"edit\"> </div>\n    </div>\n</div>";
 },"useData":true});
 
@@ -204,21 +206,21 @@ this["dw"]["templates"]["shell"] = Handlebars.template({"compiler":[7,">= 4.0.0"
     + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
     + "</h1>\n            <p>"
     + ((stack1 = ((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "</p>\n        </div>\n    </div>\n    <div data-section=\"body\"> </div>\n    <div data-section=\"footer\">\n        <button class=\"btn btn-primary\" data-action=\"save\">Save</button>\n        <button class=\"btn btn-primary\" data-action=\"save-as-draft\">Save As Draft</button>\n        <button class=\"btn btn-default\" data-action=\"cancel\">Cancel</button>\n    </div>\n</div>";
+    + "</p>\n        </div>\n    </div>\n    <div data-section=\"body\"> </div>\n    <div data-section=\"footer\">\n        <button class=\"btn btn-primary\" data-action=\"save\">Save</button>\n        <button class=\"btn btn-primary\" data-action=\"save-as-draft\">Save As Draft</button>\n        <button class=\"btn btn-default\" data-action=\"cancel\">Cancel</button>\n\n\n        <div data-section=\"feedback\">\n            <button class=\"btn btn-default\" data-action=\"feedback\">Feedback</button>\n            \n            <div class=\"form-group\" data-section=\"feedback-form\" style=\"display:none\" >\n\n                <textarea rows=\"3\" class=\"form-control\" data-name=\"feedback-message\" placeholder=\"Type the feedback message...\" ></textarea>\n\n                <button class=\"btn btn-primary\" data-action=\"save-feedback\">Save</button>\n            </div>\n        </div>\n\n    </div>\n</div>";
 },"useData":true});
 
 this["dw"]["templates"]["singleline"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var alias1=container.lambda, alias2=container.escapeExpression;
 
-  return "\n            <option value=\""
-    + alias2(alias1(depth0, depth0))
+  return "            <option value=\""
+    + alias2(alias1((depth0 != null ? depth0.value : depth0), depth0))
     + "\">"
-    + alias2(alias1(depth0, depth0))
-    + "</option> ";
+    + alias2(alias1((depth0 != null ? depth0.title : depth0), depth0))
+    + "</option> \n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
-  return "<div>\n    <div class=\"form-group form-inline\">\n        <label>Choose the format of response:</label>\n        <select class=\"form-control\" data-name=\"field-format\"> "
+  return "<div>\n    <div class=\"form-group form-inline\">\n        <label>Choose the format of response:</label>\n        <select class=\"form-control\" data-name=\"field-format\"> \n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.supported_formats : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + " </select>\n    </div>\n    <div class=\"form-group form-inline\" data-section=\"max-len\">\n        <label>Maximum Length:</label>\n        <input class=\"form-control\" data-name='max-len' type=\"text\" /> </div>\n</div>";
+    + "        </select>\n    </div>\n    <div class=\"form-group form-inline\" data-section=\"max-len\">\n        <label>Maximum Length:</label>\n        <input class=\"form-control\" data-name='max-len' type=\"text\" /> </div>\n</div>";
 },"useData":true});

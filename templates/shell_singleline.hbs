@@ -1,12 +1,12 @@
 <div data-role="toggle" data-name="question-shell" data-qid="{{ id }}">
     <div data-view="">
-        <div data-container="question" data-role="checkbox-question-type" data-value="{{ id }}">
+        <div data-container="question" data-role="singleline-question" data-value="{{ id }}">
             <div>
                 <p>{{{ title }}}</p>
             </div>
             <div>
                 <div class="form-group">
-                    <input type="text" class="form-control" data-role="{{ choices.fieldformat }}" /> </div>
+                    <input type="text" class="form-control" data-max-len="{{ choices.maximumlength }}" data-role="{{ choices.fieldformat }}" /> </div>
             </div>
             <div>
                 <ul>

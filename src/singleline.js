@@ -6,8 +6,22 @@
     function SingleLine(element, options) {
 
         var defaults = {
-            supported_formats: ["Free Text", "Number", "Date", "Time", "Email"]
-
+            supported_formats: [{
+                title: "Free Text",
+                value: "freetext"
+            }, {
+                value: "number",
+                title: "Number"
+            }, {
+                value: "date",
+                title: "Date"
+            }, {
+                value: "time",
+                title: "Time"
+            }, {
+                value: "email",
+                title: "Email"
+            }]
         };
 
         options = $.extend({}, defaults, $.dw.base_configurations, options);
@@ -68,19 +82,19 @@
         changeFormat: function(format) {
 
             switch (format) {
-                case "Free Text":
+                case "freetext":
                     this.showMaxlength(true);
                     break;
-                case "Number":
+                case "number":
                     this.showMaxlength(true);
                     break;
-                case "Date":
+                case "date":
                     this.showMaxlength(false);
                     break;
-                case "Time":
+                case "time":
                     this.showMaxlength(false);
                     break;
-                case "Email":
+                case "email":
                     this.showMaxlength(true);
                     break;
                 default:
@@ -153,17 +167,65 @@
 
     };
 
-
-    $("#choices").qbSingleLine();
-
-
-    $("#getValues").on("click", function(event) {
-
-        var api = $("#choices").data("qbSingleLine");
+    /*
+        $("#choices").qbSingleLine();
 
 
+        $("#getValues").on("click", function(event) {
 
-    });
+            var api = $("#choices").data("qbSingleLine");
+
+        });
+
+    */
+
+    $.fn.basicInput = function() {
+
+        var putMaxLengthLabel = function(e) {
+
+            var label = $("<label>").text("Max Char: {0}".replace(/\{0\}/, $(e).data("max-len")));
+
+            label.insertAfter($(e));
+        };
+
+        this.each(function() {
+
+            $.each($(this).find("[data-role='freetext']"), function(i, e) {
+                putMaxLengthLabel(e);
+                $(e).removeAttr("data-role");
+            });
+
+            $.each($(this).find("[data-role='number']"), function(i, e) {
+
+                $(e).attr("type", "number");
+
+                putMaxLengthLabel(e);
+                $(e).removeAttr("data-role");
+
+            });
+
+
+            $.each($(this).find("[data-role='date']"), function(i, e) {
+
+                $(e).attr("type", "date");
+                $(e).removeAttr("data-role");
+
+            });
+
+            $.each($(this).find("[data-role='email']"), function(i, e) {
+
+                $(e).attr("placeholder", "Email: someone@domain.com");
+
+                putMaxLengthLabel(e);
+                $(e).removeAttr("data-role");
+
+            });
+
+
+        });
+    };
+
+    //$("[data-section='single-line']").basicInput();
 
 
 

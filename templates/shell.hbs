@@ -10,5 +10,12 @@
         <button class="btn btn-primary" data-action="save">Save</button>
         <button class="btn btn-primary" data-action="save-as-draft">Save As Draft</button>
         <button class="btn btn-default" data-action="cancel">Cancel</button>
+        <div data-section="feedback">
+            <button class="btn btn-default" data-action="feedback">Feedback</button>
+            <div class="form-group" data-section="feedback-form" style="display:none">
+                <textarea rows="3" class="form-control" data-name="feedback-message" placeholder="Type the feedback message..."></textarea>
+                <button class="btn btn-primary" data-action="save-feedback">Save</button>
+            </div>
+        </div>
     </div>
 </div>

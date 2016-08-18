@@ -13,18 +13,21 @@
             html = window.dw.templates.shell_singleline(config);
         }
 
-
         return html;
     };
 
 
     window.questionFactory = function(type, config) {
 
+        var latestQuestion = _.maxBy($.dw.base_configurations.datasource, "id");
+
+        var newQuestionId = latestQuestion ? latestQuestion.id + 1 : 1;
+
         var defaults = {};
 
         defaults.required = true;
         defaults.randomizeChoice = true;
-        defaults.title = config.default_question;
+        defaults.title = config.default_question.replace(/\{0\}/, newQuestionId);
 
 
         if (config.scoring === "yes") {
@@ -87,10 +90,6 @@
                 };
 
             });
-
-
-
-
 
             return choices;
 
