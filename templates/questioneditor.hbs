@@ -6,7 +6,7 @@
         <div data-section="scoring">
             <div class="form-group">
                 <label>Have scores on: </label>
-                <select class="form-control" data-name="scoring-method"> {{#each allowed_scoring_methods }}
+                <select class="form-control" data-name="scoring-method"> {{#each scoring_at }}
                     <option value="{{ value }}">{{ title }}</option> {{/each }} </select>
             </div>
             <div class="form-group" data-section="question-scoring">

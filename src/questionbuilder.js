@@ -45,11 +45,9 @@
 
         _hideScore: function() {
 
-            var isScoringMethodIsQuestion = _.find(this.options.allowed_scoring_methods, {
+            var isScoringMethodIsQuestion = _.find(this.options.scoring_at, {
                 value: "question"
             });
-
-            debugger;
 
             if (this.options.scoring === "no") {
                 this.element.find(this.options.selectors.scoringSection).hide();
@@ -282,8 +280,6 @@
 
                 this.element.find(selectors.required).prop("checked", question.required);
                 this.element.find(selectors.shuffle).prop("checked", question.randomizeChoice);
-
-
 
             }
 

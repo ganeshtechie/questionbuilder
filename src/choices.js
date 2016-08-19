@@ -402,7 +402,7 @@
         $("#choices").qbCheckbox({
             max_no_of_chocies: 99,
             scoring: "yes",
-            allowed_scoring_methods: [{
+            scoring_at: [{
                 value: "choice"
             }],
             default_choice: "Untitled Choice - {0}",

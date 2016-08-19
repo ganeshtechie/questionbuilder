@@ -31,7 +31,7 @@
 
 
         if (config.scoring === "yes") {
-            defaults.scoringMethod = config.default_scoring_method || config.allowed_scoring_methods[0].value;
+            defaults.scoringMethod = config.default_scoring_method || config.scoring_at[0].value;
             defaults.score = defaults.scoringMethod === "question" ? config.default_score : null;
         }
 
@@ -74,7 +74,7 @@
 
         if (type === "radiobutton" || type === "checkbox") {
 
-            if (config.scoring === "yes" && config.allowed_scoring_methods.filter(function(o) {
+            if (config.scoring === "yes" && config.scoring_at.filter(function(o) {
                     return o.value === "choice";
                 }).length > 0) {
 

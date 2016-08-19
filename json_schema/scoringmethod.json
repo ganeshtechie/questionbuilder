@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "title": "any",
+    "description": "Full score will be given for a question, on selecting any one correct choice"
+  },
+  {
+    "id": 2,
+    "title": "divide",
+    "description": "Scores will be divided based on the # of correct choices the user selects for a question"
+  },
+  {
+    "id": 3,
+    "title": "all",
+    "description": "Full score will be given for a question, only when the user selects all the correct choices"
+  }
+]

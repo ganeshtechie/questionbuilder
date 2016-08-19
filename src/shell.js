@@ -51,7 +51,7 @@
 
             tags: ["depression", "anxiety"], // tags which can be added to a question
 
-            allowed_scoring_methods: [{
+            scoring_at: [{
                 title: "Question",
                 value: "question"
             }, {
@@ -213,6 +213,7 @@
             });
 
         },
+
 
         _saveAsDraft: function() {},
 
@@ -403,8 +404,6 @@
 
         _onQuestionSaved: function(event, args) {
 
-
-
             //_.forEach(this.datasource, function(q){ q.edit = false; });
 
             this._replaceWithNewView(args.data);
@@ -463,7 +462,7 @@
             /*
                         var config = _.pick(this.options, ["allowed_choice_types",
                             "scoring", "default_score",
-                            "allowed_scoring_methods",
+                            "scoring_at",
                             "default_scoring_method",
                             "tagging", "tags",
                             "default_choice"
@@ -489,26 +488,27 @@
 
         scoring: "yes",
 
-        allowed_scoring_methods: [{
-            title: "Choice Level",
-            value: "choice"
+/*
+        scoring_at: [{
+            title: "Question Level",
+            value: "question"
         }],
 
-        default_scoring_method: "choice",
-
+        default_scoring_method: "question",
+*/
         tagging: "yes",
 
-        tags: ["hello", "world"],
 
+        tags: [ "depression", "anxiety" ],
+        
+/*
         allowed_choice_types: [{
             title: "Radio Buttons",
             value: "radiobutton"
-        }, {
-            title: "Textbox",
-            value: "singleline"
         }],
 
         default_choice_type: "radiobutton",
+*/
 
         feedback: "yes",
 
@@ -550,7 +550,7 @@
 
     $(window).on("assessment:save", function(event, args) {
 
-
+        console.log(args); /*RemoveLogging:skip*/
 
     });
 

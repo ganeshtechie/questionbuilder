@@ -1,0 +1,33 @@
+{
+  "id": 1,
+  "title": "Hey there",
+  "scoring_at": "question",
+  "randomize_choices": 1,
+  "score": 10,
+  "required": 1,
+  "tags": [
+    "depression",
+    "anxitey"
+  ],
+  "choice_type": "checkbox",
+  "choices": [
+    {
+      "id": 1,
+      "title": "<p>Hello</p>",
+      "score": 10,
+      "correct": true
+    },
+    {
+      "id": 2,
+      "title": "<p>World</p>",
+      "score": 10,
+      "correct": false
+    },
+    {
+      "id": 3,
+      "title": "<p>Hey there!</p>",
+      "score": 10,
+      "correct": true
+    }
+  ]
+}

@@ -46,26 +46,29 @@
          */
         all_mandatory_questions: "yes",
 
-        repeat: "custom", // enables options to allow the author to choose the value for repeat / also accepts an integer value that represents the no of retakes
+        retake: "custom", // enables options to allow the author to choose the value for repeat / also accepts an integer value that represents the no of retakes
 
         tagging: "yes", // enables the ui to tag questions with the given tags
 
         tags: ["depression", "anxiety"], // tags which can be added to a question
 
-        allowed_scoring_methods: [{
+        // enables the ui to add scores either on question / choices
+        scoring_at: [{
             title: "Question",
             value: "question"
         }, {
             title: "Choice",
             value: "choice"
-        }], // enables the ui to add scores either on question / choices
+        }],
+
+        allowed_scoring_methods: [""],
 
         default_scoring_method: "question",
 
         /* only the allowed options will be enabled in the UI. leave it as empty to allow all the possible options
          * like "edit", "delete", "insert", "move"
          */
-        allowed_options: ["edit", "delete"],
+        allowed_access: ["edit", "delete"],
 
         // this is a default question which will appear when user clicks on insert button
         default_question: "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",

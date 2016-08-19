@@ -1,0 +1,23 @@
+/* For Choice Based Questions */
+[
+	{
+        "question_id": 1,
+        "selected_choices_id": [1, 2]
+    },
+
+    {
+        "question_id": 10,
+        "selected_choices_id": [1]
+    },
+
+    /* For Single / Multi Line Questions */
+    {
+        "question_id": 20,
+        "response": "ganesh.rajan@srgtech.com"
+    },
+
+    {
+        "question_id": 20,
+        "response": "<p class='description'>If you include < code > % { value } < /code> in the error message it will be replaced with the actual value.The value is transformed using < code > validate.stringifyValue < /code> (which per default just calls < code > validate.prettify < /code>) but it can be overidden to customize the formatting.</p>"
+    }
+]
