@@ -1,0 +1,7 @@
+max qu no -1 is infinite
+retake 
+frequnece
+dont want score for a question
+Asc Desc for choices
+scoring method 
+choices can be html should be rte
