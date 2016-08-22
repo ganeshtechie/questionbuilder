@@ -307,66 +307,66 @@
 
 
 
-        // score, title, id, correct - are the properties
-/*
-        $("#choices").data("value", [{
-            "correct": false,
-            "title": "Untitled Choice - 1",
-            "score": 1,
-            "id": 1
-        }, {
-            "correct": true,
-            "title": "Untitled Choice - 5",
-            "score": 1,
-            "id": 5
-        }, {
-            "correct": true,
-            "title": "Untitled Choice - 4",
-            "score": 1,
-            "id": 4
-        }, {
-            "correct": true,
-            "title": "Untitled Choice - 2",
-            "score": 1,
-            "id": 2
-        }, {
-            "correct": false,
-            "title": "Untitled Choice - 3",
-            "score": 1,
-            "id": 3
-        }]);
-*/
+    // score, title, id, correct - are the properties
+    /*
+            $("#choices").data("value", [{
+                "correct": false,
+                "title": "Untitled Choice - 1",
+                "score": 1,
+                "id": 1
+            }, {
+                "correct": true,
+                "title": "Untitled Choice - 5",
+                "score": 1,
+                "id": 5
+            }, {
+                "correct": true,
+                "title": "Untitled Choice - 4",
+                "score": 1,
+                "id": 4
+            }, {
+                "correct": true,
+                "title": "Untitled Choice - 2",
+                "score": 1,
+                "id": 2
+            }, {
+                "correct": false,
+                "title": "Untitled Choice - 3",
+                "score": 1,
+                "id": 3
+            }]);
+    */
 
-        $("#choices").qbCheckbox({
-            max_no_of_chocies: 99,
-            scoring: "yes",
-            scoring_at: [{
-                value: "choice"
-            }],
-            default_choice: "Untitled Choice - {0}",
-            //scoring_method: "choice",
-            default_score: 1,
-            unique_id: 1
+    $("#choices").qbCheckbox({
+        max_no_of_chocies: 99,
+        scoring: "yes",
+        scoring_at: [{
+            value: "choice"
+        }],
+        default_choice: "Untitled Choice - {0}",
+        //scoring_method: "choice",
+        default_score: 1,
+        unique_id: 1
+    });
+
+
+    $("#turnScoresOff").on("click", function() {
+
+        var name = $("#choices").data("pluginName");
+
+        var checkbox = $("#choices").data(name);
+
+        checkbox.destroy();
+
+        $("#choices")[name]({
+            max_no_of_chocies: 4,
+            scoring: "no"
         });
 
 
-        $("#turnScoresOff").on("click", function() {
 
-            var name = $("#choices").data("pluginName");
+    });
 
-            var checkbox = $("#choices").data(name);
-
-            checkbox.destroy();
-
-            $("#choices")[name]({
-                max_no_of_chocies: 4,
-                scoring: "no"
-            });
-
-
-
-        });
-    
 
     $("#getChoices").on("click", function() {
 
