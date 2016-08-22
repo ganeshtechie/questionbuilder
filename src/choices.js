@@ -2,7 +2,79 @@
 
     "use strict";
 
-    var baseMethods = {
+    var Checkbox = function(element, options) {
+
+        var $this = this;
+
+        var defaults = {
+            templates: {
+                layout: '<div data-role="choice-list"></div><div><div><a data-name="add-more-choice">Add more choices</a></div></div>',
+                choice: window.dw.templates.checkboxes
+            },
+            min_no_of_choices: 2,
+            add_more_choice: "yes",
+            max_no_of_chocies: 4,
+            scoring: "yes",
+            persist_value: true,
+            unique_id: 1 // mostly it will be the question id, which is used to add in the name of the input elements for grouping
+        };
+
+
+        this.options = $.extend({}, defaults, $.dw.base_configurations, options);
+
+        this.options.data = this.options.data || [];
+
+        // declaration
+        this.options.data = options.choices || [];
+        this.element = element;
+        this.element.append(this.options.templates.layout);
+        this.addMoreChoice = this.element.find("[data-name='add-more-choice']");
+        this.choiceContainer = this.element.find("[data-role='choice-list']");
+
+        // execution
+        // you can set the state of the plugin before initialzing, by setting the data-value property
+        this.options.data = element.data("value") || [];
+
+
+
+        if (this.options.persist_value === false) element.removeData("value");
+
+        if (this.options.data.length === 0) {
+            this.options.data.push(this.getChoiceObject());
+            this.options.data.push(this.getChoiceObject());
+        }
+
+        // if default choices are provided, make it available in the UI for the user to modify
+        for (var i = 0; i < this.options.data.length; i++) {
+            var choiceHTML = $(this.getChoiceHtml(this.options.data[i]));
+            this.choiceContainer.append(choiceHTML);
+            if (this.options.data[i].correct === true) choiceHTML.find("input[type='checkbox']").prop("checked", true);
+        }
+
+
+        this.element.on("click", "[data-role='delete-choice']", function(event) {
+            event.preventDefault();
+            $this.deleteChoice(this);
+        });
+
+        if (this.options.add_more_choice === "yes") {
+
+            this.updateAddMoreChoice();
+
+            this.addMoreChoice.click(function(event) {
+                event.preventDefault();
+                $this.addChoice();
+            });
+
+        } else if (this.options.add_more_choice === "no" || this.options.max_no_of_chocies === 1) {
+            this.addMoreChoice.addClass("hide");
+        }
+
+        this.choiceContainer.sortable();
+
+    };
+
+    Checkbox.prototype = {
 
         deleteChoice: function(element) {
 
@@ -11,7 +83,7 @@
 
             choiceContainer.remove();
 
-            _.remove(this.choices, function(c) {
+            _.remove(this.options.data, function(c) {
                 return c.id === uniqueid;
             });
 
@@ -23,7 +95,9 @@
 
             var uniqueId = this.getNewChoiceId();
 
-            var choice = window.getChoiceFactory("radiobutton", this.options, [uniqueId])[0];
+            var choice = window.getChoiceFactory("radiobutton", $.extend({}, this.options, {
+                scoring: this.options.scoring
+            }), [uniqueId])[0];
 
             return choice;
         },
@@ -32,7 +106,7 @@
 
             var choiceObj = this.getChoiceObject();
 
-            this.choices.push(choiceObj);
+            this.options.data.push(choiceObj);
 
             var data = $.extend(this.getConfigForHTML(), choiceObj);
 
@@ -45,16 +119,14 @@
 
         getNewChoiceId: function() {
 
-            if (this.choices.length === 0) return 1;
+            if (this.options.data.length === 0) return 1;
 
-            var choice = _.maxBy(this.choices, "id");
+            var choice = _.maxBy(this.options.data, "id");
 
             return choice.id + 1;
         },
 
         getConfigForHTML: function() {
-
-            console.log(this.options);
 
             return {
                 enable_scoring: this.options.scoring === "yes",
@@ -116,8 +188,6 @@
 
             var data = $.extend(this.getConfigForHTML(), choice);
 
-            console.log(data);
-
             choiceHtml += this.options.templates.choice(data);
 
             return choiceHtml;
@@ -126,7 +196,7 @@
 
         updateAddMoreChoice: function() {
 
-            if (this.options.max_no_of_chocies <= this.choices.length) {
+            if (this.options.max_no_of_chocies <= this.options.data.length) {
                 this.addMoreChoice.hide();
             } else {
                 this.addMoreChoice.show();
@@ -192,218 +262,80 @@
 
     };
 
-    (function() {
+    var PluginInit = function(pluginName, options) {
 
-        var Checkbox = function(element, options) {
+        this.name = pluginName;
+        this.options = options;
 
-            var $this = this;
+        var that = this;
 
-            var defaults = {
-                templates: {
-                    layout: '<div data-role="choice-list"></div><div><div><a data-name="add-more-choice">Add more choices</a></div></div>',
-                    choice: window.dw.templates.checkboxes
-                },
-                min_no_of_choices: 2,
-                add_more_choice: "yes",
-                max_no_of_chocies: 4,
-                scoring: "yes",
-                persist_value: true,
-                default_choice: "Untitled Choice - {0}",
-                default_score: 1,
-                unique_id: 1 // mostly it will be the question id, which is used to add in the name of the input elements for grouping
-            };
+        this.init = function() {
 
+            var element = $(this);
 
-            this.options = $.extend({}, defaults, $.dw.base_configurations, options);
-
-            // declaration
-            this.choices = options.choices || [];
-            this.element = element;
-            this.element.append(this.options.templates.layout);
-            this.addMoreChoice = this.element.find("[data-name='add-more-choice']");
-            this.choiceContainer = this.element.find("[data-role='choice-list']");
-
-            // execution
-            // you can set the state of the plugin before initialzing, by setting the data-value property
-            this.choices = element.data("value") || [];
-
-            if (this.options.persist_value === false) element.removeData("value");
-
-            if (this.choices.length === 0) {
-                this.choices.push(this.getChoiceObject());
-                this.choices.push(this.getChoiceObject());
+            // return by doing nothing, if the plugin is already binded to the dom
+            if (element.data(that.name)) {
+                return;
             }
 
-            // if default choices are provided, make it available in the UI for the user to modify
-            for (var i = 0; i < this.choices.length; i++) {
-                var choiceHTML = $(this.getChoiceHtml(this.choices[i]));
-                this.choiceContainer.append(choiceHTML);
-                if (this.choices[i].correct === true) choiceHTML.find("input[type='checkbox']").prop("checked", true);
-            }
+            var checkbox = new Checkbox(element, that.options);
 
-
-            this.element.on("click", "[data-role='delete-choice']", function(event) {
-                event.preventDefault();
-                $this.deleteChoice(this);
-            });
-
-            if (this.options.add_more_choice === "yes") {
-
-                this.updateAddMoreChoice();
-
-                this.addMoreChoice.click(function(event) {
-                    event.preventDefault();
-                    $this.addChoice();
-                });
-
-            } else if (this.options.add_more_choice === "no" || this.options.max_no_of_chocies === 1) {
-                this.addMoreChoice.addClass("hide");
-            }
-
-            this.choiceContainer.sortable();
-
+            element.data("pluginName", that.name);
+            element.data(that.name, checkbox); // this object can be further accessed to communicate to the plugin
         };
 
-        Checkbox.prototype = baseMethods;
-        /*
-                var Radiobutton = function(element, options) {
-
-                    var $this = this;
-
-                    var defaults = {
-                        templates: {
-                            layout: '<div data-role="choice-list"></div><div><div><a data-name="add-more-choice">Add more choices</a></div></div>',
-                            choice: window.dw.templates.radiobutton
-                        },
-                        min_no_of_choices: 2,
-                        add_more_choice: "yes",
-                        max_no_of_chocies: 4,
-                        scoring: "yes",
-                        persist_value: true,
-                        default_score: 1,
-                        default_choice: "Untitled Choice",
-                        unique_id: 1 // mostly it will be the question id, which is used to add in the name of the input elements for grouping
-                    };
-
-                    this.options = $.extend(defaults, options);
-
-                    // declaration
-                    this.choices = options.choices || [];
-                    this.element = element;
-                    this.element.append(this.options.templates.layout);
-                    this.addMoreChoice = this.element.find("[data-name='add-more-choice']");
-                    this.choiceContainer = this.element.find("[data-role='choice-list']");
-
-                    // execution
-                    // you can set the state of the plugin before initialzing, by setting the data-value property
-                    this.choices = element.data("value") || [];
-
-                    if (this.options.persist_value === false) element.removeData("value");
-
-                    if (this.choices.length === 0) {
-                        this.choices.push(this.getChoiceObject());
-                        this.choices.push(this.getChoiceObject());
-                    }
-
-                    // if default choices are provided, make it available in the UI for the user to modify
-                    for (var i = 0; i < this.choices.length; i++) {
-                        this.choiceContainer.append(this.getChoiceHtml(this.choices[i]));
-                    }
+    };
 
 
-                    this.element.on("click", "[data-role='delete-choice']", function(event) {
-                        event.preventDefault();
-                        $this.deleteChoice(this);
-                    });
+    $.fn.qbCheckbox = function(options) {
 
-                    if (this.options.add_more_choice === "yes") {
+        var object = new PluginInit("qbCheckbox", options);
 
-                        this.updateAddMoreChoice();
+        return this.each(object.init);
 
-                        this.addMoreChoice.click(function(event) {
-                            event.preventDefault();
-                            $this.addChoice();
-                        });
+    };
 
-                    } else if (this.options.add_more_choice === "no" || this.options.max_no_of_chocies === 1) {
-                        this.addMoreChoice.addClass("hide");
-                    }
+    $.fn.qbRadiobutton = function(options) {
 
-                    this.choiceContainer.sortable();
+        var object = new PluginInit("qbRadiobutton", options);
 
-                };
+        return this.each(object.init);
 
-                Radiobutton.prototype = baseMethods;
-        */
+    };
 
-        $.fn.qbCheckbox = function(options) {
 
-            return this.each(function() {
 
-                var element = $(this);
 
-                // return by doing nothing, if the plugin is already binded to the dom
-                if (element.data("qbCheckbox")) {
-                    return;
-                }
-
-                var checkbox = new Checkbox(element, options);
-
-                element.data("pluginName", "qbCheckbox");
-                element.data("qbCheckbox", checkbox); // this object can be further accessed to communicate to the plugin
-
-            });
-
-        };
-
-        $.fn.qbRadiobutton = function(options) {
-
-            return this.each(function() {
-
-                var element = $(this);
-
-                if (element.data("qbRadiobutton")) {
-                    return;
-                }
-
-                var radiobutton = new Checkbox(element, options);
-
-                element.data("pluginName", "qbRadiobutton");
-
-                element.data("qbRadiobutton", radiobutton);
-
-            });
-
-        };
-
-    })();
-
-    /*
 
         // score, title, id, correct - are the properties
-
+/*
         $("#choices").data("value", [{
             "correct": false,
             "title": "Untitled Choice - 1",
+            "score": 1,
             "id": 1
         }, {
             "correct": true,
             "title": "Untitled Choice - 5",
+            "score": 1,
             "id": 5
         }, {
             "correct": true,
             "title": "Untitled Choice - 4",
+            "score": 1,
             "id": 4
         }, {
             "correct": true,
             "title": "Untitled Choice - 2",
+            "score": 1,
             "id": 2
         }, {
             "correct": false,
             "title": "Untitled Choice - 3",
+            "score": 1,
             "id": 3
         }]);
-
+*/
 
         $("#choices").qbCheckbox({
             max_no_of_chocies: 99,
@@ -434,7 +366,7 @@
 
 
         });
-    */
+    
 
     $("#getChoices").on("click", function() {
 
@@ -445,7 +377,7 @@
         var response = choices.val();
 
         if (response instanceof Error) {
-
+            console.log(response); /*RemoveLogging:skip*/
         } else {
             console.log(response); /*RemoveLogging:skip*/
         }

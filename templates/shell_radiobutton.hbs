@@ -9,11 +9,8 @@
                     <label>
                         <input type="radio" data-value="{{ id }}" name="question{{ ../id  }}" /> {{ title }} </label>
                 </div> {{/each }} </div>
-            <div data-section="tags"> 
-                {{#each tags}}
-                <span class="label label-info">{{ this }}</span> 
-                {{/each}} 
-            </div>
+            <div data-section="tags"> {{#each tags}}
+                <span class="label label-info">{{ this }}</span> {{/each}} </div>
             <div>
                 <ul>
                     <li> <a data-action="edit">Edit</a> </li>

@@ -52,8 +52,8 @@
             if (this.options.scoring === "no") {
                 this.element.find(this.options.selectors.scoringSection).hide();
             } else {
-                this.scoringAt = this.options.scoring_at[0].value;
-                this.element.find("[data-name='scoring-method']").val(this.scoringAt).trigger("change");
+                this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_at[0].value;
+                this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt).trigger("change");
             }
         },
 
@@ -88,6 +88,10 @@
 
             this.element.html("");
 
+            // create a default object if the data has not be passed; and when ever the ui changes, update this data object
+            // hence we need not have to create lot of private variables in the "this" 
+            this.options.data = this.options.data || {};
+
             var html = window.dw.templates.questioneditor(this.options);
 
             this.element.html(html);
@@ -102,8 +106,6 @@
         },
 
 
-
-
         _bind: function() {
 
             this._on(this.element, {
@@ -112,7 +114,7 @@
 
                 'click [data-name="save-question"]': this._saveQuestion,
 
-                'change [data-name="scoring-method"]': this._onScoringMethodChanges,
+                'change [data-name="scoring-method"]': this._onScoringAtChanges,
 
                 'click [data-name="cancel-question"]': this._cancelChanges
 
@@ -127,11 +129,12 @@
 
         },
 
-        _onScoringMethodChanges: function(event) {
+        _onScoringAtChanges: function(event) {
 
             var value = $(event.target).val();
 
-            this.scoringAt = value;
+            this.options.data.scoringAt = value;
+
 
             if (value === "choice") {
                 this.element.find("[data-section='question-scoring']").hide();
@@ -139,32 +142,22 @@
                 this.element.find("[data-section='question-scoring']").show();
             }
 
-            this.element.find(this.options.selectors.questionScore).val("");
+            this.element.find(this.options.selectors.questionScore).val(this.options.default_score);
 
             var previousState = null;
 
             var pluginName = this.element.find(this.options.selectors.choiceSection).data("pluginName");
 
             if (pluginName) {
-
                 previousState = this.element.find(this.options.selectors.choiceSection).data(pluginName).val();
-
             }
 
-            this.element.find(this.options.selectors.choiceTypes).trigger("change", {
-                value: previousState
-            });
+            this.element.find(this.options.selectors.choiceTypes).trigger("change");
         },
 
         _onchoiceTypeChanges: function(event, args) {
 
-            var newChoiceType = $(event.target).val();
-
-            if (this.choiceType === newChoiceType) {
-
-            }
-
-            this.choiceType = newChoiceType;
+            this.options.data.choiceType = $(event.target).val();
 
             var choice = this.element.find(this.options.selectors.choiceSection);
 
@@ -174,18 +167,26 @@
             if (pluginName && choice.data(pluginName))
                 choice.data(pluginName).destroy();
 
-            if (args && args.value) choice.data("value", args.value);
+            var enableScoringForChoice = "";
+
+            enableScoringForChoice = (this.options.data.scoringAt === "choice") ? "yes" : "no";
 
             var settings = null;
 
-            switch (this.choiceType) {
+            var isValidScoringItem = function(itemName) {
+                return _.findIndex(this.options.scoring_at, {
+                    value: itemName
+                }) >= 0;
+            }.bind(this);
+
+
+            switch (this.options.data.choiceType) {
                 case "checkbox":
                     settings = {
                         name: "qbCheckbox",
                         add_more_choice: this.options.add_more_choice,
                         max_no_of_chocies: this.options.max_no_of_chocies,
-                        scoring: this.options.scoring === "yes" && this.options.scoring_at.indexOf("choice") > -1 ? "yes" : "no",
-                        persist_value: true
+                        scoring: enableScoringForChoice
                     };
                     this.choice = choice.qbCheckbox(settings).data("qbCheckbox");
                     break;
@@ -194,8 +195,7 @@
                         name: "qbRadiobutton",
                         add_more_choice: this.options.add_more_choice,
                         max_no_of_chocies: this.options.max_no_of_chocies,
-                        scoring: this.options.scoring === "yes" &&  this.options.scoring_at.indexOf("choice") > -1 ? "yes" : "no",
-                        persist_value: true
+                        scoring: enableScoringForChoice
                     };
 
                     this.choice = choice.qbRadiobutton(settings).data("qbRadiobutton");
@@ -234,7 +234,7 @@
 
             if (this.options.scoring === "yes") {
                 // "scoringMethod" value should be retrieved from the new ui control that we are going to add later
-                question.scoringAt = this.scoringAt;
+                question.scoringAt = this.options.data.scoringAt;
                 question.score = question.scoringAt === "question" ?
                     parseInt(this.element.find("[data-name='question-score']").val() || 0) : null;
             }
@@ -250,6 +250,10 @@
 
             if (this.options.tagging === "yes")
                 question.tags = this.tag.getValue(true);
+
+            console.group("Question Builder Result"); /* RemoveLogging:skip */
+            console.log(question); /* RemoveLogging:skip */
+            console.groupEnd("Question Builder Result"); /* RemoveLogging:skip */
 
             this._trigger("savequestion", this, {
                 data: question

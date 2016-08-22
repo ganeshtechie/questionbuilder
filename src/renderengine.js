@@ -11,10 +11,10 @@
             html = window.dw.templates.shell_checkbox(config);
         } else if (config.choiceType === "singleline") {
             html = window.dw.templates.shell_singleline(config);
-        } else if(config.choiceType === "multiline"){
+        } else if (config.choiceType === "multiline") {
             html = window.dw.templates.shell_multiline(config);
         }
-        
+
         return html;
     };
 
@@ -39,15 +39,19 @@
 
         var Question = {};
 
-        
-
         Question = {
             id: 1,
-            choices: window.getChoiceFactory(type, config, [1, 2]),
+            choices: window.getChoiceFactory(type, $.extend({}, config, {
+                scoring: (defaults.scoringAt === "choice") ? "yes" : "no"
+            }), [1, 2]),
             choiceType: type
         };
 
         $.extend(Question, defaults);
+
+        console.group("RenderEngine:"); /*RemoveLogging:skip*/
+        console.log(Question); /*RemoveLogging:skip*/
+        console.groupEnd("RenderEngine"); /*RemoveLogging:skip*/
 
         return Question;
 
@@ -62,11 +66,8 @@
 
         if (type === "radiobutton" || type === "checkbox") {
 
-            if (config.scoring === "yes" && config.scoring_at.filter(function(o) {
-                    return o.value === "choice";
-                }).length > 0) {
-
-                score = config.default_score || 1;
+            if (config.scoring === "yes") {
+                score = config.default_score;
             }
 
             var choices = choiceId.map(function(e) {

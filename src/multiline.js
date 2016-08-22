@@ -4,7 +4,7 @@
 
 
     function MultiLine(element, options) {
-        
+
         options = options || {};
 
         var defaults = {
@@ -57,7 +57,7 @@
 
         },
 
-        onFieldFormatChanged: function(event){
+        onFieldFormatChanged: function(event) {
 
             var element = $(event.target);
 

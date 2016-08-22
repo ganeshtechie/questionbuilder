@@ -513,7 +513,7 @@
 
             config.data = JSON.parse(JSON.stringify(question));
 
-            console.log(config);
+
 
             editView.find("[data-container='edit']").questionbuilder(config);
 
@@ -543,7 +543,7 @@
         feedback_message: "Thank you for participating",
 
         default_choice: "Untitled Choice - {0}"
-            
+
         /*
         datasource: [{
             "id": 3,
