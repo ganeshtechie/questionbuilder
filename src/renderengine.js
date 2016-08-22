@@ -41,7 +41,7 @@
 
         Question = {
             id: 1,
-            choices: window.getChoiceFactory(type, $.extend({}, config, {
+            choice: window.getChoiceFactory(type, $.extend({}, config, {
                 scoring: (defaults.scoringAt === "choice") ? "yes" : "no"
             }), [1, 2]),
             choiceType: type

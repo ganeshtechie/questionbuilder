@@ -86,6 +86,8 @@
 
         _init: function() {
 
+            debugger;
+
             this.element.html("");
 
             // create a default object if the data has not be passed; and when ever the ui changes, update this data object
@@ -96,11 +98,19 @@
 
             this.element.html(html);
 
-            this._hideScore();
+            // Scoring Section 
+            if (this.options.scoring === "no") {
+                this.element.find(this.options.selectors.scoringSection).hide();
+            }
+
+            this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_at[0].value;
+            this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt).trigger("change");
+
 
             this._hideTags();
 
-            this.element.find("[data-name='choice-types']").trigger("change");
+            if (this.options.data && this.options.data.choiceType)
+                this.element.find("[data-name='choice-types']").val(this.options.data.choiceType).trigger("change");
 
             this._bindData();
         },
@@ -135,15 +145,13 @@
 
             this.options.data.scoringAt = value;
 
-
             if (value === "choice") {
                 this.element.find("[data-section='question-scoring']").hide();
             } else if (value === "question") {
                 this.element.find("[data-section='question-scoring']").show();
+                this.element.find(this.options.selectors.questionScore).val(this.options.default_score);
             }
-
-            this.element.find(this.options.selectors.questionScore).val(this.options.default_score);
-
+/*
             var previousState = null;
 
             var pluginName = this.element.find(this.options.selectors.choiceSection).data("pluginName");
@@ -151,11 +159,18 @@
             if (pluginName) {
                 previousState = this.element.find(this.options.selectors.choiceSection).data(pluginName).val();
             }
+*/
+            if (this.options.data)
+                this.element.find(this.options.selectors.choiceTypes).val(this.options.data.choiceType);
 
             this.element.find(this.options.selectors.choiceTypes).trigger("change");
         },
 
         _onchoiceTypeChanges: function(event, args) {
+
+            if(this.options.data.choiceType !== $(event.target).val()){
+                this.options.data.choice = null;
+            }
 
             this.options.data.choiceType = $(event.target).val();
 
@@ -163,9 +178,10 @@
 
             var pluginName = choice.data("pluginName");
 
-
             if (pluginName && choice.data(pluginName))
                 choice.data(pluginName).destroy();
+
+            choice.data("value", this.options.data.choice);
 
             var enableScoringForChoice = "";
 
@@ -245,7 +261,7 @@
             if (choice instanceof Error) { /* show this error in the page  */
                 return;
             } else {
-                question.choices = choice;
+                question.choice = choice;
             }
 
             if (this.options.tagging === "yes")
@@ -278,9 +294,7 @@
                 if (question.scoringAt)
                     this.element.find(selectors.scoringMethod).val(question.scoringAt).trigger("change");
 
-                this.element.find(selectors.choiceTypes).val(question.choiceType).trigger("change", {
-                    value: question.choices
-                });
+                this.element.find(selectors.choiceTypes).val(question.choiceType).trigger("change");
 
                 if (question.scoringAt === "question") {
                     this.element.find(selectors.questionScore).val(question.score);

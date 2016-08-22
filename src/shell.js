@@ -327,10 +327,11 @@
                 this.reload();
             }
 
-
         },
 
         _editQuestion: function(event) {
+
+            debugger;
 
             _.forEach(this.datasource, function(q) {
                 q.edit = false;
