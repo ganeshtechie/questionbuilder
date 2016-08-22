@@ -28,25 +28,6 @@
             // the default questions will be of this choice type. 
             default_choice_type: "checkbox",
 
-            minimum_no_of_questions_required: 1, // specifies the minimum no of questions required. Default is "1"
-
-            maximum_no_of_questions_allowed: 10, // specifies the maximum allowed question. Default is "10"
-
-            scoring: "yes", // "yes" if scoring is required, else "no"; this also enables the section to passing score, feedback, scoring method
-
-            default_score: 1, // default score for each question
-
-            negative_score: "yes", // enables the ui to enter negative scores 
-
-            import_questions: "yes", // allows the author to import questions from other sources like an existing wizard / a default template
-
-            /* if "yes" by default the required option will be checked and readonly. if no, it will be unchecked and readonly. leave it as null ( default ) to allow the author 
-             * to decide on that.
-             */
-            all_mandatory_questions: "yes",
-
-            repeat: "custom", // enables options to allow the author to choose the value for repeat / also accepts an integer value that represents the no of retakes
-
             tagging: "yes", // enables the ui to tag questions with the given tags
 
             tags: ["depression", "anxiety"], // tags which can be added to a question
@@ -58,8 +39,6 @@
                 title: "Choice",
                 value: "choice"
             }], // enables the ui to add scores either on question / choices
-
-            default_scoring_method: "question",
 
             /* only the allowed options will be enabled in the UI. leave it as empty to allow all the possible options
              * like "edit", "delete", "insert", "move"
@@ -108,7 +87,18 @@
             else
                 this.element.find("[data-name='feedback-message']").val(this.options.feedback_message);
 
+            if (this.options.scoring === "no") {
+                this.element.find("[data-section='scoring-method']").remove();
+            } else {
+                var _selector = "[data-section='scoring-method'] [name='scoring-method'][value='{0}']".replace(/\{0\}/, this.options.default_scoring_method);
+                this.element.find(_selector).prop("checked", true);
+            }
 
+            if (this.options.enable_retake === "no") {
+                this.element.find("[data-section='retake']").remove();
+            } else {
+                this.element.find("[data-section='retake'] [data-name='retake']").val(this.options.retake_limit);
+            }
 
             this.reload();
 
@@ -133,6 +123,7 @@
             this.element.find("[data-role='toggle']").dwToggle();
             this.element.find("[data-section='body']").arrangeActionButtons();
             this.element.find("[data-role='singleline-question']").basicInput();
+            this.element.find("[data-role='multiline-question']").basicInput();
         },
 
         // in edit mode, present the data at first
@@ -175,11 +166,19 @@
 
                 "click [data-action='save-feedback']": this._saveFeedback,
 
+                "click [data-section='scoring-method'] [name='scoring-method']": this._onScoringMethodChanged,
+
                 "questionbuildersavequestion  [data-container='edit']": this._onQuestionSaved,
 
                 "questionbuildersavequestioncancelled [data-container='edit']": this._onQuestionEditCancelled
 
             });
+
+        },
+
+        _onScoringMethodChanged: function(event) {
+
+            this.options.scoring_method = $(event.target).val();
 
         },
 
@@ -208,9 +207,49 @@
 
         _save: function() {
 
+            var assessment = {
+                title: this.options.title,
+                description: this.options.description,
+                questions: this.datasource,
+                retake: this._getRetakeLimit(),
+                scoringMethod: this._getScoringMethod(),
+                feedbackMessage: this.options.feedback_message,
+            };
+
             $(window).trigger("assessment:save", {
-                data: this.datasource
+                data: assessment
             });
+
+        },
+
+        _getScoringMethod: function() {
+            var scoringMethod = this.options.scoring_method;
+            if (this.options.scoring === "yes") {
+                scoringMethod = this.element.find("[data-section='scoring-method'] [name='scoring-method']:checked").val();
+            }
+            return scoringMethod;
+        },
+
+        _getRetakeLimit: function() {
+            var retakeLimit = this.options.retake_limit;
+
+            if (this.options.enable_retake === "yes") {
+                retakeLimit = this.element.find("[data-name='retake']").val();
+            }
+
+            return parseInt(retakeLimit);
+        },
+
+        _prepareJSON: function() {
+
+            var assessmentProperties = {
+                title: this.options.title,
+                description: this.options.description,
+                questions: this.datasource
+                    //retake: this.options.retake,
+                    //scoringMethod: this.options.scoringMethod,
+                    //feedbackMessage: this.options.feedbackMessage
+            };
 
         },
 
@@ -337,7 +376,8 @@
 
         _insertQuestion: function(event) {
 
-            if (this.options.maximum_no_of_questions_allowed <= this.datasource.length) return;
+            if (this.options.maximum_no_of_questions_allowed !== -1 &&
+                this.options.maximum_no_of_questions_allowed <= this.datasource.length) return;
 
             var $element = $(event.target);
 
@@ -473,6 +513,8 @@
 
             config.data = JSON.parse(JSON.stringify(question));
 
+            console.log(config);
+
             editView.find("[data-container='edit']").questionbuilder(config);
 
             toggler.data("dwToggle").toggle();
@@ -488,63 +530,49 @@
 
         scoring: "yes",
 
-/*
-        scoring_at: [{
-            title: "Question Level",
-            value: "question"
-        }],
+        default_scoring_method: "all",
 
-        default_scoring_method: "question",
-*/
+        enable_retake: "yes",
+
         tagging: "yes",
 
-
-        tags: [ "depression", "anxiety" ],
-        
-/*
-        allowed_choice_types: [{
-            title: "Radio Buttons",
-            value: "radiobutton"
-        }],
-
-        default_choice_type: "radiobutton",
-*/
+        tags: ["depression", "anxiety"],
 
         feedback: "yes",
 
         feedback_message: "Thank you for participating",
 
         default_choice: "Untitled Choice - {0}"
-            //maximum_no_of_questions_allowed: 3,
-            /*
-            datasource: [{
-                "id": 3,
-                "required": true,
-                "randomizeChoice": true,
-                "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-                "type": "singleline",
-                "scoringMethod": "question",
-                "score": 1,
-                "choices": { "id": 1, "fieldformat": "Free Text", "maximumlength": 120 },
-                "tags": ["anxiety"]
-            }, {
-                "id": 1,
-                "required": false,
-                "randomizeChoice": false,
-                "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-                "type": "radiobutton",
-                "scoringMethod": "question",
-                "score": null,
-                "choices": [{ "score": 10, "correct": false, "title": "Yes222", "id": 1 }, { "score": 0, "correct": false, "title": "No3333", "id": 2 }],
-                "tags": ["depression"]
-            }, {
-                "type": "radiobutton",
-                "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-                "id": 2,
-                "scoringMethod": "question",
-                "choices": [{ "id": 1, "title": "Yes", "score": 10 }, { "id": 2, "title": "No", "score": 0 }],
-                "edit": false
-            }]*/
+            
+        /*
+        datasource: [{
+            "id": 3,
+            "required": true,
+            "randomizeChoice": true,
+            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+            "type": "singleline",
+            "scoringMethod": "question",
+            "score": 1,
+            "choices": { "id": 1, "fieldformat": "Free Text", "maximumlength": 120 },
+            "tags": ["anxiety"]
+        }, {
+            "id": 1,
+            "required": false,
+            "randomizeChoice": false,
+            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+            "type": "radiobutton",
+            "scoringMethod": "question",
+            "score": null,
+            "choices": [{ "score": 10, "correct": false, "title": "Yes222", "id": 1 }, { "score": 0, "correct": false, "title": "No3333", "id": 2 }],
+            "tags": ["depression"]
+        }, {
+            "type": "radiobutton",
+            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+            "id": 2,
+            "scoringMethod": "question",
+            "choices": [{ "id": 1, "title": "Yes", "score": 10 }, { "id": 2, "title": "No", "score": 0 }],
+            "edit": false
+        }]*/
 
     });
 

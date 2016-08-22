@@ -1,0 +1,10 @@
+<div>
+    <div class="form-group form-inline">
+        <label>Choose the format of response:</label>
+        <select class="form-control" data-name="field-format"> {{#each supported_formats}}
+            <option value="{{ this.value }}">{{ this.title }}</option> {{/each}} </select>
+    </div>
+    <div class="form-group form-inline" data-section="max-len">
+        <label>Maximum Length:</label>
+        <input class="form-control" data-name='max-len' type="text" /> </div>
+</div>

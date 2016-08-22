@@ -1,0 +1,27 @@
+<div data-role="toggle" data-name="question-shell" data-qid="{{ id }}">
+    <div data-view="">
+        <div data-container="question" data-role="multiline-question" data-value="{{ id }}">
+            <div>
+                <p>{{{ title }}}</p>
+            </div>
+            <div>
+                <div class="form-group">
+                    <textarea class="form-control" data-max-len="{{ choices.maximumlength }}" data-role="{{ choices.fieldformat }}"></textarea>
+                </div>
+            </div>
+            <div>
+                <ul>
+                    <li> <a data-action="edit">Edit</a> </li>
+                    <li> <a data-action="delete">Delete</a> </li>
+                    <li> <a data-action="insert">Insert</a> </li>
+                    <li> <a data-action="moveup">Move Up</a> </li>
+                    <li> <a data-action="movedown">Move Down</a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div data-view="">
+        <h2>Edit Question</h2>
+        <div data-container="edit"> </div>
+    </div>
+</div>

@@ -41,19 +41,19 @@
             this.options = $.extend({}, $.dw.base_configurations, this.options);
 
             this._bind();
+
         },
 
         _hideScore: function() {
+            var isScoringEnabled = this.options.scoring;
 
-            var isScoringMethodIsQuestion = _.find(this.options.scoring_at, {
-                value: "question"
-            });
+            if (this.options.data) {}
 
             if (this.options.scoring === "no") {
                 this.element.find(this.options.selectors.scoringSection).hide();
             } else {
-                this.scoringMethod = this.options.default_scoring_method;
-                this.element.find("[data-name='scoring-method']").val(this.scoringMethod).trigger("change");
+                this.scoringAt = this.options.scoring_at[0].value;
+                this.element.find("[data-name='scoring-method']").val(this.scoringAt).trigger("change");
             }
         },
 
@@ -131,7 +131,7 @@
 
             var value = $(event.target).val();
 
-            this.scoringMethod = value;
+            this.scoringAt = value;
 
             if (value === "choice") {
                 this.element.find("[data-section='question-scoring']").hide();
@@ -184,7 +184,7 @@
                         name: "qbCheckbox",
                         add_more_choice: this.options.add_more_choice,
                         max_no_of_chocies: this.options.max_no_of_chocies,
-                        scoring: this.options.scoring === "yes" & this.scoringMethod === "choice" ? "yes" : "no",
+                        scoring: this.options.scoring === "yes" && this.options.scoring_at.indexOf("choice") > -1 ? "yes" : "no",
                         persist_value: true
                     };
                     this.choice = choice.qbCheckbox(settings).data("qbCheckbox");
@@ -194,7 +194,7 @@
                         name: "qbRadiobutton",
                         add_more_choice: this.options.add_more_choice,
                         max_no_of_chocies: this.options.max_no_of_chocies,
-                        scoring: this.options.scoring === "yes" & this.scoringMethod === "choice" ? "yes" : "no",
+                        scoring: this.options.scoring === "yes" &&  this.options.scoring_at.indexOf("choice") > -1 ? "yes" : "no",
                         persist_value: true
                     };
 
@@ -202,13 +202,19 @@
                     break;
                 case "singleline":
                     settings = {
-                        fieldformat: "Number",
+                        fieldformat: "number",
                         maximumlength: 10,
                         id: 1
                     };
                     this.choice = choice.qbSingleLine(settings).data("qbSingleLine");
                     break;
                 default:
+                    settings = {
+                        fieldformat: "freetext",
+                        maximumlength: 10,
+                        id: 1
+                    };
+                    this.choice = choice.qbMultiLine(settings).data("qbMultiLine");
                     break;
             }
 
@@ -224,12 +230,12 @@
             question.required = this.element.find("[data-name='required']").is(":checked");
             question.randomizeChoice = this.element.find("[data-name='shuffle']").is(":checked");
             question.title = this.element.find("[data-name='title']").val();
-            question.type = this.element.find("[data-name='choice-types']").val();
+            question.choiceType = this.element.find("[data-name='choice-types']").val();
 
             if (this.options.scoring === "yes") {
                 // "scoringMethod" value should be retrieved from the new ui control that we are going to add later
-                question.scoringMethod = this.scoringMethod;
-                question.score = question.scoringMethod === "question" ?
+                question.scoringAt = this.scoringAt;
+                question.score = question.scoringAt === "question" ?
                     parseInt(this.element.find("[data-name='question-score']").val() || 0) : null;
             }
 
@@ -265,14 +271,16 @@
 
                 this.element.find(selectors.questionTitle).val(question.title);
 
-                this.element.find(selectors.scoringMethod).val(question.scoringMethod).trigger("change");
+                if (question.scoringAt)
+                    this.element.find(selectors.scoringMethod).val(question.scoringAt).trigger("change");
 
-                this.element.find(selectors.choiceTypes).val(question.type).trigger("change", {
+                this.element.find(selectors.choiceTypes).val(question.choiceType).trigger("change", {
                     value: question.choices
                 });
 
-                if (question.scoringMethod === "question")
+                if (question.scoringAt === "question") {
                     this.element.find(selectors.questionScore).val(question.score);
+                }
 
                 if (question.tags && question.tags.length > 0) {
                     // set the tags
@@ -290,25 +298,35 @@
 
 
 
-
-
-
     $("[data-section='question-edit']").questionbuilder({
         data: {
-            "type": "radiobutton",
-            "title": "Sample Question",
-            "id": 2,
-            "scoringMethod": "choice",
+            "id": 1,
+            "title": "Hey there",
+            "scoringAt": "question",
+            "randomizeChoices": 1,
+            "score": 10,
+            "required": 1,
+            "tags": [
+                "depression",
+                "anxitey"
+            ],
+            "choiceType": "radiobutton",
             "choices": [{
                 "id": 1,
-                "title": "Yes",
-                "score": 10
+                "title": "<p>Hello</p>",
+                "score": 10,
+                "correct": true
             }, {
                 "id": 2,
-                "title": "No",
-                "score": 0
-            }],
-            "edit": true
+                "title": "<p>World</p>",
+                "score": 10,
+                "correct": false
+            }, {
+                "id": 3,
+                "title": "<p>Hey there!</p>",
+                "score": 10,
+                "correct": true
+            }]
         }
     });
     /*

@@ -31,7 +31,8 @@
 
         minimum_no_of_questions_required: 1, // specifies the minimum no of questions required. Default is "1"
 
-        maximum_no_of_questions_allowed: 10, // specifies the maximum allowed question. Default is "10"
+        // specifies the maximum allowed question. Default is "-1" which means it is infinte
+        maximum_no_of_questions_allowed: -1,
 
         scoring: "yes", // "yes" if scoring is required, else "no"; this also enables the section to passing score, feedback, scoring method
 
@@ -46,7 +47,9 @@
          */
         all_mandatory_questions: "yes",
 
-        retake: "custom", // enables options to allow the author to choose the value for repeat / also accepts an integer value that represents the no of retakes
+        retake_limit: -1,
+
+        enable_retake: "yes", // enables options to allow the author to choose the value for repeat / also accepts an integer value that represents the no of retakes
 
         tagging: "yes", // enables the ui to tag questions with the given tags
 
@@ -61,9 +64,30 @@
             value: "choice"
         }],
 
-        allowed_scoring_methods: [""],
+        /*
+        // Here are the possible scoring methods
+        [
+          {
+            "id": 1,
+            "title": "any",
+            "description": "Full score will be given for a question, on selecting any one correct choice"
+          },
+          {
+            "id": 2,
+            "title": "divide",
+            "description": "Scores will be divided based on the # of correct choices the user selects for a question"
+          },
+          {
+            "id": 3,
+            "title": "all",
+            "description": "Full score will be given for a question, only when the user selects all the correct choices"
+          }
+        ]
+        */
+        default_scoring_method: "any",
 
-        default_scoring_method: "question",
+        // This enables the UI, so that the user can select the scoring method he wants from the given list of methods
+        allow_to_change_scoring_method: "yes",
 
         /* only the allowed options will be enabled in the UI. leave it as empty to allow all the possible options
          * like "edit", "delete", "insert", "move"
@@ -76,7 +100,6 @@
         default_choice: "Untitled Choice {0}",
 
         datasource: []
-
 
     };
 

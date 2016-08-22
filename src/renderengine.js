@@ -5,14 +5,16 @@
 
         var html = "";
 
-        if (config.type === "radiobutton") {
+        if (config.choiceType === "radiobutton") {
             html = window.dw.templates.shell_radiobutton(config);
-        } else if (config.type === "checkbox") {
+        } else if (config.choiceType === "checkbox") {
             html = window.dw.templates.shell_checkbox(config);
-        } else if (config.type === "singleline") {
+        } else if (config.choiceType === "singleline") {
             html = window.dw.templates.shell_singleline(config);
+        } else if(config.choiceType === "multiline"){
+            html = window.dw.templates.shell_multiline(config);
         }
-
+        
         return html;
     };
 
@@ -31,37 +33,23 @@
 
 
         if (config.scoring === "yes") {
-            defaults.scoringMethod = config.default_scoring_method || config.scoring_at[0].value;
-            defaults.score = defaults.scoringMethod === "question" ? config.default_score : null;
+            defaults.scoringAt = config.scoring_at[0].value;
+            defaults.score = defaults.scoringAt === "question" ? config.default_score : null;
         }
 
         var Question = {};
 
-        if (type === "radiobutton") {
+        
 
-            Question = {
-                type: type,
-                id: 1,
-                choices: window.getChoiceFactory(type, config, [1, 2])
-            };
-
-        } else if (type === "checkbox") {
-
-            Question = {
-                type: type,
-                id: 1,
-                choices: window.getChoiceFactory(type, config, [1, 2])
-            };
-
-        }
+        Question = {
+            id: 1,
+            choices: window.getChoiceFactory(type, config, [1, 2]),
+            choiceType: type
+        };
 
         $.extend(Question, defaults);
 
-
-
-
         return Question;
-
 
     };
 

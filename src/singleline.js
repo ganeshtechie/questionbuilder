@@ -5,6 +5,8 @@
 
     function SingleLine(element, options) {
 
+        options = options || {};
+
         var defaults = {
             supported_formats: [{
                 title: "Free Text",
@@ -60,7 +62,7 @@
 
         bind: function() {
 
-            $("body").on("change", "[data-name='field-format']", this.onFieldFormatChanged);
+            this.element.find("[data-name='field-format']").on("change", this.onFieldFormatChanged);
 
         },
 
@@ -222,9 +224,17 @@
             });
 
 
+            $.each($(this).find("[data-role='richtext']"), function(i, e) {
+
+                $(e).attr("placeholder", "HTML Content is allowed");
+
+                $(e).removeAttr("data-role");
+
+            });
+
+
         });
     };
-
 
     
 

@@ -54,6 +54,8 @@
 
         getConfigForHTML: function() {
 
+            console.log(this.options);
+
             return {
                 enable_scoring: this.options.scoring === "yes",
                 unique_id: this.options.unique_id
@@ -112,7 +114,11 @@
 
             var choiceHtml = "";
 
-            choiceHtml += this.options.templates.choice($.extend(this.getConfigForHTML(), choice));
+            var data = $.extend(this.getConfigForHTML(), choice);
+
+            console.log(data);
+
+            choiceHtml += this.options.templates.choice(data);
 
             return choiceHtml;
 
