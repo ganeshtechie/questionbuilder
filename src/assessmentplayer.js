@@ -13,14 +13,10 @@
 
 
         _create: function() {
-
             this._bind();
-
             // 1. Render your questions
             this._render();
-
             // 2. initialize all the widgets
-
             this.element.find("[data-choice-type='checkbox']").dwplay_checkbox();
             this.element.find("[data-choice-type='radiobutton']").dwplay_radiobutton();
             this.element.find("[data-choice-type='singleline']").dwplay_singleline();
@@ -45,22 +41,13 @@
             } else if (question.type === "singleline") {
                 html = window.dw.templates.play_singleline(question);
             }
-
-
-
             html = "<li>" + html + "</li>";
-
             return html;
-
         },
 
-
         _render: function() {
-
             for (var i = 0; i < this.options.datasource.length; i++) {
-
                 this.element.find("[data-name='question-list']").append(this._getHtml(this.options.datasource[i]));
-
             }
         },
 
@@ -79,17 +66,16 @@
                         responses: $(this).data("value")
                     });
             });
-
             return responses;
-
         },
 
         _submitResponse: function() {
             var responses = this._getAllResponses();
 
-
+            console.group("Submiting Response"); /*Removelogging:skip*/
+            console.log(responses); /*Removelogging:skip*/
+            console.groupEnd("Submiting Response"); /*Removelogging:skip*/
         }
-
 
 
     });

@@ -307,7 +307,6 @@
             });
 
 
-
             var index = _.findIndex(this.datasource, question);
 
             if (index <= this.datasource.length - 2) {

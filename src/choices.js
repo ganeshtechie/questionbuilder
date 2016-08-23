@@ -2,23 +2,22 @@
 
     "use strict";
 
+    var defaults = {
+        templates: {
+            layout: '<div data-role="choice-list"></div><div><div><a data-name="add-more-choice">Add more choices</a></div></div>',
+            choice: window.dw.templates.checkboxes
+        },
+        min_no_of_choices: 2,
+        add_more_choice: "yes",
+        max_no_of_chocies: 4,
+        scoring: "yes",
+        persist_value: true,
+        unique_id: 1 // mostly it will be the question id, which is used to add in the name of the input elements for grouping
+    };
+
     var Checkbox = function(element, options) {
 
         var $this = this;
-
-        var defaults = {
-            templates: {
-                layout: '<div data-role="choice-list"></div><div><div><a data-name="add-more-choice">Add more choices</a></div></div>',
-                choice: window.dw.templates.checkboxes
-            },
-            min_no_of_choices: 2,
-            add_more_choice: "yes",
-            max_no_of_chocies: 4,
-            scoring: "yes",
-            persist_value: true,
-            unique_id: 1 // mostly it will be the question id, which is used to add in the name of the input elements for grouping
-        };
-
 
         this.options = $.extend({}, defaults, $.dw.base_configurations, options);
 
@@ -34,7 +33,6 @@
         // execution
         // you can set the state of the plugin before initialzing, by setting the data-value property
         this.options.data = element.data("value") || [];
-
 
 
         if (this.options.persist_value === false) element.removeData("value");
