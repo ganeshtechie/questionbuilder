@@ -2,17 +2,17 @@
 {
   "id": 1,
   "title": "Hey there",
-  "scoring_at": "question",
+  "scoringAt": "question",
   "required": 1,
   "score": 10,
   "tags": [
     "depression",
     "anxitey"
   ],
-  "choice_type": "multiline",
+  "choiceType": "multiline",
   "choices": {
     "id": 1,
-    "field_format": "richtext",
-    "maximum_length": 200
+    "fieldformat": "richtext",
+    "maximumlength": 200
   }
 }

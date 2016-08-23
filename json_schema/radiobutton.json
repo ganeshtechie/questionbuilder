@@ -1,15 +1,16 @@
 {
   "id": 1,
   "title": "Hey there",
-  "scoring_at": "question",
-  "randomize_choices": 1,
+  "scoringAt": "question",
+  "randomizeChoices": 1,
+  "rhetorical": false,
   "score": 10,
   "required": 1,
   "tags": [
     "depression",
     "anxitey"
   ],
-  "choice_type": "radiobutton",
+  "choiceType": "radiobutton",
   "choices": [
     {
       "id": 1,

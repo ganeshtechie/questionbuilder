@@ -331,8 +331,6 @@
 
         _editQuestion: function(event) {
 
-            debugger;
-
             _.forEach(this.datasource, function(q) {
                 q.edit = false;
             });
@@ -578,8 +576,10 @@
     });
 
     $(window).on("assessment:save", function(event, args) {
-
-        console.log(args); /*RemoveLogging:skip*/
+        
+        console.group("Assessment JSON"); /*RemoveLogging:skip*/
+        console.log(args.data); /*RemoveLogging:skip*/
+        console.groupEnd("Assessment JSON"); /*RemoveLogging:skip*/
 
     });
 

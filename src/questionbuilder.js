@@ -86,8 +86,6 @@
 
         _init: function() {
 
-            debugger;
-
             this.element.html("");
 
             // create a default object if the data has not be passed; and when ever the ui changes, update this data object
@@ -101,11 +99,12 @@
             // Scoring Section 
             if (this.options.scoring === "no") {
                 this.element.find(this.options.selectors.scoringSection).hide();
+            } else {
+                this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_at[0].value;
+                this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt).trigger("change");
+
+                this.element.find("[name='rhetorical-question']").prop("checked", this.options.data.rhetorical);
             }
-
-            this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_at[0].value;
-            this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt).trigger("change");
-
 
             this._hideTags();
 
@@ -126,10 +125,17 @@
 
                 'change [data-name="scoring-method"]': this._onScoringAtChanges,
 
-                'click [data-name="cancel-question"]': this._cancelChanges
+                'click [data-name="cancel-question"]': this._cancelChanges,
+
+                'click [name="rhetorical-question"]': this._markQuestionAsRhetorical
 
             });
 
+        },
+
+        _markQuestionAsRhetorical: function(event){
+            
+            this.options.data.rhetorical = $(event.target).is(":checked");
         },
 
         _cancelChanges: function(event) {
@@ -254,6 +260,8 @@
                 question.score = question.scoringAt === "question" ?
                     parseInt(this.element.find("[data-name='question-score']").val() || 0) : null;
             }
+
+            question.rhetorical = this.options.data.rhetorical;
 
 
             var choice = this.choice.val();
