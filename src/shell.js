@@ -531,7 +531,9 @@
 
         default_scoring_method: "all",
 
-        enable_retake: "yes",
+        enable_retake: "no",
+
+        retake_limit: 0,
 
         tagging: "yes",
 
