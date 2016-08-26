@@ -1,0 +1,69 @@
+<contacts>
+    <contact>
+        <id>1</id>
+        <type>Multiple</type>
+        <address>
+            <value>IND</value>
+        </address>
+        <address>
+            <value>CHINA</value>
+        </address>
+        <address>
+            <value>PAK</value>
+        </address>
+    </contact>
+    <contact>
+        <id>1</id>
+        <type>Single</type>
+        <address>
+            <id>1</id>
+            <name>XYZ</name>
+            <country>IND</country>
+        </address>
+    </contact>
+</contacts>
+
+I want to convert this xml to c# object. For that i have created the below classes
+
+[XmlRoot("address")]
+public class MultipleAddress
+{
+	[XmlElement("value")]
+	prop string value { get; set; }
+}
+
+[XmlRoot("address")]
+public class SingleAddress
+{
+	[XmlElement("name")]
+	prop string name { get; set; }
+	[XmlElement("country")]
+	prop string country { get; set; }
+}
+
+
+public class BaseContact
+{
+	prop int id { get; set; }
+	prop string type { get; set; }
+}
+
+public class MultipleContact: BaseContact
+{
+	prop MultipleAddress[] address { get; set; }
+}
+
+public class SingleContact: BaseContact
+{
+	prop SingleAddress address { get; set; }
+}
+
+// Main Class
+public calss Contact
+{
+	[XmlElement("contact")]
+	public <???> contact { get; set; }
+}
+
+
+If i replace "???" with BaseContact, the address element will be omitted in the output XML. Is there any way that i can achieve this?

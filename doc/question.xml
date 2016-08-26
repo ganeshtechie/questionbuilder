@@ -1,0 +1,31 @@
+<Question ID="1" QuestionType="2" Required="0" RandomizeChoices="0" FieldColumns="40" FieldRows="5" QuestionWeight="1" FieldFormat="Checkboxes">
+    <Title>
+        <![CDATA[
+        <p>Enclose your HTML in a <a href="http://www.w3.org/TR/xml/#sec-cdata-sect">CDATA section</a> so it doesn't get treated as part of your XML, but instead just normal text:</p>
+        ]]>
+    </Title>
+    <Choice ID="1" Correct="0" Score="10">
+        <Title>Collaborative Workspaces</Title>
+        <Value>Collaborative Workspaces</Value>
+    </Choice>
+    <Choice ID="2" Correct="0" Score="10">
+        <Title>Action Steps</Title>
+        <Value>Action Steps</Value>
+    </Choice>
+    <Choice ID="3" Correct="0" Score="10">
+        <Title>Data Wizard Assessments</Title>
+        <Value>Data Wizard Assessments</Value>
+    </Choice>
+    <Choice ID="4" Correct="0" Score="10">
+        <Title>Pulse Checks</Title>
+        <Value>Pulse Checks</Value>
+    </Choice>
+    <Choice ID="5" Correct="0" Score="10">
+        <Title>Rich Text Discussion Forums</Title>
+        <Value>Rich Text Discussion Forums</Value>
+    </Choice>
+    <Choice ID="6" Correct="0" Score="10">
+        <Title>Shared Bookmarks</Title>
+        <Value>Shared Bookmarks</Value>
+    </Choice>
+</Question>

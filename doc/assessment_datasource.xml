@@ -1,0 +1,40 @@
+<Wizard ID="181" Edition="2" Output="2" Type="4" QuestionPrompt="0">
+  <Title>Pulse Check</Title>
+  <MaximumRetake>1</MaximumRetake>
+  <CompletionMessage>Thank you for participating.</CompletionMessage>
+  <Scoring MaxScore="0" PassingScore="" OnFailCertificate="0" OnFailContinue="0" ScoringMethod="2" />
+  <Page ID="1">
+    <Title>Untitled Page</Title>
+    <Section ID="1">
+      <Title>Untitled Section</Title>
+      <Question ID="1" QuestionType="2" Required="0" RandomizeChoices="0" FieldColumns="40" FieldRows="5" QuestionWeight="1" FieldFormat="Checkboxes">
+        <Title>Which of the following new features in the updated Learning Re-Engineered site, excites you most?&lt;div&gt;&lt;br&gt;&lt;/div&gt;</Title>
+        <Choice ID="1" Correct="0">
+          <Title>Collaborative Workspaces</Title>
+          <Value>Collaborative Workspaces</Value>
+        </Choice>
+        <Choice ID="2" Correct="0">
+          <Title>Action Steps</Title>
+          <Value>Action Steps</Value>
+        </Choice>
+        <Choice ID="3" Correct="0">
+          <Title>Data Wizard Assessments</Title>
+          <Value>Data Wizard Assessments</Value>
+        </Choice>
+        <Choice ID="4" Correct="0">
+          <Title>Pulse Checks</Title>
+          <Value>Pulse Checks</Value>
+        </Choice>
+        <Choice ID="5" Correct="0">
+          <Title>Rich Text Discussion Forums</Title>
+          <Value>Rich Text Discussion Forums</Value>
+        </Choice>
+        <Choice ID="6" Correct="0">
+          <Title>Shared Bookmarks</Title>
+          <Value>Shared Bookmarks</Value>
+        </Choice>
+      </Question>
+    </Section>
+  </Page>
+  <SkipLogic />
+</Wizard>

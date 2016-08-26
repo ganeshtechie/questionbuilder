@@ -47,10 +47,66 @@ void Main()
 		}
 	}
 	
-	Console.WriteLine(questions);
+	serializer = new XmlSerializer(typeof(Assessment));
+	
+	Assessment assessment;
+	
+	using (TextReader reader = new StringReader(stringWriter.GetStringBuilder().ToString()))
+	{
+		assessment = ( Assessment )  serializer.Deserialize(reader);
+		
+		assessment.questions = questions;
+	}
+	
+	serializer = new XmlSerializer(typeof(Assessment));
+   	StreamWriter sw = new StreamWriter(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\assessment.xml");
+   	serializer.Serialize(sw, assessment);
+   	sw.Close();
+}
+
+
+[XmlRoot("assessment")]
+public class Assessment
+{
+	[XmlElement("title")]
+	public string title { get; set; }
+	[XmlElement("description")]
+	public string description { get; set; }
+	[XmlElement("question")]
+	public List<BaseQuestion> questions { get; set; }
+	[XmlElement("retake")]
+	public int retake { get; set; }
+	[XmlElement("scoringMethod")]
+	public string scoringMethod { get; set; }
+	[XmlElement("feedbackMessage")]
+	public string feedbackMessage { get; set; }
+}
+
+[XmlInclude(typeof(MultipleChoice))]
+[XmlInclude(typeof(FactualChoice))]
+public abstract class BaseChoice
+{
+	public int id { get; set; }
+}
+
+
+public class MultipleChoice: BaseChoice
+{
+	public bool correct { get; set; }
+	public string title { get; set; }
+}
+
+
+public class FactualChoice: BaseChoice
+{
+	public string fieldformat { get; set; }
+	public string maximumlength { get; set; }
 }
 
 // Define other methods and classes here
+
+[XmlInclude(typeof(MultipleChoiceQuestion))]
+[XmlInclude(typeof(FactualQuestion))]
 public abstract class BaseQuestion
 {
 	public int id { get; set; }
@@ -64,44 +120,18 @@ public abstract class BaseQuestion
 	public string rhetorical { get; set; }
 }
 
-public abstract class BaseChoice
-{
-	public int id { get; set; }
-}
-
-public class Assessment
-{
-	public string title { get; set; }
-	public string description { get; set; }
-	public List<BaseQuestion> questions { get; set; }
-	public int retake { get; set; }
-	public string scoringMethod { get; set; }
-	public string feedbackMessage { get; set; }
-}
-
 [XmlRoot("questions")]
 public class MultipleChoiceQuestion : BaseQuestion
 {
 	[XmlElement("choice")]
-	public MultipleChoice[] choice { get; set; }
+	public List<MultipleChoice> choice { get; set; }
 }
 
 [XmlRoot("questions")]
 public class FactualQuestion : BaseQuestion
 {
 	[XmlElement("choice")]
-	public FactualChoice choice { get; set; }
+	public FactualChoice choices { get; set; }
 }
 
 
-public class MultipleChoice: BaseChoice
-{
-	public bool correct { get; set; }
-	public string title { get; set; }
-}
-
-public class FactualChoice: BaseChoice
-{
-	public string fieldformat { get; set; }
-	public string maximumlength { get; set; }
-}

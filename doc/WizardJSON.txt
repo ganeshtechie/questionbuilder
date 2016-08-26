@@ -1,0 +1,85 @@
+{
+  "assessment": {
+    "title": "Health Assessment",
+    "description": "A Basic health assessment",
+    "questions": [
+      {
+        "id": 1,
+        "required": true,
+        "randomizeChoice": true,
+        "title": "1) Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+        "choiceType": "checkbox",
+        "scoringAt": "question",
+        "score": 1,
+        "choice": [
+          {
+            "correct": false,
+            "title": "Untitled Choice - 1",
+            "id": 1
+          },
+          {
+            "correct": false,
+            "title": "Untitled Choice - 2",
+            "id": 2
+          }
+        ],
+        "tags": [
+          "anxiety",
+          "depression"
+        ],
+        "edit": false
+      },
+      {
+        "id": 2,
+        "required": true,
+        "randomizeChoice": true,
+        "title": "2) Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+        "choiceType": "radiobutton",
+        "scoringAt": "choice",
+        "choice": [
+          {
+            "correct": false,
+            "title": "Untitled Choice - 1",
+            "id": 1,
+            "score": 10
+          },
+          {
+            "correct": false,
+            "title": "Untitled Choice - 2",
+            "id": 2,
+            "score": 0
+          },
+          {
+            "correct": false,
+            "title": "Untitled Choice - 3",
+            "id": 3,
+            "score": 4
+          }
+        ],
+        "tags": [
+          "anxiety"
+        ]
+      },
+      {
+        "id": 3,
+        "required": true,
+        "randomizeChoice": true,
+        "title": "2) Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
+        "choiceType": "singleline",
+        "scoringAt": "question",
+        "score": 1,
+        "choice": {
+          "id": 1,
+          "fieldformat": "number",
+          "maximumlength": 100
+        },
+        "tags": [
+          "anxiety"
+        ]
+      }
+    ],
+    "retake": 0,
+    "scoringMethod": "all",
+    "feedbackMessage": "Thank you for participating"
+  }
+}
