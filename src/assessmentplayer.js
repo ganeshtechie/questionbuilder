@@ -33,6 +33,7 @@
             html = "<li>" + html + "</li>";
             return html;
         },
+
         _render: function() {
             for (var i = 0; i < this.options.datasource.length; i++) {
                 this.element.find("[data-name='question-list']").append(this._getHtml(this.options.datasource[i]));
@@ -54,6 +55,7 @@
             return responses;
         },
         _submitResponse: function() {
+
             var responses = this._getAllResponses(),
                 preventSubmit = true,
                 errors = this._validate(responses);
@@ -114,6 +116,7 @@
             }
             return errors;
         }
+
     });
-    
+
 })();
