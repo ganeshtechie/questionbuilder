@@ -2,17 +2,17 @@
 [
 	{
         "questionId": 1,
-        "selected_choices_id": [1, 2]
+        "selected_choice_id": [1, 2]
     },
 
     {
         "questionId": 10,
-        "selected_choices_id": [1]
+        "selected_choice_id": [1]
     },
 
     /* For Single / Multi Line Questions */
     {
-        "questionId": 20,
+        "questionId": 22,
         "response": "ganesh.rajan@srgtech.com"
     },
 

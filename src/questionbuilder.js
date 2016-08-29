@@ -133,8 +133,8 @@
 
         },
 
-        _markQuestionAsRhetorical: function(event){
-            
+        _markQuestionAsRhetorical: function(event) {
+
             this.options.data.rhetorical = $(event.target).is(":checked");
         },
 
@@ -149,7 +149,7 @@
 
             var value = $(event.target).val();
 
-            this.options.data.scoringAt = value;
+            
 
             if (value === "choice") {
                 this.element.find("[data-section='question-scoring']").hide();
@@ -157,28 +157,37 @@
                 this.element.find("[data-section='question-scoring']").show();
                 this.element.find(this.options.selectors.questionScore).val(this.options.default_score);
             }
-/*
-            var previousState = null;
 
-            var pluginName = this.element.find(this.options.selectors.choiceSection).data("pluginName");
+            //if (this.options.data)
+            //this.element.find(this.options.selectors.choiceTypes).val(this.options.data.choiceType);
 
-            if (pluginName) {
-                previousState = this.element.find(this.options.selectors.choiceSection).data(pluginName).val();
+            if(this.options.data.scoringAt !== value){
+                // when set the choicetype to empty, on triggering the change event of choice type dropdown will
+                // make the ui to update.
+                this.options.data.choiceType = "";
             }
-*/
-            if (this.options.data)
-                this.element.find(this.options.selectors.choiceTypes).val(this.options.data.choiceType);
+
+            this.options.data.scoringAt = value;
 
             this.element.find(this.options.selectors.choiceTypes).trigger("change");
         },
 
+
+
         _onchoiceTypeChanges: function(event, args) {
 
-            if(this.options.data.choiceType !== $(event.target).val()){
+            var choiceType = $(event.target).val();
+
+            this._rebindChoicePlugin(choiceType);
+        },
+
+        _rebindChoicePlugin: function(choiceType) {
+
+            if(this.options.data.choiceType !== choiceType){
                 this.options.data.choice = null;
             }
 
-            this.options.data.choiceType = $(event.target).val();
+            this.options.data.choiceType = choiceType;
 
             var choice = this.element.find(this.options.selectors.choiceSection);
 
@@ -194,13 +203,6 @@
             enableScoringForChoice = (this.options.data.scoringAt === "choice") ? "yes" : "no";
 
             var settings = null;
-
-            var isValidScoringItem = function(itemName) {
-                return _.findIndex(this.options.scoring_at, {
-                    value: itemName
-                }) >= 0;
-            }.bind(this);
-
 
             switch (this.options.data.choiceType) {
                 case "checkbox":
@@ -299,10 +301,10 @@
 
                 this.element.find(selectors.questionTitle).val(question.title);
 
-                if (question.scoringAt)
-                    this.element.find(selectors.scoringMethod).val(question.scoringAt).trigger("change");
+                /*if (question.scoringAt)
+                    this.element.find(selectors.scoringMethod).val(question.scoringAt).trigger("change");*/
 
-                this.element.find(selectors.choiceTypes).val(question.choiceType).trigger("change");
+                //this.element.find(selectors.choiceTypes).val(question.choiceType).trigger("change");
 
                 if (question.scoringAt === "question") {
                     this.element.find(selectors.questionScore).val(question.score);
@@ -316,59 +318,56 @@
                 this.element.find(selectors.shuffle).prop("checked", question.randomizeChoice);
 
             }
-
-        }
-
-
-    });
-
-
-
-    $("[data-section='question-edit']").questionbuilder({
-        data: {
-            "id": 1,
-            "title": "Hey there",
-            "scoringAt": "question",
-            "randomizeChoices": 1,
-            "score": 10,
-            "required": 1,
-            "tags": [
-                "depression",
-                "anxitey"
-            ],
-            "choiceType": "radiobutton",
-            "choices": [{
-                "id": 1,
-                "title": "<p>Hello</p>",
-                "score": 10,
-                "correct": true
-            }, {
-                "id": 2,
-                "title": "<p>World</p>",
-                "score": 10,
-                "correct": false
-            }, {
-                "id": 3,
-                "title": "<p>Hey there!</p>",
-                "score": 10,
-                "correct": true
-            }]
         }
     });
-    /*
+
+
+
         $("[data-section='question-edit']").questionbuilder({
             data: {
-                title: "Sample Question",
-                type: "checkbox",
-                scoringMethod: "choice",
-                score: 10,
-                choices: [{ id: 1, title: "simple question", score: 10 }, { id: 2, title: "test 2", score: 20 }],
-                randomizeChoice: false,
-                tags: [],
-                required: false
+                "id": 1,
+                "title": "Hey there",
+                "scoringAt": "question",
+                "randomizeChoices": 1,
+                "score": 10,
+                "required": 1,
+                "tags": [
+                    "depression",
+                    "anxitey"
+                ],
+                "choiceType": "radiobutton",
+                "choices": [{
+                    "id": 1,
+                    "title": "<p>Hello</p>",
+                    "score": 10,
+                    "correct": true
+                }, {
+                    "id": 2,
+                    "title": "<p>World</p>",
+                    "score": 10,
+                    "correct": false
+                }, {
+                    "id": 3,
+                    "title": "<p>Hey there!</p>",
+                    "score": 10,
+                    "correct": true
+                }]
             }
         });
-    */
+        /*
+            $("[data-section='question-edit']").questionbuilder({
+                data: {
+                    title: "Sample Question",
+                    type: "checkbox",
+                    scoringMethod: "choice",
+                    score: 10,
+                    choices: [{ id: 1, title: "simple question", score: 10 }, { id: 2, title: "test 2", score: 20 }],
+                    randomizeChoice: false,
+                    tags: [],
+                    required: false
+                }
+            });
+        */
     //$("[data-action='edit']").on("click", function () {
 
     //    $(this).closest("[data-role='toggle']").data("dwToggle").toggle();

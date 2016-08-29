@@ -1,7 +1,7 @@
-max qu no -1 is infinite
-retake 
+max qu no -1 is infinite - done
+retake - done
 frequnece
-dont want score for a question
-Asc Desc for choices
-scoring method 
+dont want score for a question - done
+Asc Desc for choices - done
+scoring method - done. changed to scoring at
 choices can be html should be rte

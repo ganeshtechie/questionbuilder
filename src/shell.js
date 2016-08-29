@@ -1,5 +1,7 @@
 (function() {
 
+    var factory = window.assessmentbuilder.factory;
+
 
     $.widget("dw.shell", {
 
@@ -105,7 +107,7 @@
         },
 
         _getNewQuestion: function(choiceType) {
-            var question = window.questionFactory(choiceType, this.options);
+            var question = factory.questionFactory(choiceType, this.options);
             return question;
         },
 
@@ -113,7 +115,7 @@
             var html = "";
             var question = this._getNewQuestion(this.options.default_choice_type);
             this.datasource.push(question);
-            html = window.renderEngine(question);
+            html = factory.renderEngine(question);
             //this.element.append(html);
             this._addQuestion(html);
         },
@@ -130,7 +132,7 @@
         _bindData: function() {
             var html = "";
             for (var i = 0; i < this.datasource.length; i++) {
-                html += window.renderEngine(this.datasource[i]);
+                html += factory.renderEngine(this.datasource[i]);
             }
             this._addQuestion(html);
         },
@@ -156,7 +158,7 @@
 
                 "click [data-action='movedown']": this._moveDown,
 
-                "click [data-action='save']": this._save,
+                "click [data-action='save']": this.save,
 
                 "click [data-action='save-as-draft']": this._saveAsDraft,
 
@@ -173,6 +175,7 @@
                 "questionbuildersavequestioncancelled [data-container='edit']": this._onQuestionEditCancelled
 
             });
+
 
         },
 
@@ -205,7 +208,7 @@
 
         },
 
-        _save: function() {
+        save: function() {
 
             var assessment = {
                 title: this.options.title,
@@ -216,7 +219,7 @@
                 feedbackMessage: this.options.feedback_message,
             };
 
-            $(window).trigger("assessment:save", {
+            $(window).trigger("assessmentbuilder:save", {
                 data: assessment
             });
 
@@ -280,7 +283,7 @@
 
                 var questionDOM = this._getQuestionDOM(previousQuestion.id);
 
-                var html = window.renderEngine(question);
+                var html = factory.renderEngine(question);
                 html = $(html);
                 html.insertBefore(questionDOM);
 
@@ -321,7 +324,7 @@
 
                 var questionDOM = this._getQuestionDOM(nextQuestion.id);
 
-                var html = window.renderEngine(question);
+                var html = factory.renderEngine(question);
                 html = $(html);
                 html.insertAfter(questionDOM);
                 this.reload();
@@ -393,7 +396,7 @@
             // Push the question in the specified index.
             this.datasource.splice(index + 1, 0, question);
 
-            var html = window.renderEngine(question);
+            var html = factory.renderEngine(question);
 
             html = $(html);
 
@@ -456,7 +459,7 @@
 
             //this.datasource.splice(index, 1, question);
 
-            var html = window.renderEngine(question);
+            var html = factory.renderEngine(question);
 
             var questionToReplace = this.element.find("[data-name='question-shell'][data-qid='" + question.id + "']");
 
@@ -474,7 +477,7 @@
 
             this.datasource.splice(index, 1, question);
 
-            var html = window.renderEngine(question);
+            var html = factory.renderEngine(question);
 
             var questionToReplace = this.element.find("[data-name='question-shell'][data-qid='" + question.id + "']");
 
@@ -484,12 +487,10 @@
 
         },
 
-
         _updateQuestion: function(html) {
 
 
         },
-
 
         _prepareQuestionEditor: function(element) {
 
@@ -498,21 +499,10 @@
             var toggler = element.closest("[data-role='toggle']"),
                 container = element.closest("[data-container='question']");
             var editView = toggler.find("[data-view]:last");
-            /*
-                        var config = _.pick(this.options, ["allowed_choice_types",
-                            "scoring", "default_score",
-                            "scoring_at",
-                            "default_scoring_method",
-                            "tagging", "tags",
-                            "default_choice"
-                        ]);
-            */
 
             var config = {};
 
             config.data = JSON.parse(JSON.stringify(question));
-
-
 
             editView.find("[data-container='edit']").questionbuilder(config);
 
@@ -525,65 +515,8 @@
 
     });
 
-    $("[data-role='shell']").shell({
+    
 
-        scoring: "yes",
-
-        default_scoring_method: "all",
-
-        enable_retake: "no",
-
-        retake_limit: 0,
-
-        tagging: "yes",
-
-        tags: ["depression", "anxiety"],
-
-        feedback: "yes",
-
-        feedback_message: "Thank you for participating",
-
-        default_choice: "Untitled Choice - {0}"
-
-        /*
-        datasource: [{
-            "id": 3,
-            "required": true,
-            "randomizeChoice": true,
-            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-            "type": "singleline",
-            "scoringMethod": "question",
-            "score": 1,
-            "choices": { "id": 1, "fieldformat": "Free Text", "maximumlength": 120 },
-            "tags": ["anxiety"]
-        }, {
-            "id": 1,
-            "required": false,
-            "randomizeChoice": false,
-            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-            "type": "radiobutton",
-            "scoringMethod": "question",
-            "score": null,
-            "choices": [{ "score": 10, "correct": false, "title": "Yes222", "id": 1 }, { "score": 0, "correct": false, "title": "No3333", "id": 2 }],
-            "tags": ["depression"]
-        }, {
-            "type": "radiobutton",
-            "title": "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-            "id": 2,
-            "scoringMethod": "question",
-            "choices": [{ "id": 1, "title": "Yes", "score": 10 }, { "id": 2, "title": "No", "score": 0 }],
-            "edit": false
-        }]*/
-
-    });
-
-    $(window).on("assessment:save", function(event, args) {
-        
-        console.group("Assessment JSON"); /*RemoveLogging:skip*/
-        console.log(args.data); /*RemoveLogging:skip*/
-        console.groupEnd("Assessment JSON"); /*RemoveLogging:skip*/
-
-    });
-
+    
 
 })();

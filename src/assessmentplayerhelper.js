@@ -16,9 +16,7 @@
                 });
 
             });
-
         });
-
     };
 
     $.fn.dwplay_checkbox = function(element, options) {
@@ -79,10 +77,7 @@
                 closestContainer.data("value", value);
 
             });
-
-
         });
-
     };
 
 

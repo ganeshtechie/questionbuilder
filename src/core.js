@@ -22,7 +22,7 @@
             title: "Single Line",
             value: "singleline"
         }, {
-            title: "Multie Line",
+            title: "Multi Line",
             value: "multiline"
         }],
 
@@ -34,11 +34,7 @@
         // specifies the maximum allowed question. Default is "-1" which means it is infinte
         maximum_no_of_questions_allowed: -1,
 
-        scoring: "yes", // "yes" if scoring is required, else "no"; this also enables the section to passing score, feedback, scoring method
-
-        default_score: 1, // default score for each question
-
-        negative_score: "yes", // enables the ui to enter negative scores 
+        
 
         import_questions: "yes", // allows the author to import questions from other sources like an existing wizard / a default template
 
@@ -47,6 +43,7 @@
          */
         all_mandatory_questions: "yes",
 
+        /* Defaults to "-1", which means the assessment can be taken n no of times */
         retake_limit: -1,
 
         enable_retake: "yes", // enables options to allow the author to choose the value for repeat / also accepts an integer value that represents the no of retakes
@@ -54,6 +51,15 @@
         tagging: "yes", // enables the ui to tag questions with the given tags
 
         tags: ["depression", "anxiety"], // tags which can be added to a question
+
+        
+        /***************************************************** Scoring ***************************************/
+
+        scoring: "yes", // "yes" if scoring is required, else "no"; this also enables the section to passing score, feedback, scoring method
+
+        default_score: 1, // default score for each question
+
+        negative_score: "yes", // enables the ui to enter negative scores 
 
         // enables the ui to add scores either on question / choices
         scoring_at: [{
@@ -64,27 +70,10 @@
             value: "choice"
         }],
 
-        /*
-        // Here are the possible scoring methods
-        [
-          {
-            "id": 1,
-            "title": "any",
-            "description": "Full score will be given for a question, on selecting any one correct choice"
-          },
-          {
-            "id": 2,
-            "title": "divide",
-            "description": "Scores will be divided based on the # of correct choices the user selects for a question"
-          },
-          {
-            "id": 3,
-            "title": "all",
-            "description": "Full score will be given for a question, only when the user selects all the correct choices"
-          }
-        ]
-        */
-        default_scoring_method: "any",
+        /* Possible values for scoring method is "any", "divide", "all" */
+        default_scoring_method: "any", 
+
+        /***************************************************** Scoring ***************************************/
 
         // This enables the UI, so that the user can select the scoring method he wants from the given list of methods
         allow_to_change_scoring_method: "yes",
