@@ -37,10 +37,9 @@
             defaults.randomizeChoice = true;
             defaults.title = config.default_question.replace(/\{0\}/, newQuestionId);
 
-
-            if (config.scoring === "yes") {
-                defaults.scoringAt = config.scoring_at[0].value;
-                defaults.score = defaults.scoringAt === "question" ? config.default_score : null;
+            if (config.scoring_configuration) {
+                defaults.scoringAt = config.scoring_configuration.scoring_at[0].value;
+                defaults.score = defaults.scoringAt === "question" ? config.scoring_configuration.default_score : null;
             }
 
             var Question = {};
@@ -74,8 +73,8 @@
 
             if (type === "radiobutton" || type === "checkbox") {
 
-                if (config.scoring === "yes") {
-                    score = config.default_score;
+                if (config.scoring_configuration && config.scoring_configuration !== null) {
+                    score = config.scoring_configuration.default_score;
                 }
 
                 var choices = choiceId.map(function(e) {

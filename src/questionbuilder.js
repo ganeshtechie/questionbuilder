@@ -45,14 +45,12 @@
         },
 
         _hideScore: function() {
-            var isScoringEnabled = this.options.scoring;
-
             if (this.options.data) {}
 
-            if (this.options.scoring === "no") {
+            if (!this.options.scoring_configuration) {
                 this.element.find(this.options.selectors.scoringSection).hide();
             } else {
-                this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_at[0].value;
+                this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_configuration.scoring_at[0].value;
                 this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt).trigger("change");
             }
         },
@@ -97,10 +95,10 @@
             this.element.html(html);
 
             // Scoring Section 
-            if (this.options.scoring === "no") {
+            if (!this.options.scoring_configuration) {
                 this.element.find(this.options.selectors.scoringSection).hide();
             } else {
-                this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_at[0].value;
+                this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_configuration.scoring_at[0].value;
                 this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt).trigger("change");
 
                 this.element.find("[name='rhetorical-question']").prop("checked", this.options.data.rhetorical);
@@ -149,13 +147,11 @@
 
             var value = $(event.target).val();
 
-            
-
             if (value === "choice") {
                 this.element.find("[data-section='question-scoring']").hide();
             } else if (value === "question") {
                 this.element.find("[data-section='question-scoring']").show();
-                this.element.find(this.options.selectors.questionScore).val(this.options.default_score);
+                this.element.find(this.options.selectors.questionScore).val(this.options.scoring_configuration.default_score);
             }
 
             //if (this.options.data)
@@ -256,7 +252,7 @@
             question.title = this.element.find("[data-name='title']").val();
             question.choiceType = this.element.find("[data-name='choice-types']").val();
 
-            if (this.options.scoring === "yes") {
+            if (this.options.scoring_configuration) {
                 // "scoringMethod" value should be retrieved from the new ui control that we are going to add later
                 question.scoringAt = this.options.data.scoringAt;
                 question.score = question.scoringAt === "question" ?

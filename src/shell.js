@@ -34,25 +34,11 @@
 
             tags: ["depression", "anxiety"], // tags which can be added to a question
 
-            scoring_at: [{
-                title: "Question",
-                value: "question"
-            }, {
-                title: "Choice",
-                value: "choice"
-            }], // enables the ui to add scores either on question / choices
-
+            
             /* only the allowed options will be enabled in the UI. leave it as empty to allow all the possible options
              * like "edit", "delete", "insert", "move"
              */
             allowed_options: ["edit", "delete"],
-
-            // this is a default question which will appear when user clicks on insert button
-            default_question: "{0}) Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
-
-            default_choice: "Untitled Choice {0}",
-
-            datasource: [],
 
             // if "yes", a feedback message will be shown to the user after completing the assessment
             feedback: "yes",
@@ -89,10 +75,10 @@
             else
                 this.element.find("[data-name='feedback-message']").val(this.options.feedback_message);
 
-            if (this.options.scoring === "no") {
+            if (!this.options.scoring_configuration) {
                 this.element.find("[data-section='scoring-method']").remove();
             } else {
-                var _selector = "[data-section='scoring-method'] [name='scoring-method'][value='{0}']".replace(/\{0\}/, this.options.default_scoring_method);
+                var _selector = "[data-section='scoring-method'] [name='scoring-method'][value='{0}']".replace(/\{0\}/, this.options.scoring_configuration.default_scoring_method);
                 this.element.find(_selector).prop("checked", true);
             }
 
@@ -116,7 +102,6 @@
             var question = this._getNewQuestion(this.options.default_choice_type);
             this.datasource.push(question);
             html = factory.renderEngine(question);
-            //this.element.append(html);
             this._addQuestion(html);
         },
 
@@ -160,8 +145,6 @@
 
                 "click [data-action='save']": this.save,
 
-                "click [data-action='save-as-draft']": this._saveAsDraft,
-
                 "click [data-action='cancel']": this._cancel,
 
                 "click [data-action='feedback']": this._feedback,
@@ -176,12 +159,11 @@
 
             });
 
-
         },
 
         _onScoringMethodChanged: function(event) {
 
-            this.options.scoring_method = $(event.target).val();
+            this.options.scoring_configuration.default_scoring_method = $(event.target).val();
 
         },
 
@@ -192,7 +174,6 @@
             var feedbackArea = section.find("[data-section='feedback-form']");
 
             feedbackArea.show();
-
 
         },
 
@@ -215,9 +196,10 @@
                 description: this.options.description,
                 questions: this.datasource,
                 retake: this._getRetakeLimit(),
-                scoringMethod: this._getScoringMethod(),
                 feedbackMessage: this.options.feedback_message,
             };
+
+            $.extend(assessment, this._getScoringMethod());
 
             $(window).trigger("assessmentbuilder:save", {
                 data: assessment
@@ -226,11 +208,12 @@
         },
 
         _getScoringMethod: function() {
-            var scoringMethod = this.options.scoring_method;
-            if (this.options.scoring === "yes") {
-                scoringMethod = this.element.find("[data-section='scoring-method'] [name='scoring-method']:checked").val();
-            }
-            return scoringMethod;
+            
+            if (this.options.scoring_configuration) 
+                return { scoringMethod : this.element.find("[data-section='scoring-method'] [name='scoring-method']:checked").val() };
+            else
+                return {};
+            
         },
 
         _getRetakeLimit: function() {
@@ -255,9 +238,6 @@
             };
 
         },
-
-
-        _saveAsDraft: function() {},
 
         _cancel: function() {},
 

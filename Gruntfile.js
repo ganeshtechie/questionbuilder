@@ -54,7 +54,7 @@
 
         jsbeautifier: {
 
-            files: ["src/**/*.js", "templates/*.hbs", "!templates/templates.js"],
+            files: ["src/**/*.js", "templates/*.hbs", "dist/**/*.js", "!templates/templates.js"],
 
             options: {
 
@@ -92,6 +92,22 @@
                 }
             }
 
+        },
+
+        concat: {
+            options: {
+                separator: ';',
+                banner: '(function() { if (typeof define === "function" && define.amd) { define(["handlebars"], function( Handlebars ) {',
+                footer: ' }); } })();'
+            },
+
+            builder: {
+                src: ['templates/templates.js', 'src/core.js', 'src/renderengine.js',
+                    'src/choices.js', 'src/toggle.js', 'src/questionbuilder.js', 'src/helper.js',
+                    'src/singleline.js', 'src/multiline.js', 'src/shell.js'
+                ],
+                dest: 'dist/assessment.builder.js',
+            },
         }
 
     });
@@ -103,9 +119,13 @@
     grunt.loadNpmTasks("grunt-remove-logging");
     grunt.loadNpmTasks("grunt-jsbeautifier");
     grunt.loadNpmTasks("grunt-strip-debug");
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks("grunt-jsbeautifier");
 
     grunt.registerTask("default", ["watch"]);
 
     grunt.registerTask("clean", ["removelogging:js", "jsbeautifier"]);
+
+    grunt.registerTask("bundle", ["concat:builder", "jsbeautifier"]);
 
 };

@@ -34,8 +34,6 @@
         // specifies the maximum allowed question. Default is "-1" which means it is infinte
         maximum_no_of_questions_allowed: -1,
 
-        
-
         import_questions: "yes", // allows the author to import questions from other sources like an existing wizard / a default template
 
         /* if "yes" by default the required option will be checked and readonly. if no, it will be unchecked and readonly. leave it as null ( default ) to allow the author 
@@ -55,28 +53,22 @@
         
         /***************************************************** Scoring ***************************************/
 
-        scoring: "yes", // "yes" if scoring is required, else "no"; this also enables the section to passing score, feedback, scoring method
+        scoring_configuration: {
 
-        default_score: 1, // default score for each question
+            default_score: 1,
 
-        negative_score: "yes", // enables the ui to enter negative scores 
+            scoring_at: [{ title: "Question", value: "question" }, { title: "Choice", value: "choice"}],
 
-        // enables the ui to add scores either on question / choices
-        scoring_at: [{
-            title: "Question",
-            value: "question"
-        }, {
-            title: "Choice",
-            value: "choice"
-        }],
+            default_scoring_method: "any",
 
-        /* Possible values for scoring method is "any", "divide", "all" */
-        default_scoring_method: "any", 
+            allow_to_change_scoring_method: "yes",
+
+            negative_score: "yes"
+            
+        },
 
         /***************************************************** Scoring ***************************************/
 
-        // This enables the UI, so that the user can select the scoring method he wants from the given list of methods
-        allow_to_change_scoring_method: "yes",
 
         /* only the allowed options will be enabled in the UI. leave it as empty to allow all the possible options
          * like "edit", "delete", "insert", "move"
