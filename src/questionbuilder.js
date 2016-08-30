@@ -323,59 +323,7 @@
 
 
 
-        $("[data-section='question-edit']").questionbuilder({
-            data: {
-                "id": 1,
-                "title": "Hey there",
-                "scoringAt": "question",
-                "randomizeChoices": 1,
-                "score": 10,
-                "required": 1,
-                "tags": [
-                    "depression",
-                    "anxitey"
-                ],
-                "choiceType": "radiobutton",
-                "choices": [{
-                    "id": 1,
-                    "title": "<p>Hello</p>",
-                    "score": 10,
-                    "correct": true
-                }, {
-                    "id": 2,
-                    "title": "<p>World</p>",
-                    "score": 10,
-                    "correct": false
-                }, {
-                    "id": 3,
-                    "title": "<p>Hey there!</p>",
-                    "score": 10,
-                    "correct": true
-                }]
-            }
-        });
-        /*
-            $("[data-section='question-edit']").questionbuilder({
-                data: {
-                    title: "Sample Question",
-                    type: "checkbox",
-                    scoringMethod: "choice",
-                    score: 10,
-                    choices: [{ id: 1, title: "simple question", score: 10 }, { id: 2, title: "test 2", score: 20 }],
-                    randomizeChoice: false,
-                    tags: [],
-                    required: false
-                }
-            });
-        */
-    //$("[data-action='edit']").on("click", function () {
-
-    //    $(this).closest("[data-role='toggle']").data("dwToggle").toggle();
-
-
-    //});
-
-    //$("[data-role='toggle']").dwToggle();
+        
 
 
 })();
