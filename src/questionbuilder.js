@@ -157,7 +157,7 @@
             //if (this.options.data)
             //this.element.find(this.options.selectors.choiceTypes).val(this.options.data.choiceType);
 
-            if(this.options.data.scoringAt !== value){
+            if (this.options.data.scoringAt !== value) {
                 // when set the choicetype to empty, on triggering the change event of choice type dropdown will
                 // make the ui to update.
                 this.options.data.choiceType = "";
@@ -179,7 +179,7 @@
 
         _rebindChoicePlugin: function(choiceType) {
 
-            if(this.options.data.choiceType !== choiceType){
+            if (this.options.data.choiceType !== choiceType) {
                 this.options.data.choice = null;
             }
 
@@ -319,7 +319,7 @@
 
 
 
-        
+
 
 
 })();

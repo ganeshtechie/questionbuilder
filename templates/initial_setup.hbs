@@ -1,17 +1,20 @@
-<div>
-    <div data-section="head">
-        <div>
-            <h1>{{ title }}</h1>
-            <p>{{{ description }}}</p>
+<div data-role="initial-setup">
+    <section>
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" placeholder="Type the Assessment Title" data-name="assessment-title"> </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea class="form-control" placeholder="Type the Assessment Description" data-name="assessment-description"></textarea>
         </div>
-    </div>
-    <div data-section="body"> </div>
-    <div data-section="footer">
+    </section>
+    <hr />
+    <section>
         <div class="form-group" data-section="feedback">
             <div class="form-group">
                 <button class="btn btn-default" data-action="feedback">Feedback</button>
             </div>
-            <div data-section="feedback-form" style="display:none">
+            <div data-section="feedback-form">
                 <div class="form-group">
                     <textarea rows="3" class="form-control" data-name="feedback-message" placeholder="Type the feedback message..."></textarea>
                 </div>
@@ -43,9 +46,5 @@
                 </dl>
             </div>
         </div>
-        <div class="form-group">
-            <button class="btn btn-primary" data-action="save">Save</button>
-            <button class="btn btn-default" data-action="cancel">Cancel</button>
-        </div>
-    </div>
+    </section>
 </div>

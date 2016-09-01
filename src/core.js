@@ -50,21 +50,27 @@
 
         tags: ["depression", "anxiety"], // tags which can be added to a question
 
-        
+
         /***************************************************** Scoring ***************************************/
 
         scoring_configuration: {
 
             default_score: 1,
 
-            scoring_at: [{ title: "Question", value: "question" }, { title: "Choice", value: "choice"}],
+            scoring_at: [{
+                title: "Question",
+                value: "question"
+            }, {
+                title: "Choice",
+                value: "choice"
+            }],
 
             default_scoring_method: "any",
 
             allow_to_change_scoring_method: "yes",
 
             negative_score: "yes"
-            
+
         },
 
         /***************************************************** Scoring ***************************************/

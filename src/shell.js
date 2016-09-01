@@ -2,7 +2,6 @@
 
     var factory = window.assessmentbuilder.factory;
 
-
     $.widget("dw.shell", {
 
 
@@ -34,7 +33,7 @@
 
             tags: ["depression", "anxiety"], // tags which can be added to a question
 
-            
+
             /* only the allowed options will be enabled in the UI. leave it as empty to allow all the possible options
              * like "edit", "delete", "insert", "move"
              */
@@ -189,7 +188,8 @@
 
         },
 
-        save: function() {
+        save: function(event) {
+            event.preventDefault();
 
             var assessment = {
                 title: this.options.title,
@@ -208,12 +208,14 @@
         },
 
         _getScoringMethod: function() {
-            
-            if (this.options.scoring_configuration) 
-                return { scoringMethod : this.element.find("[data-section='scoring-method'] [name='scoring-method']:checked").val() };
+
+            if (this.options.scoring_configuration)
+                return {
+                    scoringMethod: this.element.find("[data-section='scoring-method'] [name='scoring-method']:checked").val()
+                };
             else
                 return {};
-            
+
         },
 
         _getRetakeLimit: function() {
@@ -226,31 +228,20 @@
             return parseInt(retakeLimit);
         },
 
-        _prepareJSON: function() {
-
-            var assessmentProperties = {
-                title: this.options.title,
-                description: this.options.description,
-                questions: this.datasource
-                    //retake: this.options.retake,
-                    //scoringMethod: this.options.scoringMethod,
-                    //feedbackMessage: this.options.feedbackMessage
-            };
+        _cancel: function(event) {
+            event.preventDefault();
 
         },
 
-        _cancel: function() {},
-
         _moveUp: function(event) {
             event.preventDefault();
+
             var $element = $(event.target);
             var questionId = this._getQuestionId($element);
 
             var question = _.find(this.datasource, {
                 "id": questionId
             });
-
-
 
             var index = _.findIndex(this.datasource, question);
 
@@ -282,6 +273,7 @@
 
         _moveDown: function(event) {
             event.preventDefault();
+
             var $element = $(event.target);
             var questionId = this._getQuestionId($element);
 
@@ -494,8 +486,8 @@
 
     });
 
-    
 
-    
+
+
 
 })();

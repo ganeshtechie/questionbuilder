@@ -63,41 +63,35 @@
     <script src="../src/helper.js"></script>
     <script src="../src/singleline.js"></script>
     <script src="../src/multiline.js"></script>
-    <script src="../src/shell.js"></script> 
-
+    <script src="../src/shell.js"></script>
     <!-- <script src="../dist/assessment.builder.js"></script>-->
     <!-- Source Code -->
-
     <script type="text/javascript">
-        $("[data-role='shell']").shell({
+    $("[data-role='shell']").shell({
 
-            enable_retake: "yes",
+        enable_retake: "yes",
 
-            
+        retake_limit: -1,
 
-            retake_limit: -1,
+        tagging: "no",
 
-            tagging: "yes",
+        feedback: "yes",
 
-            tags: ["depression", "anxiety"],
+        feedback_message: "Thank you for participating",
 
-            feedback: "yes",
+        default_choice: "Untitled Choice - {0}"
 
-            feedback_message: "Thank you for participating",
-
-            default_choice: "Untitled Choice - {0}"
-
-        });
+    });
 
 
 
-        $(window).on("assessmentbuilder:save", function(event, args) {
+    $(window).on("assessmentbuilder:save", function(event, args) {
 
-            console.group("Assessment JSON"); /*RemoveLogging:skip*/
-            console.log(args.data); /*RemoveLogging:skip*/
-            console.groupEnd("Assessment JSON"); /*RemoveLogging:skip*/
+        console.group("Assessment JSON"); /*RemoveLogging:skip*/
+        console.log(args.data); /*RemoveLogging:skip*/
+        console.groupEnd("Assessment JSON"); /*RemoveLogging:skip*/
 
-        });
+    });
     </script>
 </body>
 

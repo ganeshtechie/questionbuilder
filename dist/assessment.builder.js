@@ -606,7 +606,7 @@
                             "hash": {},
                             "data": data
                         }) : helper))) != null ? stack1 : "") +
-                        "</p>\r\n        </div>\r\n    </div>\r\n    <div data-section=\"body\"> </div>\r\n    <div data-section=\"footer\">\r\n        <div class=\"form-group\" data-section=\"feedback\">\r\n            <div class=\"form-group\">\r\n                <button class=\"btn btn-default\" data-action=\"feedback\">Feedback</button>\r\n            </div>\r\n            <div data-section=\"feedback-form\" style=\"display:none\">\r\n                <div class=\"form-group\">\r\n                    <textarea rows=\"3\" class=\"form-control\" data-name=\"feedback-message\" placeholder=\"Type the feedback message...\"></textarea>\r\n                </div>\r\n                <button class=\"btn btn-primary\" data-action=\"save-feedback\">Save</button>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" data-section=\"retake\">\r\n            <p class=\"well form-inline\">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.\r\n            <input type=\"number\" class=\"form-control\" data-name=\"retake\" placeholder=\"Enter the retake limit for this assessment\">\r\n            </p>\r\n            \r\n        </div>\r\n        <div class=\"form-group\" data-section=\"scoring-method\">\r\n            <div class=\"form-group\">\r\n                <dl class=\"dl-horizontal\">\r\n                    <dt>\r\n                        <label>\r\n                            <input type=\"radio\" name=\"scoring-method\" value=\"any\" />Any</label>\r\n                    </dt>\r\n                    <dd>Full score will be given for a question, on selecting any one correct choice</dd>\r\n                    <dt>\r\n                        <label>\r\n                            <input type=\"radio\" name=\"scoring-method\" value=\"divide\" />Divide</label>\r\n                    </dt>\r\n                    <dd>Scores will be divided based on the no.of.correct choices, the user selects for a question</dd>\r\n                    <dt>\r\n                        <label>\r\n                            <input type=\"radio\" name=\"scoring-method\" value=\"all\" />All</label>\r\n                    </dt>\r\n                    <dd>Full score will be given for a question, only when the user selects all the correct choices</dd>\r\n                </dl>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <button class=\"btn btn-primary\" data-action=\"save\">Save</button>\r\n            <button class=\"btn btn-primary\" data-action=\"save-as-draft\">Save As Draft</button>\r\n            <button class=\"btn btn-default\" data-action=\"cancel\">Cancel</button>\r\n        </div>\r\n    </div>\r\n</div>";
+                        "</p>\r\n        </div>\r\n    </div>\r\n    <div data-section=\"body\"> </div>\r\n    <div data-section=\"footer\">\r\n        <div class=\"form-group\" data-section=\"feedback\">\r\n            <div class=\"form-group\">\r\n                <button class=\"btn btn-default\" data-action=\"feedback\">Feedback</button>\r\n            </div>\r\n            <div data-section=\"feedback-form\" style=\"display:none\">\r\n                <div class=\"form-group\">\r\n                    <textarea rows=\"3\" class=\"form-control\" data-name=\"feedback-message\" placeholder=\"Type the feedback message...\"></textarea>\r\n                </div>\r\n                <button class=\"btn btn-primary\" data-action=\"save-feedback\">Save</button>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\" data-section=\"retake\">\r\n            <p class=\"well form-inline\">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.\r\n            <input type=\"number\" class=\"form-control\" data-name=\"retake\" placeholder=\"Enter the retake limit for this assessment\">\r\n            </p>\r\n            \r\n        </div>\r\n        <div class=\"form-group\" data-section=\"scoring-method\">\r\n            <div class=\"form-group\">\r\n                <dl class=\"dl-horizontal\">\r\n                    <dt>\r\n                        <label>\r\n                            <input type=\"radio\" name=\"scoring-method\" value=\"any\" />Any</label>\r\n                    </dt>\r\n                    <dd>Full score will be given for a question, on selecting any one correct choice</dd>\r\n                    <dt>\r\n                        <label>\r\n                            <input type=\"radio\" name=\"scoring-method\" value=\"divide\" />Divide</label>\r\n                    </dt>\r\n                    <dd>Scores will be divided based on the no.of.correct choices, the user selects for a question</dd>\r\n                    <dt>\r\n                        <label>\r\n                            <input type=\"radio\" name=\"scoring-method\" value=\"all\" />All</label>\r\n                    </dt>\r\n                    <dd>Full score will be given for a question, only when the user selects all the correct choices</dd>\r\n                </dl>\r\n            </div>\r\n        </div>\r\n        <div class=\"form-group\">\r\n            <button class=\"btn btn-primary\" data-action=\"save\">Save</button>\r\n            <button class=\"btn btn-default\" data-action=\"cancel\">Cancel</button>\r\n        </div>\r\n    </div>\r\n</div>";
                 },
                 "useData": true
             });
@@ -635,6 +635,29 @@
                             "data": data
                         })) != null ? stack1 : "") +
                         " </select>\n    </div>\n    <div class=\"form-group form-inline\" data-section=\"max-len\">\n        <label>Maximum Length:</label>\n        <input class=\"form-control\" data-name='max-len' type=\"text\" /> </div>\n</div>";
+                },
+                "useData": true
+            });
+
+            this["dw"]["templates"]["test"] = Handlebars.template({
+                "1": function(container, depth0, helpers, partials, data) {
+                    return "<li>" +
+                        container.escapeExpression(container.lambda(depth0, depth0)) +
+                        "</li>\r\n";
+                },
+                "compiler": [7, ">= 4.0.0"],
+                "main": function(container, depth0, helpers, partials, data) {
+                    var stack1;
+
+                    return "<ul>\r\n\r\n" +
+                        ((stack1 = helpers.each.call(depth0 != null ? depth0 : {}, (depth0 != null ? depth0.names : depth0), {
+                            "name": "each",
+                            "hash": {},
+                            "fn": container.program(1, data, 0),
+                            "inverse": container.noop,
+                            "data": data
+                        })) != null ? stack1 : "") +
+                        "\r\n</ul>";
                 },
                 "useData": true
             });;
@@ -2037,7 +2060,7 @@
                         if (!this.options.scoring_configuration) {
                             this.element.find("[data-section='scoring-method']").remove();
                         } else {
-                            var _selector = "[data-section='scoring-method'] [name='scoring-method'][value='{0}']".replace(/\{0\}/, this.options.default_scoring_method);
+                            var _selector = "[data-section='scoring-method'] [name='scoring-method'][value='{0}']".replace(/\{0\}/, this.options.scoring_configuration.default_scoring_method);
                             this.element.find(_selector).prop("checked", true);
                         }
 
@@ -2061,7 +2084,6 @@
                         var question = this._getNewQuestion(this.options.default_choice_type);
                         this.datasource.push(question);
                         html = factory.renderEngine(question);
-                        //this.element.append(html);
                         this._addQuestion(html);
                     },
 
@@ -2105,8 +2127,6 @@
 
                             "click [data-action='save']": this.save,
 
-                            "click [data-action='save-as-draft']": this._saveAsDraft,
-
                             "click [data-action='cancel']": this._cancel,
 
                             "click [data-action='feedback']": this._feedback,
@@ -2120,7 +2140,6 @@
                             "questionbuildersavequestioncancelled [data-container='edit']": this._onQuestionEditCancelled
 
                         });
-
 
                     },
 
@@ -2138,7 +2157,6 @@
 
                         feedbackArea.show();
 
-
                     },
 
                     _saveFeedback: function(element) {
@@ -2153,16 +2171,18 @@
 
                     },
 
-                    save: function() {
+                    save: function(event) {
+                        event.preventDefault();
 
                         var assessment = {
                             title: this.options.title,
                             description: this.options.description,
                             questions: this.datasource,
                             retake: this._getRetakeLimit(),
-                            scoringMethod: this._getScoringMethod(),
                             feedbackMessage: this.options.feedback_message,
                         };
+
+                        $.extend(assessment, this._getScoringMethod());
 
                         $(window).trigger("assessmentbuilder:save", {
                             data: assessment
@@ -2171,11 +2191,14 @@
                     },
 
                     _getScoringMethod: function() {
-                        var scoringMethod = this.options.scoring_configuration.default_scoring_method;
-                        if (this.options.scoring_configuration) {
-                            scoringMethod = this.element.find("[data-section='scoring-method'] [name='scoring-method']:checked").val();
-                        }
-                        return scoringMethod;
+
+                        if (this.options.scoring_configuration)
+                            return {
+                                scoringMethod: this.element.find("[data-section='scoring-method'] [name='scoring-method']:checked").val()
+                            };
+                        else
+                            return {};
+
                     },
 
                     _getRetakeLimit: function() {
@@ -2188,34 +2211,20 @@
                         return parseInt(retakeLimit);
                     },
 
-                    _prepareJSON: function() {
-
-                        var assessmentProperties = {
-                            title: this.options.title,
-                            description: this.options.description,
-                            questions: this.datasource
-                                //retake: this.options.retake,
-                                //scoringMethod: this.options.scoringMethod,
-                                //feedbackMessage: this.options.feedbackMessage
-                        };
+                    _cancel: function(event) {
+                        event.preventDefault();
 
                     },
 
-
-                    _saveAsDraft: function() {},
-
-                    _cancel: function() {},
-
                     _moveUp: function(event) {
                         event.preventDefault();
+
                         var $element = $(event.target);
                         var questionId = this._getQuestionId($element);
 
                         var question = _.find(this.datasource, {
                             "id": questionId
                         });
-
-
 
                         var index = _.findIndex(this.datasource, question);
 
@@ -2247,6 +2256,7 @@
 
                     _moveDown: function(event) {
                         event.preventDefault();
+
                         var $element = $(event.target);
                         var questionId = this._getQuestionId($element);
 
