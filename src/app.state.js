@@ -13,11 +13,12 @@
 	$.ab.state = $.ab.state || {
 
 		// title of the assessment
-		title: "Assessment Title",
+		title: "",
 
 		// a description which tells about the assessment
-		description: "Assessment Description",
+		description: "",
 
+		feeback_message: "",
 
 		retake: -1,
 

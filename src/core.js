@@ -84,9 +84,7 @@
         // this is a default question which will appear when user clicks on insert button
         default_question: "Checks if predicate returns truthy for all elements of collection. Iteration is stopped once predicate returns falsey.",
 
-        default_choice: "Untitled Choice {0}",
-
-        datasource: []
+        default_choice: "Untitled Choice {0}"
 
     };
 

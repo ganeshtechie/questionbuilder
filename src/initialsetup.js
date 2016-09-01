@@ -2,7 +2,9 @@
 
     "use strict";
 
-    var html = window.dw.templates.initial_setup({});
+    var html = window.dw.templates.initial_setup({}),
+
+        state = $.ab.state;
 
     $.widget("dw.initialstep", {
 
@@ -13,13 +15,19 @@
 
         _create: function() {
 
+            this._bind();
 
+            this.datasource = state;
 
         },
 
         _init: function() {
 
 			this.element.html(html);
+
+            this.element.find("[data-name='assessment-title']").val(this.datasource.title);
+
+            this.element.find("[data-name='assessment-description']").val(this.datasource.description);
 
         },
 
@@ -40,10 +48,14 @@
 
         _onTitleChanged: function(event){
         	var value = $(event.target).val();
+
+            this.datasource.title = value;
+
         },
 
         _onDescriptionChanged: function(event){
 			var value = $(event.target).val();
+            this.datasource.description = value;
         },
 
         _feedbackMessageChanged: function(event){

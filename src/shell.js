@@ -1,17 +1,20 @@
 (function() {
 
-    var factory = window.assessmentbuilder.factory;
+    var factory = window.assessmentbuilder.factory,
+        state = $.ab.state;
 
+
+    /* "shell" widget is responsible for adding / editing / deleting questions in an assessment. It only deals with te question part */
     $.widget("dw.shell", {
 
 
         options: {
 
-            title: "Health Assessment", // wizard title
+            title: "Health Assessment", // assessment title
 
-            description: "A Basic health assessment", // wizard description
+            description: "A Basic health assessment", // assessment description
 
-            // load the different plugins based on the question types needed for the wizard
+            // load the different plugins based on the question types needed for the assessment
             allowed_choice_types: [{
                 title: "Multiple Choice",
                 value: "checkbox"
@@ -53,7 +56,11 @@
 
             this.options = $.extend($.dw.base_configurations, this.options);
 
-            this.datasource = this.options.datasource;
+            this.datasource = state.questions;
+
+            this.options.title = state.title;
+
+            this.options.description = state.description;
 
             this._bind();
 
@@ -64,7 +71,7 @@
 
             this.element.append(html);
 
-            if (this.options.datasource.length === 0)
+            if (this.datasource.length === 0)
                 this._initialSetup();
             else
                 this._bindData();
