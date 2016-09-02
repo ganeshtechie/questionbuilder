@@ -75,6 +75,14 @@
 
         /***************************************************** Scoring ***************************************/
 
+        default_staging_method: "one-by-one",
+
+        feedback_configuration: {
+
+            feedback_message: "Thank you for submitting the assessment"
+
+        },
+
 
         /* only the allowed options will be enabled in the UI. leave it as empty to allow all the possible options
          * like "edit", "delete", "insert", "move"
@@ -87,6 +95,20 @@
         default_choice: "Untitled Choice {0}"
 
     };
+
+
+    $.widget("dw.assessmentbuilderbase", {
+
+        options: {},
+
+        _create: function(){
+
+            this.options = $.extend($.dw.base_configurations, this.options);
+
+        }
+
+
+    });
 
 
 

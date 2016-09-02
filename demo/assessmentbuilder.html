@@ -42,6 +42,7 @@
         <ul data-role="state-change">
             <li><a data-state="initial_setup">Configure Assessment</a></li>
             <li><a data-state="question_builder">Manage Question</a></li>
+            <li><a data-state="preview">Preview</a></li>
         </ul>
         <div data-role="page-content">
         </div>
@@ -53,8 +54,8 @@
         <script src="../bower_components/handlebars/handlebars.runtime.js"></script>
         <script src="../bower_components/lodash/dist/lodash.js"></script>
         <script src="../vendors/jquery.history.js"></script>
+        <script src="../node_modules/choices.js/assets/scripts/dist/choices.min.js"></script>
 		<!-- Dependencies -->
-
 
         <script src="../templates/templates.js"></script>
         <script src="../src/app.state.js"></script>
@@ -91,9 +92,7 @@
         			page_content.html("<div></div>").find("div").shell({
                         
                     });
-
         		}
-
         		
 
         	});

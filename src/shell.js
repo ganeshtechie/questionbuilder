@@ -5,7 +5,7 @@
 
 
     /* "shell" widget is responsible for adding / editing / deleting questions in an assessment. It only deals with te question part */
-    $.widget("dw.shell", {
+    $.widget("dw.shell", $.dw.assessmentbuilderbase, {
 
 
         options: {
@@ -54,7 +54,7 @@
 
         _create: function() {
 
-            this.options = $.extend($.dw.base_configurations, this.options);
+            this._super();
 
             this.datasource = state.questions;
 
@@ -75,24 +75,6 @@
                 this._initialSetup();
             else
                 this._bindData();
-
-            if (this.options.feedback === "no")
-                this.element.find("[data-section='feedback']").hide();
-            else
-                this.element.find("[data-name='feedback-message']").val(this.options.feedback_message);
-
-            if (!this.options.scoring_configuration) {
-                this.element.find("[data-section='scoring-method']").remove();
-            } else {
-                var _selector = "[data-section='scoring-method'] [name='scoring-method'][value='{0}']".replace(/\{0\}/, this.options.scoring_configuration.default_scoring_method);
-                this.element.find(_selector).prop("checked", true);
-            }
-
-            if (this.options.enable_retake === "no") {
-                this.element.find("[data-section='retake']").remove();
-            } else {
-                this.element.find("[data-section='retake'] [data-name='retake']").val(this.options.retake_limit);
-            }
 
             this.reload();
 
@@ -153,45 +135,11 @@
 
                 "click [data-action='cancel']": this._cancel,
 
-                "click [data-action='feedback']": this._feedback,
-
-                "click [data-action='save-feedback']": this._saveFeedback,
-
-                "click [data-section='scoring-method'] [name='scoring-method']": this._onScoringMethodChanged,
-
                 "questionbuildersavequestion  [data-container='edit']": this._onQuestionSaved,
 
                 "questionbuildersavequestioncancelled [data-container='edit']": this._onQuestionEditCancelled
 
             });
-
-        },
-
-        _onScoringMethodChanged: function(event) {
-
-            this.options.scoring_configuration.default_scoring_method = $(event.target).val();
-
-        },
-
-        _feedback: function(element) {
-
-            var section = $(element.target).closest("[data-section='feedback']");
-
-            var feedbackArea = section.find("[data-section='feedback-form']");
-
-            feedbackArea.show();
-
-        },
-
-        _saveFeedback: function(element) {
-
-            var feedbackform = $(element.target).closest("[data-section='feedback-form']");
-
-            var feedbackMessage = feedbackform.find("[data-name='feedback-message']").val();
-
-            this.options.feedback_message = feedbackMessage;
-
-            feedbackform.hide();
 
         },
 

@@ -12,15 +12,17 @@
 	// only the state object will be modified by all the other parts of the application
 	$.ab.state = $.ab.state || {
 
+		id: 1,
+
 		// title of the assessment
 		title: "",
 
 		// a description which tells about the assessment
 		description: "",
 
-		feeback_message: "",
+		feedbackMessage: "",
 
-		retake: -1,
+		retakeLimit: -1,
 
 		questions: []
 

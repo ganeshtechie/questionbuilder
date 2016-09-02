@@ -1,50 +1,71 @@
 <div data-role="initial-setup">
-    <section>
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" placeholder="Type the Assessment Title" data-name="assessment-title"> </div>
-        <div class="form-group">
-            <label>Description</label>
-            <textarea class="form-control" placeholder="Type the Assessment Description" data-name="assessment-description"></textarea>
-        </div>
-    </section>
+
+    <div class="form-group">
+        <label>Title</label>
+        <input type="text" class="form-control" placeholder="Type the Assessment Title" data-name="assessment-title" />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea class="form-control" placeholder="Type the Assessment Description" data-name="assessment-description"></textarea>
+    </div>
+
     <hr />
-    <section>
-        <div class="form-group" data-section="feedback">
+
+    <div class="form-group" data-section="feedback">
+        <div data-section="feedback-form">
             <div class="form-group">
-                <button class="btn btn-default" data-action="feedback">Feedback</button>
-            </div>
-            <div data-section="feedback-form">
-                <div class="form-group">
-                    <textarea rows="3" class="form-control" data-name="feedback-message" placeholder="Type the feedback message..."></textarea>
-                </div>
-                <button class="btn btn-primary" data-action="save-feedback">Save</button>
+                <label>Feedback</label>
+                <textarea rows="3" class="form-control" data-name="feedback-message" placeholder="Type the feedback message..."></textarea>
             </div>
         </div>
-        <div class="form-group" data-section="retake">
-            <p class="well form-inline">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.
-                <input type="number" class="form-control" data-name="retake" placeholder="Enter the retake limit for this assessment"> </p>
+    </div>
+
+    <hr />
+
+
+    <div class="form-group" data-section="retake">
+        <label>Retake Limit</label>
+        <p class="well form-inline">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.
+            <input type="number" class="form-control" data-name="retake" placeholder="Enter the retake limit for this assessment"> </p>
+    </div>
+
+    <hr />
+
+    <div class="form-group form-inline">
+        <p>How you want to present your questions to the participant?</p>
+
+        <div>
+            <label><input type="radio" value="one-by-one" name="staging-method"  /> One by One</label>
+            <p>Show only one question at once</p>
         </div>
-        <div class="form-group" data-section="scoring-method">
-            <div class="form-group">
-                <dl class="dl-horizontal">
-                    <dt>
-                        <label>
-                            <input type="radio" name="scoring-method" value="any" />Any</label>
-                    </dt>
-                    <dd>Full score will be given for a question, on selecting any one correct choice</dd>
-                    <dt>
-                        <label>
-                            <input type="radio" name="scoring-method" value="divide" />Divide</label>
-                    </dt>
-                    <dd>Scores will be divided based on the no.of.correct choices, the user selects for a question</dd>
-                    <dt>
-                        <label>
-                            <input type="radio" name="scoring-method" value="all" />All</label>
-                    </dt>
-                    <dd>Full score will be given for a question, only when the user selects all the correct choices</dd>
-                </dl>
-            </div>
+
+        <div>
+            <label><input type="radio" value="all-at-once" name="staging-method" /> All at once</label>
+            <p>Show all questions in the same page</p>
         </div>
-    </section>
+    </div>
+
+    <div class="form-group" data-section="scoring-method">
+        <div class="form-group">
+            <label>Scoring Method</label>
+            <dl class="dl-horizontal">
+                <dt>
+                    <label>
+                        <input type="radio" name="scoring-method" value="any" />Any</label>
+                </dt>
+                <dd>Full score will be given for a question, on selecting any one correct choice</dd>
+                <dt>
+                    <label>
+                        <input type="radio" name="scoring-method" value="divide" />Divide</label>
+                </dt>
+                <dd>Scores will be divided based on the no.of.correct choices, the user selects for a question</dd>
+                <dt>
+                    <label>
+                        <input type="radio" name="scoring-method" value="all" />All</label>
+                </dt>
+                <dd>Full score will be given for a question, only when the user selects all the correct choices</dd>
+            </dl>
+        </div>
+    </div>
+
 </div>
