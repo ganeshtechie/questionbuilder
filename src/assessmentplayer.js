@@ -1,20 +1,45 @@
 (function() {
     "use strict";
+
     var events = {
         submit: "assessment:submit_response"
     };
+
     $.widget("dw.assessmentplayer", {
+
         options: {
+
+            staging_method: "all-at-once",
+
+            title: "A health care assessment",
+
             datasource: []
+
         },
+
         _create: function() {
+
+            var template = "<div><h1>{0}</h1></div>".replace(/\{0\}/, this.options.title);
+
+            template += '<ol data-name="question-list" data-obo-role="list" class="list-styled"></ol><div data-obo-role="nav"></div><div class="text-center"><button class="btn btn-primary" data-action="submit">Submit</button></div>';
+
+            // use es6 to store the html
+            this.element.html(template);
+
             this._bind();
             // 1. Render your questions
             this._render();
+
+            if (this.options.staging_method === "one-by-one") {
+
+                this.element.oneByOne();
+            }
+
             // 2. initialize all the widgets
             this.element.find("[data-choice-type='checkbox']").dwplay_checkbox();
             this.element.find("[data-choice-type='radiobutton']").dwplay_radiobutton();
             this.element.find("[data-choice-type='singleline']").dwplay_singleline();
+
         },
         _bind: function() {
             this._on(this.element, {
@@ -22,6 +47,7 @@
             });
         },
         _getHtml: function(question) {
+
             var html = "";
             if (question.type === "radiobutton") {
                 html = window.dw.templates.play_radiobutton(question);
@@ -30,7 +56,7 @@
             } else if (question.type === "singleline") {
                 html = window.dw.templates.play_singleline(question);
             }
-            html = "<li>" + html + "</li>";
+            html = "<li data-obo-role='item'>" + html + "</li>";
             return html;
         },
 

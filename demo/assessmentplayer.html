@@ -16,11 +16,7 @@
 <body>
     <div class="col-xs-12">
         <div id="questionbuilder" class="container">
-            <ol data-name='question-list' class="list-styled">
-            </ol>
-            <div class="text-center">
-                <button class="btn btn-primary" data-action="submit">Submit</button>
-            </div>
+            
         </div>
     </div>
     <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -37,6 +33,7 @@
     <script src="../src/choices.js"></script>
     <script src="../src/toggle.js"></script>
     <script src="../src/assessmentplayerhelper.js"></script>
+    <script src="../src/staging.onebyone.js"></script>
     <script src="../src/assessmentplayer.js"></script>
     <!-- Source Code -->
 
@@ -48,6 +45,9 @@
     });
 
     $("#questionbuilder").assessmentplayer({
+
+        staging_method: "one-by-one",
+
         datasource: [{
             title: "Remove the default list-style and left margin on list items (immediate children only). This only applies to immediate children list items, meaning you will need to add the class for any nested lists as well.",
             id: 1,
@@ -84,6 +84,7 @@
             }]
         }]
     });
+
     </script>
 </body>
 

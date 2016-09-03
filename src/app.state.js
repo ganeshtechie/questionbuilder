@@ -24,7 +24,9 @@
 
 		retakeLimit: -1,
 
-		questions: []
+		questions: [],
+
+		feedback: { }
 
 	};
 

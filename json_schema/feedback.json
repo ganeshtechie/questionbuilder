@@ -1,0 +1,9 @@
+{
+	"grades": [
+		{ "name": "Fail", "default": true, "feedback": "Better luck next time" }, 
+		{ "name": "Good", "score": "20", "feedback": "Hey, You've done a great job!" },
+		{ "name": "Very Good", "score": "30", "feedback": "Hey, You've done a great job!" },
+		{ "name": "Excellent", "score": "50", "feedback": "Hey, You've done a great job!" }
+	]
+
+}
