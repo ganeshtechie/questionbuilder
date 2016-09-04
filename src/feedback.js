@@ -78,7 +78,7 @@
 
         },
 
-        _clearForm: function(event){
+        _clearForm: function(event) {
             event.preventDefault();
 
             this._clear();
@@ -137,11 +137,7 @@
 
             var text = $(event.target).text();
 
-            if (text === "Add") {
-                this._addFeedback();
-            } else if (text === "Save") {
-                this._updateFeedback();
-            }
+            this._addFeedback();
 
         },
 
@@ -149,21 +145,24 @@
 
             var name = this.element.find("[data-name='grade-name']").val();
 
-            // checking if the name is already exsist and it is default feedback
-            var matchFound = _.find(this.datasource.grade, { name : name });
-
-            var isDefault = false;
-
-            if(matchFound) isDefault = matchFound.isDefault;
-
-            var _grade = $.extend({}, grade, {
+            var _grade = {
                 name: name,
                 score: parseInt(this.element.find("[data-name='score']").val()),
                 feedback: this.element.find("[data-name='feedback']").val(),
                 isDefault: false
-            });
+            };
 
-            if(isDefault) delete _grade.score;
+            // isDefault property must not be changed
+            var isDefault = false;
+
+            // If it is an edit, we need to find the actual name of the grade which is being edited.
+            // because the user might have edited the name of the grade also.
+            name = this.currentGrade ? this.currentGrade.name : name;
+
+            var matchFound = _.find(this.datasource.grade, { name: name });
+            if (matchFound) _grade.isDefault = isDefault = matchFound.isDefault;
+
+            if (isDefault) delete _grade.score;
 
             this._updateDataSource(_grade);
         },
@@ -180,36 +179,32 @@
 
 
         _updateDataSource: function(_grade) {
-            
-            var errors = this._validate(_grade),
-                matchFound = null,
-                grade = null;
 
-            // if edit mode
-            if (this.currentGrade && this.currentGrade.name !== _grade.name) {
+            var errors = this._validate(_grade), index, matchFound;
 
-                matchFound = _.find(this.datasource.grade, { name: this.currentGrade.name });
+            if (errors.length > 0) return;
 
-                grade = this.currentGrade;
-
+            if (this.currentGrade) {
+                index = _.findIndex(this.datasource.grade, _.find(this.datasource.grade, { name: this.currentGrade.name }));
+                if (index > -1) {
+                    this.datasource.grade[index] = _grade;
+                    this._addGradeToUI(_grade, this.currentGrade.name);
+                }
             } else {
-
+                // though, it is not edit, which means this.currentGrade is null, chances for performing an edit is possible.
+                //  because, he may try to add a new grade with an exisiting name. 
+                //  in this case we are not throwing any error message, but we are updating the exisiting grade with the new score and feedback
                 matchFound = _.find(this.datasource.grade, { name: _grade.name });
-
-                grade = _grade;
-
+                index = matchFound ? _.findIndex(this.datasource.grade, matchFound): -1;
+                if (index > -1) {
+                    this.datasource.grade[index] = _grade;
+                    this._addGradeToUI(_grade, _grade.name);
+                } else{
+                    this.datasource.grade.push(_grade);
+                    this._addGradeToUI(_grade);    
+                }
+                
             }
-
-            if (matchFound) {
-                var index = _.findIndex(this.datasource.grade, matchFound);
-                grade.isDefault = matchFound.isDefault;
-                if(index > -1) this.datasource.grade[index] = grade;
-            } else{
-                this.datasource.grade.push(grade);
-            }
-
-
-            this._addGradeToUI(_grade, grade.name);
 
             this._clear();
         },
@@ -223,7 +218,7 @@
             this.element.find("[data-name='score']").prop("disabled", false);
         },
 
-        
+
 
         _validate: function(grade) {
             var errors = [];
