@@ -42,6 +42,7 @@
         <ul data-role="state-change">
             <li><a data-state="initial_setup">Configure Assessment</a></li>
             <li><a data-state="question_builder">Manage Question</a></li>
+            <li><a data-state="setup_feedback">Setup Feedback</a></li>
             <li><a data-state="preview">Preview</a></li>
         </ul>
         <div data-role="page-content">
@@ -60,6 +61,7 @@
         <script src="../templates/templates.js"></script>
         <script src="../src/app.state.js"></script>
 		<script src="../src/core.js"></script>
+        <script src="../src/base.js"></script>
 		<script src="../src/renderengine.js"></script>
 		<script src="../src/choices.js"></script>
 		<script src="../src/toggle.js"></script>
@@ -68,6 +70,7 @@
 		<script src="../src/singleline.js"></script>
 		<script src="../src/multiline.js"></script>
 		<script src="../src/shell.js"></script>
+        <script src="../src/feedback.js"></script>
         <script src="../src/initialsetup.js"></script>
 
         <script type="text/javascript">
@@ -83,16 +86,25 @@
 
         		var html = "";
 
+                var configuration = {
+                    title: "A new assessment",
+                    description: "Hello world"
+                    //scoring_configuration: null
+                };
+
         		if(state === "initial_setup"){
 
-        			page_content.html("<div></div>").find("div").initialstep({});
+        			page_content.html("<div></div>").find("div").initialstep(configuration);
 
         		} else if(state === "question_builder"){
 
-        			page_content.html("<div></div>").find("div").shell({
-                        
-                    });
-        		}
+        			page_content.html("<div></div>").find("div").shell(configuration);
+
+        		} else if(state === "setup_feedback"){
+
+                    page_content.html("<div></div>").find("div").feedback({});
+
+                }
         		
 
         	});

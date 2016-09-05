@@ -36,7 +36,7 @@
             if (!this.options.feedback_configuration)
                 this.element.find("[data-section='feedback']").hide();
             else {
-                this.datasource.feedbackMessage =  this.datasource.feedbackMessage || this.options.feedback_configuration.feedback_message;
+                this.datasource.feedbackMessage = this.datasource.feedbackMessage || this.options.feedback_configuration.feedback_message;
                 this.element.find("[data-name='feedback-message']").val(this.datasource.feedbackMessage);
             }
 
@@ -84,7 +84,7 @@
 
         },
 
-        _onStagingMethodChanged: function(event){
+        _onStagingMethodChanged: function(event) {
             this.datasource.stagingMethod = $(event.target).val();
         },
 
@@ -107,7 +107,7 @@
             this.datasource.feedbackMessage = value;
         },
 
-        _onRetakeLimitChanged: function(event){
+        _onRetakeLimitChanged: function(event) {
             var value = $(event.target).val();
             this.datasource.retakeLimit = parseInt(value);
         }

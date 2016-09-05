@@ -58,9 +58,10 @@
 
             this.datasource = state.questions;
 
-            this.options.title = state.title;
-
-            this.options.description = state.description;
+            // if the "title" & "description" is being passed, then take that value. 
+            // there are scenarios where the state will be empty, when this "shell" widget is being initialized
+            state.title = this.options.title || state.title;
+            state.description = this.options.description || state.description;
 
             this._bind();
 

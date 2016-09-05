@@ -1,27 +1,27 @@
 <div>
-	<h1>Feedback System</h1>
-	<p>Configure the feeback message that you want to show to the participants</p>
-	<hr />
-	<div class="form-group">
-	    <ul data-name="grade-list" >
-
-	    </ul>
-	</div>
-	<div class="form-group">
-		<div class="form-group">
-			<input type="text" class="form-control" data-name="grade-name" placeholder="Grade" />
-		</div>
-	    <div class="form-group">
-	       <span>Score >=</span> <input type="number" class="form-control" data-name="score" value="20" />
-	    </div>
-	    <div class="form-group">
-	        <textarea class="form-control" data-name="feedback" placeholder="Type your feedback for this grade"></textarea>
-	    </div>
-	    <div>
-	        <button class="btn btn-primary" data-action="add-feedback">Add</button>
-
-	        <button class="btn btn-primary" data-action="clear-form">Cancel</button>
-	    </div>
-	</div>
-	<hr />
+    <h1>Feedback System</h1>
+    <p>Configure the feeback message that you want to show to the participants</p>
+    <hr />
+    <div data-section="feedback-form">
+        <div class="form-group">
+            <ul data-name="grade-list"> </ul>
+        </div>
+        <div class="form-group">
+            <div class="form-group">
+                <input type="text" class="form-control" data-name="grade-name" placeholder="Grade" /> </div>
+            <div class="form-group">
+                <span>Score >=</span>
+                <input type="number" class="form-control" data-name="score" placeholder="Type the score required to get this grade" /> </div>
+            <div class="form-group">
+                <textarea class="form-control" data-name="feedback" placeholder="Type your feedback for this grade"></textarea>
+            </div>
+            <div>
+                <button class="btn btn-primary" data-action="add-feedback">Add</button>
+                <button class="btn btn-primary" data-action="clear-form">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <div data-section="no-feedback">
+        <p>Note: Your assessment dosen't have scoring enabled in it. So you can skip this section</p>
+    </div>
 </div>

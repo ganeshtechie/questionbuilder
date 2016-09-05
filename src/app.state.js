@@ -1,34 +1,34 @@
-(function(){
-	
-	"use strict";
+(function() {
 
-	// the namespace "ab" stands for AssessmentBuilder
+    "use strict";
 
-
-	// I've created this object to share the state across all the jquery widgets and plugins
-	$.ab = $.ab || {};
+    // the namespace "ab" stands for AssessmentBuilder
 
 
-	// only the state object will be modified by all the other parts of the application
-	$.ab.state = $.ab.state || {
+    // I've created this object to share the state across all the jquery widgets and plugins
+    $.ab = $.ab || {};
 
-		id: 1,
 
-		// title of the assessment
-		title: "",
+    // only the state object will be modified by all the other parts of the application
+    $.ab.state = $.ab.state || {
 
-		// a description which tells about the assessment
-		description: "",
+        id: 1,
 
-		feedbackMessage: "",
+        // title of the assessment
+        title: "",
 
-		retakeLimit: -1,
+        // a description which tells about the assessment
+        description: "",
 
-		questions: [],
+        feedbackMessage: "",
 
-		feedback: { }
+        retakeLimit: -1,
 
-	};
+        questions: [],
+
+        feedback: {}
+
+    };
 
 
 

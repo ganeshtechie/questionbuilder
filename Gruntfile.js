@@ -102,12 +102,19 @@
             },
 
             builder: {
-                src: ['templates/templates.js', 'src/core.js', 'src/renderengine.js',
+
+                src: [ 'templates/templates.js', 'src/core.js', 'src/base.js', 'src/renderengine.js',
                     'src/choices.js', 'src/toggle.js', 'src/questionbuilder.js', 'src/helper.js',
-                    'src/singleline.js', 'src/multiline.js', 'src/shell.js'
+                    'src/singleline.js', 'src/multiline.js', 'src/shell.js', 'src/feedback.js'
                 ],
                 dest: 'dist/assessment.builder.js',
             },
+
+            play: {
+
+                src: [ 'templates/templates.js', 'src/staging.js', 'src/assessmentplayerhelper.js', 'src/assessmentplayer.initializer.js' ],
+                dest: 'dist/assessment.play.js'
+            }
         }
 
     });
@@ -126,6 +133,6 @@
 
     grunt.registerTask("clean", ["removelogging:js", "jsbeautifier"]);
 
-    grunt.registerTask("bundle", ["concat:builder", "jsbeautifier"]);
+    grunt.registerTask("bundle", ["concat:builder", "concat:play", "jsbeautifier"]);
 
 };

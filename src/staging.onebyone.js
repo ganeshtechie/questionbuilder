@@ -2,134 +2,134 @@
 	"OneByOne" - This plugin makes the assessment to show one question at once. It also puts a navigation button to move back and forth. 
 */
 
-(function(){
-	
-	"use strict";
+(function() {
+
+    "use strict";
 
 
 
-	$.fn.oneByOne = function(){
+    $.fn.oneByOne = function() {
 
-		function showPrevious(element){
+        function showPrevious(element) {
 
-			var root = $(event.target).closest("[data-obo]");
+            var root = $(event.target).closest("[data-obo]");
 
-			var nav = root.find("[data-obo-role='nav']");
+            var nav = root.find("[data-obo-role='nav']");
 
-			var currentNode  =  root.find("[data-obo-role='item']:visible");
+            var currentNode = root.find("[data-obo-role='item']:visible");
 
-			var siblings = root.find("[data-obo-role='item']");
+            var siblings = root.find("[data-obo-role='item']");
 
-			var poisition = siblings.index(currentNode);
-
-
-			if(poisition > 0){
-
-				// hide the current node
-				currentNode.hide();
-
-				poisition -= 1;
-
-				//siblings.removeAttr("value");
-
-				// show the previous node
-				$(siblings.get(poisition)).show().attr("value", poisition + 1);
+            var poisition = siblings.index(currentNode);
 
 
-				// if the new position is 0, which means the first node is the active node, then hide the previous button
-				if(poisition > 0){
-					nav.find("[data-name='previous']").show();
-				} else if(poisition === 0){
-					nav.find("[data-name='previous']").hide();
-				}
+            if (poisition > 0) {
 
-				if(poisition < siblings.length - 1){
-					nav.find("[data-name='next']").show();
-				}
+                // hide the current node
+                currentNode.hide();
 
-			}
+                poisition -= 1;
 
-			console.log("next");
+                //siblings.removeAttr("value");
 
-		}
-
-		function showNext(event){
-			event.preventDefault();
-
-			var root = $(event.target).closest("[data-obo]");
-
-			var nav = root.find("[data-obo-role='nav']");
-
-			var currentNode  =  root.find("[data-obo-role='item']:visible");
-
-			var siblings = root.find("[data-obo-role='item']");
-
-			var poisition = siblings.index(currentNode);
+                // show the previous node
+                $(siblings.get(poisition)).show().attr("value", poisition + 1);
 
 
-			if(poisition < siblings.length - 1){
+                // if the new position is 0, which means the first node is the active node, then hide the previous button
+                if (poisition > 0) {
+                    nav.find("[data-name='previous']").show();
+                } else if (poisition === 0) {
+                    nav.find("[data-name='previous']").hide();
+                }
 
-				currentNode.hide();
+                if (poisition < siblings.length - 1) {
+                    nav.find("[data-name='next']").show();
+                }
 
-				poisition += 1;
+            }
 
-				$(siblings.get(poisition)).show().attr("value", poisition + 1);
+            console.log("next");
 
-				if(poisition  === siblings.length - 1){
-					$(event.target).hide();
-				} else {
-					$(event.target).show();
-				}
+        }
 
-				if(poisition > 0){
-					nav.find("[data-name='previous']").show();
-				} else if(poisition === 0){
-					nav.find("[data-name='previous']").hide();
-				}
+        function showNext(event) {
+            event.preventDefault();
 
-			}
+            var root = $(event.target).closest("[data-obo]");
 
-			console.log("next");
+            var nav = root.find("[data-obo-role='nav']");
 
-		}
+            var currentNode = root.find("[data-obo-role='item']:visible");
 
+            var siblings = root.find("[data-obo-role='item']");
+
+            var poisition = siblings.index(currentNode);
 
 
+            if (poisition < siblings.length - 1) {
 
-		this.each(function(){
+                currentNode.hide();
 
-			var root = $(this);
+                poisition += 1;
 
-			// added this element in the root, to help finding  for any child elements 
-			root.attr("data-obo", "");
+                $(siblings.get(poisition)).show().attr("value", poisition + 1);
 
-			root.on("click", "[data-name='next']", showNext);
+                if (poisition === siblings.length - 1) {
+                    $(event.target).hide();
+                } else {
+                    $(event.target).show();
+                }
 
-			root.on("click", "[data-name='previous']", showPrevious);
+                if (poisition > 0) {
+                    nav.find("[data-name='previous']").show();
+                } else if (poisition === 0) {
+                    nav.find("[data-name='previous']").hide();
+                }
 
-			var list = root.find("[data-obo-role='list']");
+            }
 
-			var items = list.find("[data-obo-role='item']");
+            console.log("next");
 
-			var nav = root.find("[data-obo-role='nav']");
+        }
 
-			var btnPrevious = $("<button type='button' class='btn btn-primary' data-name='previous'>Previous</button>");
-			var btnNext = $("<button type='button' data-name='next' class='btn btn-primary'>Next</button>");
 
-			nav.append([btnPrevious, btnNext]);
 
-			btnPrevious.hide();
 
-			items.hide();
+        this.each(function() {
 
-			// show only first item
-			$(items.get(0)).show();
+            var root = $(this);
 
-		});
+            // added this element in the root, to help finding  for any child elements 
+            root.attr("data-obo", "");
 
-		return this;
+            root.on("click", "[data-name='next']", showNext);
 
-	};
+            root.on("click", "[data-name='previous']", showPrevious);
+
+            var list = root.find("[data-obo-role='list']");
+
+            var items = list.find("[data-obo-role='item']");
+
+            var nav = root.find("[data-obo-role='nav']");
+
+            var btnPrevious = $("<button type='button' class='btn btn-primary' data-name='previous'>Previous</button>");
+            var btnNext = $("<button type='button' data-name='next' class='btn btn-primary'>Next</button>");
+
+            nav.append([btnPrevious, btnNext]);
+
+            btnPrevious.hide();
+
+            items.hide();
+
+            // show only first item
+            $(items.get(0)).show();
+
+        });
+
+        return this;
+
+    };
 
 
 

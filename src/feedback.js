@@ -13,7 +13,12 @@
         "</div>" +
         "</li>";
 
-    var grade = { name: "Untitled", isDefault: true, score: 0, feedback: "Your default message" };
+    var grade = {
+        name: "Untitled",
+        isDefault: true,
+        score: 0,
+        feedback: "Your default message"
+    };
 
 
     $.widget("dw.feedback", $.dw.assessmentbuilderbase, {
@@ -29,38 +34,34 @@
 
         _create: function() {
 
+            this._super();
+
+            this.element.html(template);
+
+            if (!this.options.scoring_configuration) {
+                this.element.find("[data-section='feedback-form']").hide();
+                return;
+            }
+
+            this.element.find("[data-section='no-feedback']").hide();
+
             this._bind();
 
             var that = this;
-
-            this.element.html(template);
 
             this.datasource = state.feedback;
 
             this.datasource.grade = this.datasource.grade || [];
 
             if (this.datasource.grade.length === 0) {
-                this.datasource.grade.push($.extend({}, grade, { isDefault: true }));
+                this.datasource.grade.push($.extend({}, grade, {
+                    isDefault: true
+                }));
             }
 
             $(this.datasource.grade).each(function(i, e) {
                 that._addGradeToUI(e);
             });
-
-        },
-
-        _getNewObject: function() {
-
-            var obj = $.extend({}, grade);
-            return obj;
-        },
-
-        _getGradeItemHtml: function(grade) {
-
-            var defaultText = grade.isDefault === true ? "(default)" : "";
-            var score = grade.isDefault === true ? "" : " >= " + grade.score;
-
-            return gradeItemHtml.replace(/\{name\}/g, grade.name).replace(/\{score\}/g, score).replace(/\{feedback\}/g, grade.feedback).replace(/\{default\}/g, defaultText);
 
         },
 
@@ -72,9 +73,60 @@
 
                 "click [data-action='edit-feedback']": this._onEditClicked,
 
-                "click [data-action='clear-form']": this._clearForm
+                "click [data-action='clear-form']": this._clearForm,
+
+                "click [data-action='delete-grade']": this._onDeleteClicked
 
             });
+
+        },
+
+        getGradeItemHtml: function(grade) {
+
+            var defaultText = grade.isDefault === true ? "(default)" : "";
+            var score = grade.isDefault === true ? "" : " >= " + grade.score;
+
+            return gradeItemHtml.replace(/\{name\}/g, grade.name).replace(/\{score\}/g, score).replace(/\{feedback\}/g, grade.feedback).replace(/\{default\}/g, defaultText);
+
+        },
+
+        _onDeleteClicked: function(event) {
+            event.preventDefault();
+
+            if (event.target.tagName !== "SPAN") return;
+
+            var gradeName = $(event.target).closest("[data-role='list-item']").data("name");
+
+            this._deleteGrade(gradeName);
+
+        },
+
+        _deleteGrade: function(gradeName) {
+
+            if (!gradeName) return;
+
+            var item = _.find(this.datasource.grade, {
+                name: gradeName
+            });
+
+            if (item.isDefault) {
+                alert("Default grade cannot be deleted. But you can change the grade name & feedback message if needed");
+                return;
+            }
+
+            var index = _.findIndex(this.datasource.grade, item);
+
+            // remove the grade from datasource, if it is not default grade
+            this.datasource.grade.splice(index, 1);
+
+            this._removeGradeFromUI(gradeName);
+
+
+        },
+
+        _removeGradeFromUI: function(gradeName) {
+
+            this.element.find("[data-role='list-item'][data-name='{0}']".replace(/\{0\}/g, gradeName)).remove();
 
         },
 
@@ -88,9 +140,15 @@
         _onEditClicked: function(event) {
             event.preventDefault();
 
+            if (event.target.tagName !== "A") return;
+
+
+
             var name = $(event.target).closest("[data-role='list-item']").attr("data-name");
 
-            var obj = _.find(this.datasource.grade, { name: name });
+            var obj = _.find(this.datasource.grade, {
+                name: name
+            });
 
             this._fillForm(obj);
         },
@@ -120,7 +178,7 @@
 
             var element = this.element.find(selector);
 
-            var newElement = $(this._getGradeItemHtml(obj));
+            var newElement = $(this.getGradeItemHtml(obj));
 
             if (element.length > 0) {
                 //var isDefault = _.find(this.datasource.grade, { name: obj.name }).isDefault;
@@ -159,7 +217,9 @@
             // because the user might have edited the name of the grade also.
             name = this.currentGrade ? this.currentGrade.name : name;
 
-            var matchFound = _.find(this.datasource.grade, { name: name });
+            var matchFound = _.find(this.datasource.grade, {
+                name: name
+            });
             if (matchFound) _grade.isDefault = isDefault = matchFound.isDefault;
 
             if (isDefault) delete _grade.score;
@@ -180,12 +240,15 @@
 
         _updateDataSource: function(_grade) {
 
-            var errors = this._validate(_grade), index, matchFound;
+            var errors = this._validate(_grade),
+                index, matchFound;
 
             if (errors.length > 0) return;
 
             if (this.currentGrade) {
-                index = _.findIndex(this.datasource.grade, _.find(this.datasource.grade, { name: this.currentGrade.name }));
+                index = _.findIndex(this.datasource.grade, _.find(this.datasource.grade, {
+                    name: this.currentGrade.name
+                }));
                 if (index > -1) {
                     this.datasource.grade[index] = _grade;
                     this._addGradeToUI(_grade, this.currentGrade.name);
@@ -194,16 +257,18 @@
                 // though, it is not edit, which means this.currentGrade is null, chances for performing an edit is possible.
                 //  because, he may try to add a new grade with an exisiting name. 
                 //  in this case we are not throwing any error message, but we are updating the exisiting grade with the new score and feedback
-                matchFound = _.find(this.datasource.grade, { name: _grade.name });
-                index = matchFound ? _.findIndex(this.datasource.grade, matchFound): -1;
+                matchFound = _.find(this.datasource.grade, {
+                    name: _grade.name
+                });
+                index = matchFound ? _.findIndex(this.datasource.grade, matchFound) : -1;
                 if (index > -1) {
                     this.datasource.grade[index] = _grade;
                     this._addGradeToUI(_grade, _grade.name);
-                } else{
+                } else {
                     this.datasource.grade.push(_grade);
-                    this._addGradeToUI(_grade);    
+                    this._addGradeToUI(_grade);
                 }
-                
+
             }
 
             this._clear();
