@@ -1,0 +1,14 @@
+<Feedback>
+	<Grades>
+		<Grade>
+			<Name>Fail</Name>
+			<IsDefault>true</IsDefault>
+			<FeedbackMessage>You've failed</FeedbackMessage>
+		</Grade>
+		<Grade>
+			<Name>Pass</Name>
+			<IsDefault>false</IsDefault>
+			<FeedbackMessage>Congratulations</FeedbackMessage>
+		</Grade>
+	</Grades>
+</Feedback>
