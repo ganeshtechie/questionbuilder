@@ -1,3 +1,16 @@
 1. Create Stored Procedures 
 2. Write Service Method to Save data
 3. Have a nested structure for configurations instead of flat structure
+
+
+
+Show Preview
+Editing an existing Assessment
+Grouped feedback
+Retake -1 should be changed
+Create configurations for all the wizard types
+Save the Feedback, ScoreSheet & Report Xml
+Alternative text for choices
+
+
+Bug fixing

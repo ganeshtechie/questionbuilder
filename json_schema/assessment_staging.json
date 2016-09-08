@@ -1,0 +1,51 @@
+{
+  "Staging": {
+    "staging_method": "one-by-one",
+    "datasource": [
+      {
+        "title": "Select all the choices which you feel could be correct. 4 + 4 = _____ ? ",
+        "id": "1",
+        "type": "checkbox",
+        "required": "true",
+        "choice": [
+          {
+            "id": "1",
+            "title": "8"
+          },
+          {
+            "id": "1",
+            "title": "08"
+          },
+          {
+            "id": "1",
+            "title": "16"
+          },
+          {
+            "id": "1",
+            "title": "1"
+          }
+        ]
+      },
+      {
+        "title": "8 * 8 = _____ ?",
+        "id": "2",
+        "type": "radiobutton",
+        "required": "true",
+        "choice": [
+          {
+            "id": "2",
+            "title": "84"
+          },
+          {
+            "id": "2",
+            "title": "54"
+          },
+          {
+            "id": "2",
+            "title": "16"
+          }
+        ]
+      }
+    ]
+  }
+}

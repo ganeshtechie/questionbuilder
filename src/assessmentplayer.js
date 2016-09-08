@@ -39,6 +39,7 @@
             this.element.find("[data-choice-type='checkbox']").dwplay_checkbox();
             this.element.find("[data-choice-type='radiobutton']").dwplay_radiobutton();
             this.element.find("[data-choice-type='singleline']").dwplay_singleline();
+            this.element.find("[data-choice-type='multiline']").dwplay_multiline();
 
         },
         _bind: function() {
@@ -55,12 +56,32 @@
                 html = window.dw.templates.play_checkboxes(question);
             } else if (question.type === "singleline") {
                 html = window.dw.templates.play_singleline(question);
+            } else if (question.type === "multiline") {
+                html = window.dw.templates.play_multiline(question);
             }
             html = "<li data-obo-role='item'>" + html + "</li>";
             return html;
         },
 
         _render: function() {
+
+            this.options.datasource.map(function(q) {
+
+                q.id = parseInt(q.id);
+                q.required = q.required === 'true';
+
+                if (q.choice) {
+                    q.choice.map(function(c) {
+
+                        c.id = parseInt(c.id);
+
+                    });
+                }
+
+            });
+
+
+
             for (var i = 0; i < this.options.datasource.length; i++) {
                 this.element.find("[data-name='question-list']").append(this._getHtml(this.options.datasource[i]));
             }
@@ -80,7 +101,8 @@
             });
             return responses;
         },
-        _submitResponse: function() {
+        _submitResponse: function(event) {
+            event.preventDefault();
 
             var responses = this._getAllResponses(),
                 preventSubmit = true,

@@ -12,6 +12,8 @@
 
         },
 
+        datasource: null,
+
         _create: function() {
 
             this._super();
@@ -26,18 +28,21 @@
 
             this.element.html(html);
 
-            this.datasource = state;
+            this.datasource = this.datasource || state;
+
 
             this.element.find("[data-name='assessment-title']").val(this.datasource.title);
 
             this.element.find("[data-name='assessment-description']").val(this.datasource.description);
 
+            this.element.find("[data-name='retake']").val(this.datasource.retakeLimit);
+
 
             if (!this.options.feedback_configuration)
                 this.element.find("[data-section='feedback']").hide();
             else {
-                this.datasource.feedbackMessage = this.datasource.feedbackMessage || this.options.feedback_configuration.feedback_message;
-                this.element.find("[data-name='feedback-message']").val(this.datasource.feedbackMessage);
+                this.datasource.feedback.feedbackMessage = this.datasource.feedback.feedbackMessage || this.options.feedback_configuration.feedback_message;
+                this.element.find("[data-name='feedback-message']").val(this.datasource.feedback.feedbackMessage);
             }
 
             if (!this.options.scoring_configuration) {
@@ -78,10 +83,19 @@
 
                 "click [name='staging-method']": this._onStagingMethodChanged,
 
-                "change [data-name='retake']": this._onRetakeLimitChanged
+                "change [data-name='retake']": this._onRetakeLimitChanged,
+
+                "change [data-name='feedback-method']": this._feedbackMethodChanged
 
             });
 
+        },
+
+        _feedbackMethodChanged: function(event) {
+
+            this.datasource.feedback = this.datasource.feedback || {};
+
+            this.datasource.feedback.feedbackMethod = $(event.target).val();
         },
 
         _onStagingMethodChanged: function(event) {
@@ -99,12 +113,16 @@
 
         _onDescriptionChanged: function(event) {
             var value = $(event.target).val();
+
             this.datasource.description = value;
         },
 
         _feedbackMessageChanged: function(event) {
             var value = $(event.target).val();
-            this.datasource.feedbackMessage = value;
+
+            this.datasource.feedback = this.datasource.feedback || {};
+
+            this.datasource.feedback.feedbackMessage = value;
         },
 
         _onRetakeLimitChanged: function(event) {

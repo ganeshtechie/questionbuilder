@@ -39,14 +39,16 @@
 
 <body>
     <div>
+    
         <ul data-role="state-change">
             <li><a data-state="initial_setup">Configure Assessment</a></li>
             <li><a data-state="question_builder">Manage Question</a></li>
             <li><a data-state="setup_feedback">Setup Feedback</a></li>
             <li><a data-state="preview">Preview</a></li>
         </ul>
-        <div data-role="page-content">
-        </div>
+
+        <div data-role="page-content"></div>
+
         <!-- Dependencies -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
         <script src="../bower_components/jquery-ui/jquery-ui.js"></script>
@@ -94,11 +96,11 @@
 
         		if(state === "initial_setup"){
 
-        			page_content.html("<div></div>").find("div").initialstep(configuration);
+        			page_content.html("<div></div>").find("div").initialstep({});
 
         		} else if(state === "question_builder"){
 
-        			page_content.html("<div></div>").find("div").shell(configuration);
+        			page_content.html("<div></div>").find("div").shell();
 
         		} else if(state === "setup_feedback"){
 
@@ -115,6 +117,10 @@
 
                 console.log(State);
             });
+
+             $(window).on("assessmentbuilder:save", function (event, args) {
+                 console.log(args.data);
+             });
 
 
         })(window);

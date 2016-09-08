@@ -19,6 +19,23 @@
         });
     };
 
+    $.fn.dwplay_multiline = function(element, options) {
+        this.each(function() {
+
+            $(this).find(".form-control").on("change", function() {
+
+                var value = $(this).val();
+
+                var closestContainer = $(this).closest("[data-name='play-question']");
+
+                closestContainer.data("value", {
+                    text: value
+                });
+
+            });
+        });
+    };
+
     $.fn.dwplay_checkbox = function(element, options) {
 
         this.each(function() {

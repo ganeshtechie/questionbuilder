@@ -10,9 +10,10 @@
 
         options: {
 
-            title: "Health Assessment", // assessment title
 
-            description: "A Basic health assessment", // assessment description
+            title: "", // assessment title
+
+            description: "", // assessment description
 
             // load the different plugins based on the question types needed for the assessment
             allowed_choice_types: [{
@@ -58,10 +59,17 @@
 
             this.datasource = state.questions;
 
-            // if the "title" & "description" is being passed, then take that value. 
-            // there are scenarios where the state will be empty, when this "shell" widget is being initialized
+            /*// if the "title" & "description" is being passed, then take that value. 
+            // there are scenarios where the state will be empty, when this "shell" widget is initialized
             state.title = this.options.title || state.title;
-            state.description = this.options.description || state.description;
+            state.description = this.options.description || state.description;*/
+
+            // It think for now, lets goahead with the fact that, the shell widget is
+            // will not be used all alone. It will be used with the initial setup widget
+            // so no need to worry about the state object
+
+            this.options.title = state.title;
+            this.options.description = state.description;
 
             this._bind();
 
@@ -147,18 +155,18 @@
         save: function(event) {
             event.preventDefault();
 
-            var assessment = {
-                title: this.options.title,
-                description: this.options.description,
-                questions: this.datasource,
-                retake: this._getRetakeLimit(),
-                feedbackMessage: this.options.feedback_message,
-            };
+            /*            var assessment = {
+                            title: this.options.title,
+                            description: this.options.description,
+                            questions: this.datasource,
+                            retake: this._getRetakeLimit(),
+                            feedbackMessage: this.options.feedback_message,
+                        };
 
-            $.extend(assessment, this._getScoringMethod());
+                        $.extend(assessment, this._getScoringMethod());*/
 
             $(window).trigger("assessmentbuilder:save", {
-                data: assessment
+                data: $.ab.state
             });
 
         },

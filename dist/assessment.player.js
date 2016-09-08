@@ -57,7 +57,7 @@
             this["dw"]["templates"]["feedback"] = Handlebars.template({
                 "compiler": [7, ">= 4.0.0"],
                 "main": function(container, depth0, helpers, partials, data) {
-                    return "<div>\r\n	<h1>Feedback System</h1>\r\n	<p>Configure the feeback message that you want to show to the participants</p>\r\n	<hr />\r\n\r\n	<div data-section=\"feedback-form\">\r\n		<div class=\"form-group\">\r\n		    <ul data-name=\"grade-list\" >\r\n\r\n		    </ul>\r\n		</div>\r\n		<div class=\"form-group\">\r\n			<div class=\"form-group\">\r\n				<input type=\"text\" class=\"form-control\" data-name=\"grade-name\" placeholder=\"Grade\" />\r\n			</div>\r\n		    <div class=\"form-group\">\r\n		       <span>Score >=</span> <input type=\"number\" class=\"form-control\" data-name=\"score\" placeholder=\"Type the score required to get this grade\" />\r\n		    </div>\r\n		    <div class=\"form-group\">\r\n		        <textarea class=\"form-control\" data-name=\"feedback\" placeholder=\"Type your feedback for this grade\"></textarea>\r\n		    </div>\r\n		    <div>\r\n		        <button class=\"btn btn-primary\" data-action=\"add-feedback\">Add</button>\r\n\r\n		        <button class=\"btn btn-primary\" data-action=\"clear-form\">Cancel</button>\r\n		    </div>\r\n		</div>\r\n	</div>\r\n\r\n	<div data-section=\"no-feedback\">\r\n		<p>Note: Your assessment dosen't have scoring enabled in it. So you can skip this section</p>\r\n	</div>\r\n	\r\n</div>";
+                    return "<div>\n    <h1>Feedback System</h1>\n    <p>Configure the feeback message that you want to show to the participants</p>\n    <hr />\n    <div data-section=\"feedback-form\">\n        <div class=\"form-group\">\n            <ul data-name=\"grade-list\"> </ul>\n        </div>\n        <div class=\"form-group\">\n            <div class=\"form-group\">\n                <input type=\"text\" class=\"form-control\" data-name=\"grade-name\" placeholder=\"Grade\" /> </div>\n            <div class=\"form-group\">\n                <span>Score >=</span>\n                <input type=\"number\" class=\"form-control\" data-name=\"score\" placeholder=\"Type the score required to get this grade\" /> </div>\n            <div class=\"form-group\">\n                <textarea class=\"form-control\" data-name=\"feedback\" placeholder=\"Type your feedback for this grade\"></textarea>\n            </div>\n            <div>\n                <button class=\"btn btn-primary\" data-action=\"add-feedback\">Add</button>\n                <button class=\"btn btn-primary\" data-action=\"clear-form\">Cancel</button>\n            </div>\n        </div>\n    </div>\n    <div data-section=\"no-feedback\">\n        <p>Note: Your assessment dosen't have scoring enabled in it. So you can skip this section</p>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -65,7 +65,7 @@
             this["dw"]["templates"]["initial_setup"] = Handlebars.template({
                 "compiler": [7, ">= 4.0.0"],
                 "main": function(container, depth0, helpers, partials, data) {
-                    return "<div data-role=\"initial-setup\">\r\n\r\n    <div class=\"form-group\">\r\n        <label>Title</label>\r\n        <input type=\"text\" class=\"form-control\" placeholder=\"Type the Assessment Title\" data-name=\"assessment-title\" />\r\n    </div>\r\n    <div class=\"form-group\">\r\n        <label>Description</label>\r\n        <textarea class=\"form-control\" placeholder=\"Type the Assessment Description\" data-name=\"assessment-description\"></textarea>\r\n    </div>\r\n\r\n    <hr />\r\n\r\n    <div class=\"form-group\" data-section=\"feedback\">\r\n        <div data-section=\"feedback-form\">\r\n            <div class=\"form-group\">\r\n                <label>Feedback</label>\r\n                <textarea rows=\"3\" class=\"form-control\" data-name=\"feedback-message\" placeholder=\"Type the feedback message...\"></textarea>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <hr />\r\n\r\n\r\n    <div class=\"form-group\" data-section=\"retake\">\r\n        <label>Retake Limit</label>\r\n        <p class=\"well form-inline\">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.\r\n            <input type=\"number\" class=\"form-control\" data-name=\"retake\" placeholder=\"Enter the retake limit for this assessment\"> </p>\r\n    </div>\r\n\r\n    <hr />\r\n\r\n    <div class=\"form-group form-inline\">\r\n        <p>How you want to present your questions to the participant?</p>\r\n\r\n        <div>            \r\n            <p><input type=\"radio\" value=\"one-by-one\" name=\"staging-method\"  /> Show only one question at once</p>\r\n        </div>\r\n\r\n        <div>            \r\n            <p><input type=\"radio\" value=\"all-at-once\" name=\"staging-method\" /> Show all questions in the same page</p>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"form-group\" data-section=\"scoring-method\">\r\n        <div class=\"form-group\">\r\n            <label>Scoring Method</label>\r\n            <dl class=\"dl-horizontal\">\r\n                <dt>\r\n                    <label>\r\n                        <input type=\"radio\" name=\"scoring-method\" value=\"any\" />Any</label>\r\n                </dt>\r\n                <dd>Full score will be given for a question, on selecting any one correct choice</dd>\r\n                <dt>\r\n                    <label>\r\n                        <input type=\"radio\" name=\"scoring-method\" value=\"divide\" />Divide</label>\r\n                </dt>\r\n                <dd>Scores will be divided based on the no.of.correct choices, the user selects for a question</dd>\r\n                <dt>\r\n                    <label>\r\n                        <input type=\"radio\" name=\"scoring-method\" value=\"all\" />All</label>\r\n                </dt>\r\n                <dd>Full score will be given for a question, only when the user selects all the correct choices</dd>\r\n            </dl>\r\n        </div>\r\n    </div>\r\n\r\n</div>";
+                    return "<div data-role=\"initial-setup\">\n    <div class=\"form-group\">\n        <label>Title</label>\n        <input type=\"text\" class=\"form-control\" placeholder=\"Type the Assessment Title\" data-name=\"assessment-title\" /> </div>\n    <div class=\"form-group\">\n        <label>Description</label>\n        <textarea class=\"form-control\" placeholder=\"Type the Assessment Description\" data-name=\"assessment-description\"></textarea>\n    </div>\n    <hr />\n    <div class=\"form-group\" data-section=\"feedback\">\n        <div data-section=\"feedback-form\">\n            <div class=\"form-group\">\n                <label>Feedback Method</label>\n                <select data-name=\"feedback-method\" class=\"form-control\">\n                    <option value=\"simple\">Simple</option>\n                    <option value=\"custom\">Custom</option>\n                    <!--<option value=\"grouped\">Grouped</option>-->\n                </select>\n            </div>\n            <div class=\"form-group\">\n                <label>Feedback</label>\n                <textarea rows=\"3\" class=\"form-control\" data-name=\"feedback-message\" placeholder=\"Type the feedback message...\"></textarea>\n            </div>\n        </div>\n    </div>\n    <hr />\n    <div class=\"form-group\" data-section=\"retake\">\n        <label>Retake Limit</label>\n        <p class=\"well form-inline\">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.\n            <input type=\"number\" class=\"form-control\" data-name=\"retake\" placeholder=\"Enter the retake limit for this assessment\"> </p>\n    </div>\n    <hr />\n    <div class=\"form-group form-inline\">\n        <p>How you want to present your questions to the participant?</p>\n        <div>\n            <p>\n                <input type=\"radio\" value=\"one-by-one\" name=\"staging-method\" /> Show only one question at once</p>\n        </div>\n        <div>\n            <p>\n                <input type=\"radio\" value=\"all-at-once\" name=\"staging-method\" /> Show all questions in the same page</p>\n        </div>\n    </div>\n    <div class=\"form-group\" data-section=\"scoring-method\">\n        <div class=\"form-group\">\n            <label>Scoring Method</label>\n            <dl class=\"dl-horizontal\">\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"any\" />Any</label>\n                </dt>\n                <dd>Full score will be given for a question, on selecting any one correct choice</dd>\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"divide\" />Divide</label>\n                </dt>\n                <dd>Scores will be divided based on the no.of.correct choices, the user selects for a question</dd>\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"all\" />All</label>\n                </dt>\n                <dd>Full score will be given for a question, only when the user selects all the correct choices</dd>\n            </dl>\n        </div>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -105,13 +105,13 @@
                         alias3 = "function",
                         alias4 = container.escapeExpression;
 
-                    return "\r\n        <div class=\"checkbox\" data-choice-item data-value=\"" +
+                    return "\n        <div class=\"checkbox\" data-choice-item data-value=\"" +
                         alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "id",
                             "hash": {},
                             "data": data
                         }) : helper))) +
-                        "\">\r\n            <label>\r\n                <input type=\"checkbox\" class=\"clickable\" value=\"" +
+                        "\">\n            <label>\n                <input type=\"checkbox\" class=\"clickable\" value=\"" +
                         alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "id",
                             "hash": {},
@@ -119,7 +119,7 @@
                         }) : helper))) +
                         "\"> " +
                         alias4(container.lambda((depth0 != null ? depth0.title : depth0), depth0)) +
-                        " </label>\r\n        </div> ";
+                        " </label>\n        </div> ";
                 },
                 "compiler": [7, ">= 4.0.0"],
                 "main": function(container, depth0, helpers, partials, data) {
@@ -134,13 +134,13 @@
                             "hash": {},
                             "data": data
                         }) : helper))) +
-                        "\">\r\n    <div>\r\n        <p>" +
+                        "\">\n    <div>\n        <p>" +
                         ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "title",
                             "hash": {},
                             "data": data
                         }) : helper))) != null ? stack1 : "") +
-                        "</p>\r\n    </div>\r\n    <div data-choice-type=\"" +
+                        "</p>\n    </div>\n    <div data-choice-type=\"" +
                         alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "type",
                             "hash": {},
@@ -154,77 +154,12 @@
                             "inverse": container.noop,
                             "data": data
                         })) != null ? stack1 : "") +
-                        " </div>\r\n</div>";
+                        " </div>\n</div>";
                 },
                 "useData": true
             });
 
-            this["dw"]["templates"]["play_radiobutton"] = Handlebars.template({
-                "1": function(container, depth0, helpers, partials, data, blockParams, depths) {
-                    var helper, alias1 = depth0 != null ? depth0 : {},
-                        alias2 = helpers.helperMissing,
-                        alias3 = "function",
-                        alias4 = container.escapeExpression,
-                        alias5 = container.lambda;
-
-                    return "\r\n        <div class=\"radio\" data-choice-item data-value=\"" +
-                        alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-                            "name": "id",
-                            "hash": {},
-                            "data": data
-                        }) : helper))) +
-                        "\">\r\n            <label>\r\n                <input type=\"radio\" class=\"clickable\" name=\"question" +
-                        alias4(alias5((depths[1] != null ? depths[1].id : depths[1]), depth0)) +
-                        "\" value=\"" +
-                        alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-                            "name": "id",
-                            "hash": {},
-                            "data": data
-                        }) : helper))) +
-                        "\"> " +
-                        alias4(alias5((depth0 != null ? depth0.title : depth0), depth0)) +
-                        " </label>\r\n        </div> ";
-                },
-                "compiler": [7, ">= 4.0.0"],
-                "main": function(container, depth0, helpers, partials, data, blockParams, depths) {
-                    var stack1, helper, alias1 = depth0 != null ? depth0 : {},
-                        alias2 = helpers.helperMissing,
-                        alias3 = "function",
-                        alias4 = container.escapeExpression;
-
-                    return "<div data-name=\"play-question\" data-qid=\"" +
-                        alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-                            "name": "id",
-                            "hash": {},
-                            "data": data
-                        }) : helper))) +
-                        "\">\r\n    <div>\r\n        <p>" +
-                        ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-                            "name": "title",
-                            "hash": {},
-                            "data": data
-                        }) : helper))) != null ? stack1 : "") +
-                        "</p>\r\n    </div>\r\n    <div data-choice-type=\"" +
-                        alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-                            "name": "type",
-                            "hash": {},
-                            "data": data
-                        }) : helper))) +
-                        "\"> " +
-                        ((stack1 = helpers.each.call(alias1, (depth0 != null ? depth0.choice : depth0), {
-                            "name": "each",
-                            "hash": {},
-                            "fn": container.program(1, data, 0, blockParams, depths),
-                            "inverse": container.noop,
-                            "data": data
-                        })) != null ? stack1 : "") +
-                        " </div>\r\n</div>";
-                },
-                "useData": true,
-                "useDepths": true
-            });
-
-            this["dw"]["templates"]["play_singleline"] = Handlebars.template({
+            this["dw"]["templates"]["play_multiline"] = Handlebars.template({
                 "compiler": [7, ">= 4.0.0"],
                 "main": function(container, depth0, helpers, partials, data) {
                     var stack1, helper, alias1 = depth0 != null ? depth0 : {},
@@ -257,6 +192,104 @@
                 "useData": true
             });
 
+            this["dw"]["templates"]["play_radiobutton"] = Handlebars.template({
+                "1": function(container, depth0, helpers, partials, data, blockParams, depths) {
+                    var helper, alias1 = depth0 != null ? depth0 : {},
+                        alias2 = helpers.helperMissing,
+                        alias3 = "function",
+                        alias4 = container.escapeExpression,
+                        alias5 = container.lambda;
+
+                    return "\n        <div class=\"radio\" data-choice-item data-value=\"" +
+                        alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "id",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "\">\n            <label>\n                <input type=\"radio\" class=\"clickable\" name=\"question" +
+                        alias4(alias5((depths[1] != null ? depths[1].id : depths[1]), depth0)) +
+                        "\" value=\"" +
+                        alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "id",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "\"> " +
+                        alias4(alias5((depth0 != null ? depth0.title : depth0), depth0)) +
+                        " </label>\n        </div> ";
+                },
+                "compiler": [7, ">= 4.0.0"],
+                "main": function(container, depth0, helpers, partials, data, blockParams, depths) {
+                    var stack1, helper, alias1 = depth0 != null ? depth0 : {},
+                        alias2 = helpers.helperMissing,
+                        alias3 = "function",
+                        alias4 = container.escapeExpression;
+
+                    return "<div data-name=\"play-question\" data-qid=\"" +
+                        alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "id",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "\">\n    <div>\n        <p>" +
+                        ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "title",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) != null ? stack1 : "") +
+                        "</p>\n    </div>\n    <div data-choice-type=\"" +
+                        alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "type",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "\"> " +
+                        ((stack1 = helpers.each.call(alias1, (depth0 != null ? depth0.choice : depth0), {
+                            "name": "each",
+                            "hash": {},
+                            "fn": container.program(1, data, 0, blockParams, depths),
+                            "inverse": container.noop,
+                            "data": data
+                        })) != null ? stack1 : "") +
+                        " </div>\n</div>";
+                },
+                "useData": true,
+                "useDepths": true
+            });
+
+            this["dw"]["templates"]["play_singleline"] = Handlebars.template({
+                "compiler": [7, ">= 4.0.0"],
+                "main": function(container, depth0, helpers, partials, data) {
+                    var stack1, helper, alias1 = depth0 != null ? depth0 : {},
+                        alias2 = helpers.helperMissing,
+                        alias3 = "function",
+                        alias4 = container.escapeExpression;
+
+                    return "<div data-name=\"play-question\" data-qid=\"" +
+                        alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "id",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "\">\n    <div>\n        <p>" +
+                        ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "title",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) != null ? stack1 : "") +
+                        "</p>\n    </div>\n    <div data-choice-type=\"" +
+                        alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "type",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "\">\n        <div class=\"form-group\" data-choice-item>\n            <input type=\"text\" class=\"form-control\" data-max-length=\"" +
+                        alias4(container.lambda(((stack1 = (depth0 != null ? depth0.choice : depth0)) != null ? stack1.maximumlength : stack1), depth0)) +
+                        "\" /> </div>\n    </div>\n</div>";
+                },
+                "useData": true
+            });
+
             this["dw"]["templates"]["questioneditor"] = Handlebars.template({
                 "1": function(container, depth0, helpers, partials, data) {
                     var helper, alias1 = depth0 != null ? depth0 : {},
@@ -264,7 +297,7 @@
                         alias3 = "function",
                         alias4 = container.escapeExpression;
 
-                    return "\r\n                        <option value=\"" +
+                    return "\n                        <option value=\"" +
                         alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "value",
                             "hash": {},
@@ -284,7 +317,7 @@
                         alias3 = "function",
                         alias4 = container.escapeExpression;
 
-                    return "\r\n                    <option value=\"" +
+                    return "\n                    <option value=\"" +
                         alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "value",
                             "hash": {},
@@ -302,7 +335,7 @@
                 "main": function(container, depth0, helpers, partials, data) {
                     var stack1, alias1 = depth0 != null ? depth0 : {};
 
-                    return "<div class=\"question-editor\">\r\n    <div data-container=\"question-editor\">\r\n        <div data-section=\"question\">\r\n            <div class=\"form-group\" data-role=\"question\">\r\n                <textarea class=\"form-control\" data-name=\"title\" placeholder=\"Type your question here...\"></textarea>\r\n            </div>\r\n            <div data-section=\"scoring\">\r\n                <div class=\"form-group\">\r\n                    <label>Have scores on: </label>\r\n                    <select class=\"form-control\" data-name=\"scoring-method\"> " +
+                    return "<div class=\"question-editor\">\n    <div data-container=\"question-editor\">\n        <div data-section=\"question\">\n            <div class=\"form-group\" data-role=\"question\">\n                <textarea class=\"form-control\" data-name=\"title\" placeholder=\"Type your question here...\"></textarea>\n            </div>\n            <div data-section=\"scoring\">\n                <div class=\"form-group\">\n                    <label>Have scores on: </label>\n                    <select class=\"form-control\" data-name=\"scoring-method\"> " +
                         ((stack1 = helpers.each.call(alias1, ((stack1 = (depth0 != null ? depth0.scoring_configuration : depth0)) != null ? stack1.scoring_at : stack1), {
                             "name": "each",
                             "hash": {},
@@ -310,7 +343,7 @@
                             "inverse": container.noop,
                             "data": data
                         })) != null ? stack1 : "") +
-                        " </select>\r\n                </div>\r\n                <div class=\"form-group\" data-section=\"question-scoring\">\r\n                    <input type=\"number\" class=\"form-control\" data-name=\"question-score\" placeholder=\"Enter your score\" /> </div>\r\n                <p class=\"well\">Select the checkbox, to mark this question as <i>rhetorical question</i>. If selected, any scores given to this question will have no effect on the results.\r\n                    <input type=\"checkbox\" name=\"rhetorical-question\" /> </p>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <select data-name=\"choice-types\" class=\"form-control\"> " +
+                        " </select>\n                </div>\n                <div class=\"form-group\" data-section=\"question-scoring\">\n                    <input type=\"number\" class=\"form-control\" data-name=\"question-score\" placeholder=\"Enter your score\" /> </div>\n                <p class=\"well\">Select the checkbox, to mark this question as <i>rhetorical question</i>. If selected, any scores given to this question will have no effect on the results.\n                    <input type=\"checkbox\" name=\"rhetorical-question\" /> </p>\n            </div>\n            <div class=\"form-group\">\n                <select data-name=\"choice-types\" class=\"form-control\"> " +
                         ((stack1 = helpers.each.call(alias1, (depth0 != null ? depth0.allowed_choice_types : depth0), {
                             "name": "each",
                             "hash": {},
@@ -318,7 +351,7 @@
                             "inverse": container.noop,
                             "data": data
                         })) != null ? stack1 : "") +
-                        " </select>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <div data-section=\"choice\"> </div>\r\n            </div>\r\n        </div>\r\n        <div data-section=\"tagging\">\r\n            <div class=\"form-group\">\r\n                <!-- Tags should go here -->\r\n                <h5>Tag Question:</h5>\r\n                <select class=\"form-control\" data-name=\"tags\" placeholder=\"Type the tag name and press 'Enter'\" multiple=\"\"></select>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"form-group\">\r\n        <label>\r\n            <input type=\"checkbox\" data-name=\"required\" /> Required </label>\r\n        <label>\r\n            <input type=\"checkbox\" data-name=\"shuffle\" /> Randomize Choice </label>\r\n    </div>\r\n    <div class=\"form-group\">\r\n        <button class=\"btn btn-primary\" data-name=\"save-question\">Preview Question</button>\r\n        <button class=\"btn btn-default\" data-name=\"cancel-question\">Reset</button>\r\n    </div>\r\n</div>";
+                        " </select>\n            </div>\n            <div class=\"form-group\">\n                <div data-section=\"choice\"> </div>\n            </div>\n        </div>\n        <div data-section=\"tagging\">\n            <div class=\"form-group\">\n                <!-- Tags should go here -->\n                <h5>Tag Question:</h5>\n                <select class=\"form-control\" data-name=\"tags\" placeholder=\"Type the tag name and press 'Enter'\" multiple=\"\"></select>\n            </div>\n        </div>\n    </div>\n    <div class=\"form-group\">\n        <label>\n            <input type=\"checkbox\" data-name=\"required\" /> Required </label>\n        <label>\n            <input type=\"checkbox\" data-name=\"shuffle\" /> Randomize Choice </label>\n    </div>\n    <div class=\"form-group\">\n        <button class=\"btn btn-primary\" data-name=\"save-question\">Preview Question</button>\n        <button class=\"btn btn-default\" data-name=\"cancel-question\">Reset</button>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -610,19 +643,19 @@
                         alias2 = helpers.helperMissing,
                         alias3 = "function";
 
-                    return "<div>\r\n    <div data-section=\"head\">\r\n        <div>\r\n            <h1>" +
+                    return "<div>\n    <div data-section=\"head\">\n        <div>\n            <h1>" +
                         container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "title",
                             "hash": {},
                             "data": data
                         }) : helper))) +
-                        "</h1>\r\n            <p>" +
+                        "</h1>\n            <p>" +
                         ((stack1 = ((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "description",
                             "hash": {},
                             "data": data
                         }) : helper))) != null ? stack1 : "") +
-                        "</p>\r\n        </div>\r\n    </div>\r\n    <div data-section=\"body\"></div>\r\n    <div data-section=\"footer\">\r\n        <div class=\"form-group\">\r\n            <button class=\"btn btn-primary\" data-action=\"save\">Save</button>\r\n            <button class=\"btn btn-default\" data-action=\"cancel\">Cancel</button>\r\n        </div>\r\n    </div>\r\n</div>";
+                        "</p>\n        </div>\n    </div>\n    <div data-section=\"body\"></div>\n    <div data-section=\"footer\">\n        <div class=\"form-group\">\n            <button class=\"btn btn-primary\" data-action=\"save\">Save</button>\n            <button class=\"btn btn-default\" data-action=\"cancel\">Cancel</button>\n        </div>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -663,19 +696,19 @@
                         alias3 = "function",
                         alias4 = container.escapeExpression;
 
-                    return "<div>\r\n	<div>\r\n	    <h1>" +
+                    return "<div>\n    <div>\n        <h1>" +
                         alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "title",
                             "hash": {},
                             "data": data
                         }) : helper))) +
-                        "</h1>\r\n	    <p>" +
+                        "</h1>\n        <p>" +
                         ((stack1 = ((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "description",
                             "hash": {},
                             "data": data
                         }) : helper))) != null ? stack1 : "") +
-                        "\r\n	    </p>\r\n	    <p class=\"well\">Total no of questions: <b>" +
+                        " </p>\n        <p class=\"well\">Total no of questions: <b>" +
                         alias4(((helper = (helper = helpers.totalQuestions || (depth0 != null ? depth0.totalQuestions : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "totalQuestions",
                             "hash": {},
@@ -693,14 +726,14 @@
                             "hash": {},
                             "data": data
                         }) : helper))) +
-                        "</b></p>\r\n	</div>\r\n	<div class=\"text-center\">\r\n	    <button class=\"btn btn-primary\" data-action=\"start\">Start</button>\r\n	</div>\r\n</div>";
+                        "</b></p>\n    </div>\n    <div class=\"text-center\">\n        <button class=\"btn btn-primary\" data-action=\"start\">Start</button>\n    </div>\n</div>";
                 },
                 "useData": true
             });
 
             this["dw"]["templates"]["test"] = Handlebars.template({
                 "1": function(container, depth0, helpers, partials, data) {
-                    return "\r\n    <li>" +
+                    return "\n    <li>" +
                         container.escapeExpression(container.lambda(depth0, depth0)) +
                         "</li> ";
                 },
@@ -760,6 +793,23 @@
 
                 $.fn.dwplay_singleline = function(element, options) {
 
+                    this.each(function() {
+
+                        $(this).find(".form-control").on("change", function() {
+
+                            var value = $(this).val();
+
+                            var closestContainer = $(this).closest("[data-name='play-question']");
+
+                            closestContainer.data("value", {
+                                text: value
+                            });
+
+                        });
+                    });
+                };
+
+                $.fn.dwplay_multiline = function(element, options) {
                     this.each(function() {
 
                         $(this).find(".form-control").on("change", function() {
@@ -839,11 +889,310 @@
 
 
             })();;
+            /*
+            	"OneByOne" - This plugin makes the assessment to show one question at once. It also puts a navigation button to move back and forth. 
+            */
+
             (function() {
 
+                "use strict";
 
 
 
+                $.fn.oneByOne = function() {
+
+                    function showPrevious(element) {
+
+                        var root = $(event.target).closest("[data-obo]");
+
+                        var nav = root.find("[data-obo-role='nav']");
+
+                        var currentNode = root.find("[data-obo-role='item']:visible");
+
+                        var siblings = root.find("[data-obo-role='item']");
+
+                        var poisition = siblings.index(currentNode);
+
+
+                        if (poisition > 0) {
+
+                            // hide the current node
+                            currentNode.hide();
+
+                            poisition -= 1;
+
+                            //siblings.removeAttr("value");
+
+                            // show the previous node
+                            $(siblings.get(poisition)).show().attr("value", poisition + 1);
+
+
+                            // if the new position is 0, which means the first node is the active node, then hide the previous button
+                            if (poisition > 0) {
+                                nav.find("[data-name='previous']").show();
+                            } else if (poisition === 0) {
+                                nav.find("[data-name='previous']").hide();
+                            }
+
+                            if (poisition < siblings.length - 1) {
+                                nav.find("[data-name='next']").show();
+                            }
+
+                        }
+
+                        console.log("next");
+
+                    }
+
+                    function showNext(event) {
+                        event.preventDefault();
+
+                        var root = $(event.target).closest("[data-obo]");
+
+                        var nav = root.find("[data-obo-role='nav']");
+
+                        var currentNode = root.find("[data-obo-role='item']:visible");
+
+                        var siblings = root.find("[data-obo-role='item']");
+
+                        var poisition = siblings.index(currentNode);
+
+
+                        if (poisition < siblings.length - 1) {
+
+                            currentNode.hide();
+
+                            poisition += 1;
+
+                            $(siblings.get(poisition)).show().attr("value", poisition + 1);
+
+                            if (poisition === siblings.length - 1) {
+                                $(event.target).hide();
+                            } else {
+                                $(event.target).show();
+                            }
+
+                            if (poisition > 0) {
+                                nav.find("[data-name='previous']").show();
+                            } else if (poisition === 0) {
+                                nav.find("[data-name='previous']").hide();
+                            }
+
+                        }
+
+                        console.log("next");
+
+                    }
+
+
+
+
+                    this.each(function() {
+
+                        var root = $(this);
+
+                        // added this element in the root, to help finding  for any child elements 
+                        root.attr("data-obo", "");
+
+                        root.on("click", "[data-name='next']", showNext);
+
+                        root.on("click", "[data-name='previous']", showPrevious);
+
+                        var list = root.find("[data-obo-role='list']");
+
+                        var items = list.find("[data-obo-role='item']");
+
+                        var nav = root.find("[data-obo-role='nav']");
+
+                        var btnPrevious = $("<button type='button' class='btn btn-primary' data-name='previous'>Previous</button>");
+                        var btnNext = $("<button type='button' data-name='next' class='btn btn-primary'>Next</button>");
+
+                        nav.append([btnPrevious, btnNext]);
+
+                        btnPrevious.hide();
+
+                        items.hide();
+
+                        // show only first item
+                        $(items.get(0)).show();
+
+                    });
+
+                    return this;
+
+                };
+
+
+
+            })();;
+            (function() {
+                "use strict";
+
+                var events = {
+                    submit: "assessment:submit_response"
+                };
+
+                $.widget("dw.assessmentplayer", {
+
+                    options: {
+
+                        staging_method: "all-at-once",
+
+                        title: "A health care assessment",
+
+                        datasource: []
+
+                    },
+
+                    _create: function() {
+
+                        var template = "<div><h1>{0}</h1></div>".replace(/\{0\}/, this.options.title);
+
+                        template += '<ol data-name="question-list" data-obo-role="list" class="list-styled"></ol><div data-obo-role="nav"></div><div class="text-center"><button class="btn btn-primary" data-action="submit">Submit</button></div>';
+
+                        // use es6 to store the html
+                        this.element.html(template);
+
+                        this._bind();
+                        // 1. Render your questions
+                        this._render();
+
+                        if (this.options.staging_method === "one-by-one") {
+
+                            this.element.oneByOne();
+                        }
+
+                        // 2. initialize all the widgets
+                        this.element.find("[data-choice-type='checkbox']").dwplay_checkbox();
+                        this.element.find("[data-choice-type='radiobutton']").dwplay_radiobutton();
+                        this.element.find("[data-choice-type='singleline']").dwplay_singleline();
+                        this.element.find("[data-choice-type='multiline']").dwplay_multiline();
+
+                    },
+                    _bind: function() {
+                        this._on(this.element, {
+                            "click [data-action='submit']": this._submitResponse
+                        });
+                    },
+                    _getHtml: function(question) {
+
+                        var html = "";
+                        if (question.type === "radiobutton") {
+                            html = window.dw.templates.play_radiobutton(question);
+                        } else if (question.type === "checkbox") {
+                            html = window.dw.templates.play_checkboxes(question);
+                        } else if (question.type === "singleline") {
+                            html = window.dw.templates.play_singleline(question);
+                        } else if (question.type === "multiline") {
+                            html = window.dw.templates.play_multiline(question);
+                        }
+                        html = "<li data-obo-role='item'>" + html + "</li>";
+                        return html;
+                    },
+
+                    _render: function() {
+
+                        this.options.datasource.map(function(q) {
+
+                            q.id = parseInt(q.id);
+                            q.required = q.required === 'true';
+
+                            if (q.choice) {
+                                q.choice.map(function(c) {
+
+                                    c.id = parseInt(c.id);
+
+                                });
+                            }
+
+                        });
+
+
+
+                        for (var i = 0; i < this.options.datasource.length; i++) {
+                            this.element.find("[data-name='question-list']").append(this._getHtml(this.options.datasource[i]));
+                        }
+                    },
+                    _getAllResponses: function() {
+                        var questions = this.element.find("[data-name='play-question']"),
+                            responses = [];
+                        questions.each(function() {
+                            var questionId = parseInt($(this).data("qid"));
+                            if ($(this).data("value")) {
+                                var response = $(this).data("value");
+                                response = $.extend({
+                                    questionId: questionId
+                                }, response);
+                                responses.push(response);
+                            }
+                        });
+                        return responses;
+                    },
+                    _submitResponse: function(event) {
+                        event.preventDefault();
+
+                        var responses = this._getAllResponses(),
+                            preventSubmit = true,
+                            errors = this._validate(responses);
+
+                        if (errors.length > 0) {
+                            console.error(errors); /*Removelogging:skip*/
+                            preventSubmit = true;
+                        } else {
+                            var responseCount = responses.length,
+                                questionsCount = this.options.datasource.length;
+                            if (responseCount < questionsCount) {
+                                var message = "You've {0} unanswered question(s). Do you still want to proceed further ?".replace(/\{0\}/, (questionsCount - responseCount));
+                                preventSubmit = !confirm(message);
+                            } else {
+                                preventSubmit = false;
+                            }
+                        }
+                        if (!preventSubmit) {
+                            $(this.element).trigger(events.submit, {
+                                data: responses
+                            });
+                        }
+                    },
+                    _validate: function(response) {
+                        var errors = [],
+                            errorMessaage = "Answer Requried";
+                        for (var i = 0; i < this.options.datasource.length; i++) {
+                            var question = this.options.datasource[i];
+                            if (question.required) {
+                                var questionId = question.id;
+                                var index = _.findIndex(response, {
+                                    "questionId": questionId
+                                });
+                                if (index < 0) {
+                                    errors.push({
+                                        questionId: questionId,
+                                        errorMessage: errorMessaage
+                                    });
+                                } else {
+                                    var _response = response[index];
+                                    if (_response.selectedChoices) {
+                                        if (_response.selectedChoices.length === 0)
+                                            errors.push({
+                                                questionId: questionId,
+                                                errorMessage: errorMessaage
+                                            });
+                                    } else if (_response.text) {
+                                        var trimmedText = _response.text.trim();
+                                        trimmedText = $("<div>").html(trimmedText).text();
+                                        if (trimmedText === "")
+                                            errors.push({
+                                                questionId: questionId,
+                                                errorMessage: errorMessaage
+                                            });
+                                    }
+                                }
+                            }
+                        }
+                        return errors;
+                    }
+
+                });
 
             })();
         });

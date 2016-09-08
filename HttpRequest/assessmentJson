@@ -1,0 +1,93 @@
+{
+  assessment: {
+    "id": 1,
+    "title": "Mathematics",
+    "description": "This assessment will have 2 questions. Each question carries 10 marks. You need to answer atleast 1 question correctly inorder to pass this assessment. Note: You cannot retake this assessment. This is your first & last attempt. ",
+    "retakeLimit": 0,
+    "questions": [
+      {
+        "id": 1,
+        "required": true,
+        "randomizeChoice": true,
+        "title": "Select all the choices which you feel could be correct. 4 + 4 = _____ ? ",
+        "choiceType": "checkbox",
+        "scoringAt": "question",
+        "score": 10,
+        "choice": [
+          {
+            "correct": true,
+            "title": "8",
+            "id": 1
+          },
+          {
+            "correct": true,
+            "title": "08",
+            "id": 2
+          },
+          {
+            "correct": false,
+            "title": "16",
+            "id": 3
+          },
+          {
+            "correct": false,
+            "title": "1",
+            "id": 4
+          }
+        ],
+        "tags": [
+          
+        ],
+        "edit": false
+      },
+      {
+        "id": 2,
+        "required": true,
+        "randomizeChoice": true,
+        "title": "8 * 8 = _____ ?",
+        "choiceType": "radiobutton",
+        "scoringAt": "question",
+        "score": 10,
+        "choice": [
+          {
+            "correct": true,
+            "title": "84",
+            "id": 1
+          },
+          {
+            "correct": false,
+            "title": "54",
+            "id": 2
+          },
+          {
+            "correct": false,
+            "title": "16",
+            "id": 3
+          }
+        ],
+        "tags": [
+          
+        ]
+      }
+    ],
+    "feedback": {
+      "feedbackMethod": "custom",
+      "feedbackMessage": "Thank you for submitting the assessment",
+      "grade": [
+        {
+          "name": "Fail",
+          "feedback": "Sorry, You've failed the test",
+          "isDefault": true
+        },
+        {
+          "name": "Pass",
+          "score": 10,
+          "feedback": "Well done.  You've passed the test",
+          "isDefault": false
+        }
+      ]
+    },
+    "scoringMethod": "divide",
+    "stagingMethod": "one-by-one"
+  }
+}

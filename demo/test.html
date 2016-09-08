@@ -1,36 +1,23 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title></title>
+    <link rel="stylesheet" type="text/css" href="../vendors/taggingJs.styles.css">
+    <title></title>
 </head>
+
 <body>
+    <div data-tags-input-name="tag" id="tagBox">preexisting-tag</div>
 
 
-<div data-role="list">
-
-</div>
-
-<script src="../bower_components/jquery/dist/jquery.js"></script>
-
-    <script src="../bower_components/handlebars/handlebars.runtime.js"></script>
-  
-    <!-- Dependencies -->
-    <!-- Source Code -->
-    <script src="../templates/templates.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../vendors/taggingJs.js"></script>
 
     <script type="text/javascript">
-    	
 
-    	var names = [ "Ganesh", "Teja", "Koneru" ];
-
-
-    	var list = $("[data-role='list']");
-
-    	console.log(window.dw.templates.test(names));
-
-    	//list.html();
-
+        $("#tagBox").tagging();
 
     </script>
 </body>
+
 </html>

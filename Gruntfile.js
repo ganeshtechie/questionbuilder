@@ -103,17 +103,22 @@
 
             builder: {
 
-                src: [ 'templates/templates.js', 'src/core.js', 'src/base.js', 'src/renderengine.js',
-                    'src/choices.js', 'src/toggle.js', 'src/questionbuilder.js', 'src/helper.js',
-                    'src/singleline.js', 'src/multiline.js', 'src/shell.js', 'src/feedback.js'
+                src: [ 'templates/templates.js', 'src/app.state.js', 'src/core.js', 'src/base.js', 
+                    'src/renderengine.js', 'src/choices.js', 'src/toggle.js', 'src/questionbuilder.js', 
+                    'src/helper.js', 'src/singleline.js', 'src/multiline.js', 'src/shell.js', 
+                    'src/feedback.js', 'src/initialsetup.js'
                 ],
                 dest: 'dist/assessment.builder.js',
             },
 
             play: {
 
-                src: [ 'templates/templates.js', 'src/staging.js', 'src/assessmentplayerhelper.js', 'src/assessmentplayer.initializer.js' ],
-                dest: 'dist/assessment.play.js'
+                src: [ 'templates/templates.js', 
+                        'src/staging.js', 
+                        'src/assessmentplayerhelper.js', 
+                        'src/staging.onebyone.js',
+                        'src/assessmentplayer.js' ],
+                dest: 'dist/assessment.player.js'
             }
         }
 

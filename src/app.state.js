@@ -20,13 +20,16 @@
         // a description which tells about the assessment
         description: "",
 
-        feedbackMessage: "",
-
         retakeLimit: -1,
 
         questions: [],
 
-        feedback: {}
+        feedback: {
+
+            feedbackMethod: "simple",
+
+            feedbackMessage: "",
+        }
 
     };
 
