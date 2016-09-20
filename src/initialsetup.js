@@ -30,20 +30,12 @@
 
             this.datasource = this.datasource || state;
 
-
             this.element.find("[data-name='assessment-title']").val(this.datasource.title);
 
             this.element.find("[data-name='assessment-description']").val(this.datasource.description);
 
             this.element.find("[data-name='retake']").val(this.datasource.retakeLimit);
 
-
-            if (!this.options.feedback_configuration)
-                this.element.find("[data-section='feedback']").hide();
-            else {
-                this.datasource.feedback.feedbackMessage = this.datasource.feedback.feedbackMessage || this.options.feedback_configuration.feedback_message;
-                this.element.find("[data-name='feedback-message']").val(this.datasource.feedback.feedbackMessage);
-            }
 
             if (!this.options.scoring_configuration) {
                 this.element.find("[data-section='scoring-method']").remove();
@@ -53,6 +45,7 @@
                 this.element.find(_selector).prop("checked", true);
             }
 
+
             if (this.options.enable_retake === "no") {
                 this.element.find("[data-section='retake']").remove();
             } else {
@@ -61,8 +54,6 @@
             }
 
             this.datasource.stagingMethod = this.datasource.stagingMethod || this.options.default_staging_method;
-
-
             _selector = "[name='staging-method'][value='{0}']".replace(/\{0\}/, this.datasource.stagingMethod);
             this.element.find(_selector).prop("checked", true);
 
@@ -77,25 +68,14 @@
 
                 "change [data-name='assessment-description']": this._onDescriptionChanged,
 
-                "change [data-name='feedback-message']": this._feedbackMessageChanged,
-
                 "click [data-section='scoring-method'] [name='scoring-method']": this._onScoringMethodChanged,
 
                 "click [name='staging-method']": this._onStagingMethodChanged,
 
-                "change [data-name='retake']": this._onRetakeLimitChanged,
-
-                "change [data-name='feedback-method']": this._feedbackMethodChanged
+                "change [data-name='retake']": this._onRetakeLimitChanged
 
             });
 
-        },
-
-        _feedbackMethodChanged: function(event) {
-
-            this.datasource.feedback = this.datasource.feedback || {};
-
-            this.datasource.feedback.feedbackMethod = $(event.target).val();
         },
 
         _onStagingMethodChanged: function(event) {
@@ -117,13 +97,7 @@
             this.datasource.description = value;
         },
 
-        _feedbackMessageChanged: function(event) {
-            var value = $(event.target).val();
 
-            this.datasource.feedback = this.datasource.feedback || {};
-
-            this.datasource.feedback.feedbackMessage = value;
-        },
 
         _onRetakeLimitChanged: function(event) {
             var value = $(event.target).val();

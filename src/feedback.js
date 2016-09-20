@@ -25,7 +25,6 @@
 
         _options: {
 
-
         },
 
         currentGrade: null,
@@ -33,36 +32,54 @@
         datasource: {},
 
         _create: function() {
-
             this._super();
+
+            // linking the state and datascore object
+            this.datasource = state.feedback;
 
             this.element.html(template);
 
+            // if no scoring, then the feedback for each grade is not applicable.
+            // just show the simple method
             if (!this.options.scoring_configuration) {
-                this.element.find("[data-section='feedback-form']").hide();
-                return;
+                this.datasource.feedbackMethod = "simple";
+                this.element.find("[data-name='feedback-method']").find("option[value='custom']").remove();
             }
-
-            this.element.find("[data-section='no-feedback']").hide();
 
             this._bind();
 
             var that = this;
 
-            this.datasource = state.feedback;
+
+
+            this._syncUIwithStateObject();
+
+        },
+
+        _pushDefaultGrade: function() {
+            var that = this;
 
             this.datasource.grade = this.datasource.grade || [];
 
             if (this.datasource.grade.length === 0) {
+
                 this.datasource.grade.push($.extend({}, grade, {
                     isDefault: true
                 }));
+
             }
 
             $(this.datasource.grade).each(function(i, e) {
                 that._addGradeToUI(e);
             });
 
+        },
+
+        _syncUIwithStateObject: function() {
+
+            this.element.find("[data-name='feedback-method']").val(this.datasource.feedbackMethod);
+            this._showFeedbackForm(this.datasource.feedbackMethod);
+            // by this time, the form will be ready
         },
 
         _bind: function() {
@@ -75,9 +92,54 @@
 
                 "click [data-action='clear-form']": this._clearForm,
 
-                "click [data-action='delete-grade']": this._onDeleteClicked
+                "click [data-action='delete-grade']": this._onDeleteClicked,
+
+                "change [data-name='feedback-method']": this._onFeedbackMethodChanged,
+
+                "change [data-name='feedback-message']": this._onFeedbackChanged
 
             });
+
+        },
+
+        _onFeedbackChanged: function(event) {
+            event.preventDefault();
+
+            this.datasource.feedbackMessage = $(event.target).val();
+
+        },
+
+        _onFeedbackMethodChanged: function(event) {
+            event.preventDefault();
+
+            var feedbackMethod = $(event.target).val();
+
+            this._showFeedbackForm(feedbackMethod);
+
+        },
+
+        _showFeedbackForm: function(feedbackMethod) {
+
+            feedbackMethod = feedbackMethod || this.element.find("[data-name='feedback-method']").val();
+
+            this.datasource.feedbackMethod = feedbackMethod;
+
+            //this.datasource.feedback = this.datasource.feedback || {};
+
+            //this.datasource.feedback.feedbackMethod = feedbackMethod;
+
+            this.element.find("[data-section='feedback-form']").addClass("hide");
+
+            if (this.datasource.feedbackMethod === "simple") {
+                // show the textarea
+                this.element.find("[data-section='feedback-form'][data-form-name='simple']").removeClass("hide");
+                this.element.find("[data-name='feedback-message']").val(this.datasource.feedbackMessage);
+
+            } else if (this.datasource.feedbackMethod === "custom") {
+                // show the grading options
+                this._pushDefaultGrade();
+                this.element.find("[data-section='feedback-form'][data-form-name='custom']").removeClass("hide");
+            }
 
         },
 

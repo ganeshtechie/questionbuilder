@@ -63,22 +63,31 @@
                 this.element.find(this.options.selectors.taggingSection).hide();
             } else {
 
-                var element = this.element.find("[data-name='tags']")[0];
+                var element = this.element.find("[data-name='tags']");
 
-                this.tag = new Choices(element, {
-                    placeholder: true,
-                    placeholdervalue: "Type the tag name and press 'Enter'"
-                }).ajax(function(callback) {
+                var template = "<option value='{0}'>{0}</option>";
 
-                    var source = _.map($this.options.tags, function(tag) {
-                        return {
-                            title: tag
-                        };
-                    });
+                var option = "";
 
-                    callback(source, "title", "title");
+                this.options.tags.forEach(function(e, i) {
+
+                    option = template.replace(/\{0\}/g, e);
+
+                    element.append(option);
+
                 });
             }
+        },
+
+        _getTagValues: function() {
+
+            if (this.options.tagging === "no") {
+                return [];
+            } else {
+                var tagName = this.element.find("[data-name='tags']").val();
+                return [tagName];
+            }
+
         },
 
 
@@ -94,20 +103,26 @@
 
             this.element.html(html);
 
+            if (this.options.data && this.options.data.choiceType) {
+                this.element.find("[data-name='choice-types']").val(this.options.data.choiceType); //.trigger("change");
+                this._rebindChoicePlugin();
+            }
+
+
             // Scoring Section 
             if (!this.options.scoring_configuration) {
                 this.element.find(this.options.selectors.scoringSection).hide();
             } else {
                 this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_configuration.scoring_at[0].value;
-                this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt).trigger("change");
-
+                this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt); //.trigger("change");
+                this._showScoreInUI();
                 this.element.find("[name='rhetorical-question']").prop("checked", this.options.data.rhetorical);
             }
 
             this._hideTags();
 
-            if (this.options.data && this.options.data.choiceType)
-                this.element.find("[data-name='choice-types']").val(this.options.data.choiceType).trigger("change");
+
+
 
             this._bindData();
         },
@@ -125,9 +140,16 @@
 
                 'click [data-name="cancel-question"]': this._cancelChanges,
 
-                'click [name="rhetorical-question"]': this._markQuestionAsRhetorical
+                'click [name="rhetorical-question"]': this._markQuestionAsRhetorical,
+
+                'change [data-name="tags"]': this._tagChanged
 
             });
+
+        },
+
+        _tagChanged: function(event) {
+            var tag = $(event.target).val();
 
         },
 
@@ -135,6 +157,7 @@
 
             this.options.data.rhetorical = $(event.target).is(":checked");
         },
+
 
         _cancelChanges: function(event) {
             event.preventDefault();
@@ -146,6 +169,17 @@
         _onScoringAtChanges: function(event) {
 
             var value = $(event.target).val();
+
+            this._showScoreInUI(value);
+
+
+        },
+
+        _showScoreInUI: function(scoringAt) {
+
+            scoringAt = scoringAt || this.element.find("[data-name='scoring-method']").val();
+
+            var value = scoringAt;
 
             if (value === "choice") {
                 this.element.find("[data-section='question-scoring']").hide();
@@ -166,8 +200,8 @@
             this.options.data.scoringAt = value;
 
             this.element.find(this.options.selectors.choiceTypes).trigger("change");
-        },
 
+        },
 
 
         _onchoiceTypeChanges: function(event, args) {
@@ -179,6 +213,11 @@
 
         _rebindChoicePlugin: function(choiceType) {
 
+
+            choiceType = choiceType || this.element.find("[data-name='choice-types']").val();
+
+            // if the choice type is changed, then don't retain the old choice 
+            // let the user create new set
             if (this.options.data.choiceType !== choiceType) {
                 this.options.data.choice = null;
             }
@@ -261,7 +300,6 @@
 
             question.rhetorical = this.options.data.rhetorical;
 
-
             var choice = this.choice.val();
 
             if (choice instanceof Error) { /* show this error in the page  */
@@ -271,7 +309,7 @@
             }
 
             if (this.options.tagging === "yes")
-                question.tags = this.tag.getValue(true);
+                question.tags = this._getTagValues();
 
             console.group("Question Builder Result"); /* RemoveLogging:skip */
             console.log(question); /* RemoveLogging:skip */
@@ -302,12 +340,13 @@
 
                 //this.element.find(selectors.choiceTypes).val(question.choiceType).trigger("change");
 
-                if (question.scoringAt === "question") {
+                /*if (question.scoringAt === "question") {
                     this.element.find(selectors.questionScore).val(question.score);
-                }
+                }*/
 
                 if (question.tags && question.tags.length > 0) {
                     // set the tags
+                    this.element.find("[data-name='tags']").val(question.tags[0]);
                 }
 
                 this.element.find(selectors.required).prop("checked", question.required);

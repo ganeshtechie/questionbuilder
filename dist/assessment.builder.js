@@ -57,7 +57,7 @@
             this["dw"]["templates"]["feedback"] = Handlebars.template({
                 "compiler": [7, ">= 4.0.0"],
                 "main": function(container, depth0, helpers, partials, data) {
-                    return "<div>\n    <h1>Feedback System</h1>\n    <p>Configure the feeback message that you want to show to the participants</p>\n    <hr />\n    <div data-section=\"feedback-form\">\n        <div class=\"form-group\">\n            <ul data-name=\"grade-list\"> </ul>\n        </div>\n        <div class=\"form-group\">\n            <div class=\"form-group\">\n                <input type=\"text\" class=\"form-control\" data-name=\"grade-name\" placeholder=\"Grade\" /> </div>\n            <div class=\"form-group\">\n                <span>Score >=</span>\n                <input type=\"number\" class=\"form-control\" data-name=\"score\" placeholder=\"Type the score required to get this grade\" /> </div>\n            <div class=\"form-group\">\n                <textarea class=\"form-control\" data-name=\"feedback\" placeholder=\"Type your feedback for this grade\"></textarea>\n            </div>\n            <div>\n                <button class=\"btn btn-primary\" data-action=\"add-feedback\">Add</button>\n                <button class=\"btn btn-primary\" data-action=\"clear-form\">Cancel</button>\n            </div>\n        </div>\n    </div>\n    <div data-section=\"no-feedback\">\n        <p>Note: Your assessment dosen't have scoring enabled in it. So you can skip this section</p>\n    </div>\n</div>";
+                    return "<div>\n    <h1>Feedback System</h1>\n    <p>Configure the feeback message that you want to show to the participants</p>\n\n    <hr />\n    <div class=\"form-group\">\n        <div class=\"form-group\">\n            <label>Feedback Method</label>\n            <select data-name=\"feedback-method\" class=\"form-control\">\n                <option value=\"simple\">Simple</option>\n                <option value=\"custom\">Custom</option>\n                <!--<option value=\"grouped\">Grouped</option>-->\n            </select>\n        </div>        \n    </div>\n\n    <hr />\n    \n    <div class=\"form-group\" data-section='feedback-form' data-form-name='simple'>\n        <textarea rows=\"3\" class=\"form-control\" data-name=\"feedback-message\" placeholder=\"Type the feedback message...\"></textarea>\n    </div>\n\n    \n    <div data-section=\"feedback-form\" data-form-name='custom'>\n        <div class=\"form-group\">\n            <ul data-name=\"grade-list\"> </ul>\n        </div>\n        <div class=\"form-group\">\n            <div class=\"form-group\">\n                <input type=\"text\" class=\"form-control\" data-name=\"grade-name\" placeholder=\"Grade\" /> </div>\n            <div class=\"form-group\">\n                <span>Score >=</span>\n                <input type=\"number\" class=\"form-control\" data-name=\"score\" placeholder=\"Type the score required to get this grade\" /> </div>\n            <div class=\"form-group\">\n                <textarea class=\"form-control\" data-name=\"feedback\" placeholder=\"Type your feedback for this grade\"></textarea>\n            </div>\n            <div>\n                <button class=\"btn btn-primary\" data-action=\"add-feedback\">Add</button>\n                <button class=\"btn btn-primary\" data-action=\"clear-form\">Cancel</button>\n            </div>\n        </div>\n    </div>\n\n</div>";
                 },
                 "useData": true
             });
@@ -65,7 +65,7 @@
             this["dw"]["templates"]["initial_setup"] = Handlebars.template({
                 "compiler": [7, ">= 4.0.0"],
                 "main": function(container, depth0, helpers, partials, data) {
-                    return "<div data-role=\"initial-setup\">\n    <div class=\"form-group\">\n        <label>Title</label>\n        <input type=\"text\" class=\"form-control\" placeholder=\"Type the Assessment Title\" data-name=\"assessment-title\" /> </div>\n    <div class=\"form-group\">\n        <label>Description</label>\n        <textarea class=\"form-control\" placeholder=\"Type the Assessment Description\" data-name=\"assessment-description\"></textarea>\n    </div>\n    <hr />\n    <div class=\"form-group\" data-section=\"feedback\">\n        <div data-section=\"feedback-form\">\n            <div class=\"form-group\">\n                <label>Feedback Method</label>\n                <select data-name=\"feedback-method\" class=\"form-control\">\n                    <option value=\"simple\">Simple</option>\n                    <option value=\"custom\">Custom</option>\n                    <!--<option value=\"grouped\">Grouped</option>-->\n                </select>\n            </div>\n            <div class=\"form-group\">\n                <label>Feedback</label>\n                <textarea rows=\"3\" class=\"form-control\" data-name=\"feedback-message\" placeholder=\"Type the feedback message...\"></textarea>\n            </div>\n        </div>\n    </div>\n    <hr />\n    <div class=\"form-group\" data-section=\"retake\">\n        <label>Retake Limit</label>\n        <p class=\"well form-inline\">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.\n            <input type=\"number\" class=\"form-control\" data-name=\"retake\" placeholder=\"Enter the retake limit for this assessment\"> </p>\n    </div>\n    <hr />\n    <div class=\"form-group form-inline\">\n        <p>How you want to present your questions to the participant?</p>\n        <div>\n            <p>\n                <input type=\"radio\" value=\"one-by-one\" name=\"staging-method\" /> Show only one question at once</p>\n        </div>\n        <div>\n            <p>\n                <input type=\"radio\" value=\"all-at-once\" name=\"staging-method\" /> Show all questions in the same page</p>\n        </div>\n    </div>\n    <div class=\"form-group\" data-section=\"scoring-method\">\n        <div class=\"form-group\">\n            <label>Scoring Method</label>\n            <dl class=\"dl-horizontal\">\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"any\" />Any</label>\n                </dt>\n                <dd>Full score will be given for a question, on selecting any one correct choice</dd>\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"divide\" />Divide</label>\n                </dt>\n                <dd>Scores will be divided based on the no.of.correct choices, the user selects for a question</dd>\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"all\" />All</label>\n                </dt>\n                <dd>Full score will be given for a question, only when the user selects all the correct choices</dd>\n            </dl>\n        </div>\n    </div>\n</div>";
+                    return "<div data-role=\"initial-setup\">\n    <div class=\"form-group\">\n        <label>Title</label>\n        <input type=\"text\" class=\"form-control\" placeholder=\"Type the Assessment Title\" data-name=\"assessment-title\" /> </div>\n    <div class=\"form-group\">\n        <label>Description</label>\n        <textarea class=\"form-control\" placeholder=\"Type the Assessment Description\" data-name=\"assessment-description\"></textarea>\n    </div>\n    \n    <hr />\n    <div class=\"form-group\" data-section=\"retake\">\n        <label>Retake Limit</label>\n        <p class=\"well form-inline\">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.\n            <input type=\"number\" class=\"form-control\" data-name=\"retake\" placeholder=\"Enter the retake limit for this assessment\"> </p>\n    </div>\n    <hr />\n    <div class=\"form-group form-inline\">\n        <p>How you want to present your questions to the participant?</p>\n        <div>\n            <p>\n                <input type=\"radio\" value=\"one-by-one\" name=\"staging-method\" /> Show only one question at once</p>\n        </div>\n        <div>\n            <p>\n                <input type=\"radio\" value=\"all-at-once\" name=\"staging-method\" /> Show all questions in the same page</p>\n        </div>\n    </div>\n    <div class=\"form-group\" data-section=\"scoring-method\">\n        <div class=\"form-group\">\n            <label>Scoring Method</label>\n            <dl class=\"dl-horizontal\">\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"any\" />Any</label>\n                </dt>\n                <dd>Full score will be given for a question, on selecting any one correct choice</dd>\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"divide\" />Divide</label>\n                </dt>\n                <dd>Scores will be divided based on the no.of.correct choices, the user selects for a question</dd>\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"all\" />All</label>\n                </dt>\n                <dd>Full score will be given for a question, only when the user selects all the correct choices</dd>\n            </dl>\n        </div>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -173,21 +173,21 @@
                             "hash": {},
                             "data": data
                         }) : helper))) +
-                        "\">\r\n    <div>\r\n        <p>" +
+                        "\">\n    <div>\n        <p>" +
                         ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "title",
                             "hash": {},
                             "data": data
                         }) : helper))) != null ? stack1 : "") +
-                        "</p>\r\n    </div>\r\n    <div data-choice-type=\"" +
+                        "</p>\n    </div>\n    <div data-choice-type=\"" +
                         alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "type",
                             "hash": {},
                             "data": data
                         }) : helper))) +
-                        "\">\r\n        <div class=\"form-group\" data-choice-item>\r\n            <input type=\"text\" class=\"form-control\" data-max-length=\"" +
+                        "\">\n        <div class=\"form-group\" data-choice-item>\n            <input type=\"text\" class=\"form-control\" data-max-length=\"" +
                         alias4(container.lambda(((stack1 = (depth0 != null ? depth0.choice : depth0)) != null ? stack1.maximumlength : stack1), depth0)) +
-                        "\" /> </div>\r\n    </div>\r\n</div>";
+                        "\" /> </div>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -351,7 +351,7 @@
                             "inverse": container.noop,
                             "data": data
                         })) != null ? stack1 : "") +
-                        " </select>\n            </div>\n            <div class=\"form-group\">\n                <div data-section=\"choice\"> </div>\n            </div>\n        </div>\n        <div data-section=\"tagging\">\n            <div class=\"form-group\">\n                <!-- Tags should go here -->\n                <h5>Tag Question:</h5>\n                <select class=\"form-control\" data-name=\"tags\" placeholder=\"Type the tag name and press 'Enter'\" multiple=\"\"></select>\n            </div>\n        </div>\n    </div>\n    <div class=\"form-group\">\n        <label>\n            <input type=\"checkbox\" data-name=\"required\" /> Required </label>\n        <label>\n            <input type=\"checkbox\" data-name=\"shuffle\" /> Randomize Choice </label>\n    </div>\n    <div class=\"form-group\">\n        <button class=\"btn btn-primary\" data-name=\"save-question\">Preview Question</button>\n        <button class=\"btn btn-default\" data-name=\"cancel-question\">Reset</button>\n    </div>\n</div>";
+                        " </select>\n            </div>\n            <div class=\"form-group\">\n                <div data-section=\"choice\"> </div>\n            </div>\n        </div>\n        <div data-section=\"tagging\">\n            <div class=\"form-group\">\n                <!-- Tags should go here -->\n                <h5>Tag Question:</h5>\n                <select class=\"form-control\" data-name=\"tags\"></select>\n            </div>\n        </div>\n    </div>\n    <div class=\"form-group\">\n        <label>\n            <input type=\"checkbox\" data-name=\"required\" /> Required </label>\n        <label>\n            <input type=\"checkbox\" data-name=\"shuffle\" /> Randomize Choice </label>\n    </div>\n    <div class=\"form-group\">\n        <button class=\"btn btn-primary\" data-name=\"save-question\">Preview Question</button>\n        <button class=\"btn btn-default\" data-name=\"cancel-question\">Reset</button>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -1452,22 +1452,31 @@
                             this.element.find(this.options.selectors.taggingSection).hide();
                         } else {
 
-                            var element = this.element.find("[data-name='tags']")[0];
+                            var element = this.element.find("[data-name='tags']");
 
-                            this.tag = new Choices(element, {
-                                placeholder: true,
-                                placeholdervalue: "Type the tag name and press 'Enter'"
-                            }).ajax(function(callback) {
+                            var template = "<option value='{0}'>{0}</option>";
 
-                                var source = _.map($this.options.tags, function(tag) {
-                                    return {
-                                        title: tag
-                                    };
-                                });
+                            var option = "";
 
-                                callback(source, "title", "title");
+                            this.options.tags.forEach(function(e, i) {
+
+                                option = template.replace(/\{0\}/g, e);
+
+                                element.append(option);
+
                             });
                         }
+                    },
+
+                    _getTagValues: function() {
+
+                        if (this.options.tagging === "no") {
+                            return [];
+                        } else {
+                            var tagName = this.element.find("[data-name='tags']").val();
+                            return [tagName];
+                        }
+
                     },
 
 
@@ -1483,20 +1492,26 @@
 
                         this.element.html(html);
 
+                        if (this.options.data && this.options.data.choiceType) {
+                            this.element.find("[data-name='choice-types']").val(this.options.data.choiceType); //.trigger("change");
+                            this._rebindChoicePlugin();
+                        }
+
+
                         // Scoring Section 
                         if (!this.options.scoring_configuration) {
                             this.element.find(this.options.selectors.scoringSection).hide();
                         } else {
                             this.options.data.scoringAt = this.options.data.scoringAt || this.options.scoring_configuration.scoring_at[0].value;
-                            this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt).trigger("change");
-
+                            this.element.find("[data-name='scoring-method']").val(this.options.data.scoringAt); //.trigger("change");
+                            this._showScoreInUI();
                             this.element.find("[name='rhetorical-question']").prop("checked", this.options.data.rhetorical);
                         }
 
                         this._hideTags();
 
-                        if (this.options.data && this.options.data.choiceType)
-                            this.element.find("[data-name='choice-types']").val(this.options.data.choiceType).trigger("change");
+
+
 
                         this._bindData();
                     },
@@ -1514,9 +1529,16 @@
 
                             'click [data-name="cancel-question"]': this._cancelChanges,
 
-                            'click [name="rhetorical-question"]': this._markQuestionAsRhetorical
+                            'click [name="rhetorical-question"]': this._markQuestionAsRhetorical,
+
+                            'change [data-name="tags"]': this._tagChanged
 
                         });
+
+                    },
+
+                    _tagChanged: function(event) {
+                        var tag = $(event.target).val();
 
                     },
 
@@ -1524,6 +1546,7 @@
 
                         this.options.data.rhetorical = $(event.target).is(":checked");
                     },
+
 
                     _cancelChanges: function(event) {
                         event.preventDefault();
@@ -1535,6 +1558,17 @@
                     _onScoringAtChanges: function(event) {
 
                         var value = $(event.target).val();
+
+                        this._showScoreInUI(value);
+
+
+                    },
+
+                    _showScoreInUI: function(scoringAt) {
+
+                        scoringAt = scoringAt || this.element.find("[data-name='scoring-method']").val();
+
+                        var value = scoringAt;
 
                         if (value === "choice") {
                             this.element.find("[data-section='question-scoring']").hide();
@@ -1555,8 +1589,8 @@
                         this.options.data.scoringAt = value;
 
                         this.element.find(this.options.selectors.choiceTypes).trigger("change");
-                    },
 
+                    },
 
 
                     _onchoiceTypeChanges: function(event, args) {
@@ -1568,6 +1602,11 @@
 
                     _rebindChoicePlugin: function(choiceType) {
 
+
+                        choiceType = choiceType || this.element.find("[data-name='choice-types']").val();
+
+                        // if the choice type is changed, then don't retain the old choice 
+                        // let the user create new set
                         if (this.options.data.choiceType !== choiceType) {
                             this.options.data.choice = null;
                         }
@@ -1650,7 +1689,6 @@
 
                         question.rhetorical = this.options.data.rhetorical;
 
-
                         var choice = this.choice.val();
 
                         if (choice instanceof Error) { /* show this error in the page  */
@@ -1660,7 +1698,7 @@
                         }
 
                         if (this.options.tagging === "yes")
-                            question.tags = this.tag.getValue(true);
+                            question.tags = this._getTagValues();
 
                         console.group("Question Builder Result"); /* RemoveLogging:skip */
                         console.log(question); /* RemoveLogging:skip */
@@ -1691,12 +1729,13 @@
 
                             //this.element.find(selectors.choiceTypes).val(question.choiceType).trigger("change");
 
-                            if (question.scoringAt === "question") {
+                            /*if (question.scoringAt === "question") {
                                 this.element.find(selectors.questionScore).val(question.score);
-                            }
+                            }*/
 
                             if (question.tags && question.tags.length > 0) {
                                 // set the tags
+                                this.element.find("[data-name='tags']").val(question.tags[0]);
                             }
 
                             this.element.find(selectors.required).prop("checked", question.required);
@@ -2619,7 +2658,6 @@
 
                     _options: {
 
-
                     },
 
                     currentGrade: null,
@@ -2627,36 +2665,54 @@
                     datasource: {},
 
                     _create: function() {
-
                         this._super();
+
+                        // linking the state and datascore object
+                        this.datasource = state.feedback;
 
                         this.element.html(template);
 
+                        // if no scoring, then the feedback for each grade is not applicable.
+                        // just show the simple method
                         if (!this.options.scoring_configuration) {
-                            this.element.find("[data-section='feedback-form']").hide();
-                            return;
+                            this.datasource.feedbackMethod = "simple";
+                            this.element.find("[data-name='feedback-method']").find("option[value='custom']").remove();
                         }
-
-                        this.element.find("[data-section='no-feedback']").hide();
 
                         this._bind();
 
                         var that = this;
 
-                        this.datasource = state.feedback;
+
+
+                        this._syncUIwithStateObject();
+
+                    },
+
+                    _pushDefaultGrade: function() {
+                        var that = this;
 
                         this.datasource.grade = this.datasource.grade || [];
 
                         if (this.datasource.grade.length === 0) {
+
                             this.datasource.grade.push($.extend({}, grade, {
                                 isDefault: true
                             }));
+
                         }
 
                         $(this.datasource.grade).each(function(i, e) {
                             that._addGradeToUI(e);
                         });
 
+                    },
+
+                    _syncUIwithStateObject: function() {
+
+                        this.element.find("[data-name='feedback-method']").val(this.datasource.feedbackMethod);
+                        this._showFeedbackForm(this.datasource.feedbackMethod);
+                        // by this time, the form will be ready
                     },
 
                     _bind: function() {
@@ -2669,9 +2725,54 @@
 
                             "click [data-action='clear-form']": this._clearForm,
 
-                            "click [data-action='delete-grade']": this._onDeleteClicked
+                            "click [data-action='delete-grade']": this._onDeleteClicked,
+
+                            "change [data-name='feedback-method']": this._onFeedbackMethodChanged,
+
+                            "change [data-name='feedback-message']": this._onFeedbackChanged
 
                         });
+
+                    },
+
+                    _onFeedbackChanged: function(event) {
+                        event.preventDefault();
+
+                        this.datasource.feedbackMessage = $(event.target).val();
+
+                    },
+
+                    _onFeedbackMethodChanged: function(event) {
+                        event.preventDefault();
+
+                        var feedbackMethod = $(event.target).val();
+
+                        this._showFeedbackForm(feedbackMethod);
+
+                    },
+
+                    _showFeedbackForm: function(feedbackMethod) {
+
+                        feedbackMethod = feedbackMethod || this.element.find("[data-name='feedback-method']").val();
+
+                        this.datasource.feedbackMethod = feedbackMethod;
+
+                        //this.datasource.feedback = this.datasource.feedback || {};
+
+                        //this.datasource.feedback.feedbackMethod = feedbackMethod;
+
+                        this.element.find("[data-section='feedback-form']").addClass("hide");
+
+                        if (this.datasource.feedbackMethod === "simple") {
+                            // show the textarea
+                            this.element.find("[data-section='feedback-form'][data-form-name='simple']").removeClass("hide");
+                            this.element.find("[data-name='feedback-message']").val(this.datasource.feedbackMessage);
+
+                        } else if (this.datasource.feedbackMethod === "custom") {
+                            // show the grading options
+                            this._pushDefaultGrade();
+                            this.element.find("[data-section='feedback-form'][data-form-name='custom']").removeClass("hide");
+                        }
 
                     },
 
@@ -2927,20 +3028,12 @@
 
                         this.datasource = this.datasource || state;
 
-
                         this.element.find("[data-name='assessment-title']").val(this.datasource.title);
 
                         this.element.find("[data-name='assessment-description']").val(this.datasource.description);
 
                         this.element.find("[data-name='retake']").val(this.datasource.retakeLimit);
 
-
-                        if (!this.options.feedback_configuration)
-                            this.element.find("[data-section='feedback']").hide();
-                        else {
-                            this.datasource.feedback.feedbackMessage = this.datasource.feedback.feedbackMessage || this.options.feedback_configuration.feedback_message;
-                            this.element.find("[data-name='feedback-message']").val(this.datasource.feedback.feedbackMessage);
-                        }
 
                         if (!this.options.scoring_configuration) {
                             this.element.find("[data-section='scoring-method']").remove();
@@ -2950,6 +3043,7 @@
                             this.element.find(_selector).prop("checked", true);
                         }
 
+
                         if (this.options.enable_retake === "no") {
                             this.element.find("[data-section='retake']").remove();
                         } else {
@@ -2958,8 +3052,6 @@
                         }
 
                         this.datasource.stagingMethod = this.datasource.stagingMethod || this.options.default_staging_method;
-
-
                         _selector = "[name='staging-method'][value='{0}']".replace(/\{0\}/, this.datasource.stagingMethod);
                         this.element.find(_selector).prop("checked", true);
 
@@ -2974,25 +3066,14 @@
 
                             "change [data-name='assessment-description']": this._onDescriptionChanged,
 
-                            "change [data-name='feedback-message']": this._feedbackMessageChanged,
-
                             "click [data-section='scoring-method'] [name='scoring-method']": this._onScoringMethodChanged,
 
                             "click [name='staging-method']": this._onStagingMethodChanged,
 
-                            "change [data-name='retake']": this._onRetakeLimitChanged,
-
-                            "change [data-name='feedback-method']": this._feedbackMethodChanged
+                            "change [data-name='retake']": this._onRetakeLimitChanged
 
                         });
 
-                    },
-
-                    _feedbackMethodChanged: function(event) {
-
-                        this.datasource.feedback = this.datasource.feedback || {};
-
-                        this.datasource.feedback.feedbackMethod = $(event.target).val();
                     },
 
                     _onStagingMethodChanged: function(event) {
@@ -3014,13 +3095,7 @@
                         this.datasource.description = value;
                     },
 
-                    _feedbackMessageChanged: function(event) {
-                        var value = $(event.target).val();
 
-                        this.datasource.feedback = this.datasource.feedback || {};
-
-                        this.datasource.feedback.feedbackMessage = value;
-                    },
 
                     _onRetakeLimitChanged: function(event) {
                         var value = $(event.target).val();

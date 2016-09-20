@@ -3,6 +3,5 @@
   "description": "<p>A survey for diabetis</p>",
   "retake": 10,
   "questions": [],
-  "scoring_method": "any",
-  "feedback_message": "Thank you for participating"
+  "scoring_method": "any"
 }

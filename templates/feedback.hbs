@@ -2,7 +2,21 @@
     <h1>Feedback System</h1>
     <p>Configure the feeback message that you want to show to the participants</p>
     <hr />
-    <div data-section="feedback-form">
+    <div class="form-group">
+        <div class="form-group">
+            <label>Feedback Method</label>
+            <select data-name="feedback-method" class="form-control">
+                <option value="simple">Simple</option>
+                <option value="custom">Custom</option>
+                <!--<option value="grouped">Grouped</option>-->
+            </select>
+        </div>
+    </div>
+    <hr />
+    <div class="form-group" data-section='feedback-form' data-form-name='simple'>
+        <textarea rows="3" class="form-control" data-name="feedback-message" placeholder="Type the feedback message..."></textarea>
+    </div>
+    <div data-section="feedback-form" data-form-name='custom'>
         <div class="form-group">
             <ul data-name="grade-list"> </ul>
         </div>
@@ -20,8 +34,5 @@
                 <button class="btn btn-primary" data-action="clear-form">Cancel</button>
             </div>
         </div>
-    </div>
-    <div data-section="no-feedback">
-        <p>Note: Your assessment dosen't have scoring enabled in it. So you can skip this section</p>
     </div>
 </div>
