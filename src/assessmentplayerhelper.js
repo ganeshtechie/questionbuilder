@@ -38,9 +38,26 @@
 
     $.fn.dwplay_checkbox = function(element, options) {
 
+        var selector = {
+            PLAY_QUESTION: "[data-name='play-question']"
+        };
+
         this.each(function() {
 
             var $this = $(this);
+
+            // preselected choice is when, the choice is already selected, those choice id 
+            // has to be added in the dom
+            var preselectedChoices = $this.find(".clickable:checked");
+
+            var preselectedChoiceId = _.map(preselectedChoices, function(e) {
+                return parseInt($(e).val());
+            });
+
+            $this.closest(selector.PLAY_QUESTION).data("value", {
+                selectedChoices: preselectedChoiceId
+            });
+
 
             $this.on("click", function(event) {
 
@@ -48,7 +65,7 @@
 
                 if (!$(event.target).is(".clickable")) return;
 
-                var closestContainer = $(event.target).closest("[data-name='play-question']");
+                var closestContainer = $(event.target).closest(selector.PLAY_QUESTION);
 
                 var choiceId = parseInt($(event.target).closest("[data-choice-item]").data("value"));
 
@@ -67,7 +84,6 @@
                 closestContainer.data("value", value);
 
             });
-
 
         });
 

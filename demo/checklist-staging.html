@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title></title>
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../bower_components/bootstrap-vertical-tabs/bootstrap.vertical-tabs.css" rel="stylesheet" />
+    <link href="../node_modules/choices.js/assets/styles/css/choices.min.css" rel="stylesheet" />
+    <style type="text/css">
+    .hide {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="col-xs-12">
+        <div id="assessmentdetails" class="container">
+
+            <ul>
+                <li>
+
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+
+    <!-- Dependecies -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/jquery-ui/jquery-ui.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../node_modules/q/q.js"></script>
+    <script src="../bower_components/handlebars/handlebars.runtime.js"></script>
+    <script src="../templates/templates.js"></script>
+    <script src="../bower_components/lodash/dist/lodash.js"></script>
+    <!-- Dependecies -->
+
+    <script src="../templates/templates.js"></script>
+    <script src="../src/assessmentplayerhelper.js"></script>
+    <script src="../src/staging.checklist.js"></script>
+   
+    <script type="text/javascript">
+        $("#assessmentdetails").checkliststaging({
+            title: "Sample Check List",
+            datasource: [{"title":"Select all the choices which you feel could be correct. 4 + 4 = _____ ? ","id":"1","type":"checkbox","required":"true","choice":[{ "id":"1","title":"8", "selected": true },{"id":"2","title":"08", "selected": true },{"id":"3","title":"16", "selected": true},{"id":"4","title":"1", "selected": true}]},{"title":"8 * 8 = _____ ?","id":"2","type":"checkbox","required":"true","choice":[{"id":"1","title":"84", "selected": true},{"id":"2","title":"54"},{"id":"3","title":"16"}]}]
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,11 +1,21 @@
 <div data-role="choice-item" class="ui-state-default">
-    <div class="pull-left"><a href="#"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></a></div>
     <div class="form-group form-inline">
         <input type="hidden" data-name="uniqueid" value="{{ id }}" />
-        <input type="checkbox" title="'Check' to mark this choice as correct" name="question{{ unique_id }}" />
-        <textarea data-name="choice" placeholder="Type your choice here" rows="1" class="form-control">{{ title }}</textarea> {{#if enable_scoring}}
+        <input type="hidden" data-name="choicetext" />
+
+        <input title="Mark this as answer" class="checkbox-custom" id="question{{ id }}" name="question{{ id }}" type="checkbox">
+        <label id="text" class="checkbox-custom-label" for="question{{ id }}"> </label>
+      
+        <span class="input input--hoshi active">
+            <div data-role="editor" data-name='choice' contenteditable="true" class="input__field input__field--hoshi jqx-widget jqx-editor-inline" data-placeholder="Type your choice here"></div>
+            <label class="input__label input__label--hoshi input__label--hoshi-color-1"> </label>
+        </span>
+
+        {{#if enable_scoring}}
         <label>Score</label>
-        <input type="number" data-name="score" placeholder="Enter the score" value="{{ score }}" class="form-control" /> {{/if }}
-        <div class="pull-right"><a data-role="delete-choice"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+        <input type="number" data-name="score" placeholder="Enter the score" value="{{ score }}" class="form-control" /> 
+        {{/if }}
+		
+		<a data-role="delete-choice"><i class="fa fa-trash" aria-hidden="true"></i></a>
     </div>
 </div>

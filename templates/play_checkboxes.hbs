@@ -5,6 +5,6 @@
     <div data-choice-type="{{ type }}"> {{#each choice}}
         <div class="checkbox" data-choice-item data-value="{{ id }}">
             <label>
-                <input type="checkbox" class="clickable" value="{{ id }}"> {{ ./title }} </label>
+                <input type="checkbox" class="clickable" {{#if selected }} checked="checked" {{/if}} value="{{ id }}"> {{ ./title }} </label>
         </div> {{/each }} </div>
 </div>

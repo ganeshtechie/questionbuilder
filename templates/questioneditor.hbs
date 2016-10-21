@@ -1,44 +1,56 @@
-<div class="question-editor">
-    <div data-container="question-editor">
-        <div data-section="question">
-            <div class="form-group" data-role="question">
-                <textarea class="form-control" data-name="title" placeholder="Type your question here..."></textarea>
-            </div>
-            <div data-section="scoring">
-                <div class="form-group">
-                    <label>Have scores on: </label>
-                    <select class="form-control" data-name="scoring-method"> {{#each scoring_configuration.scoring_at }}
-                        <option value="{{ value }}">{{ title }}</option> {{/each }} </select>
+<div class="question-editor row question-box active">
+    <div class="col-sm-9">
+        <div data-container="question-editor">
+            <div data-section="question">
+                <div class="form-group" data-role="question">
+                    <div>
+                        <span class="input input--hoshi">
+                            <div data-role="editor" data-name="title" class="input__field input__field--hoshi jqx-widget jqx-editor-inline" contenteditable="true" data-placeholder="Enter Your Question Here" id="input-4"></div>
+                            <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4"> </label>
+                        </span>
+                    </div>
                 </div>
-                <div class="form-group" data-section="question-scoring">
-                    <input type="number" class="form-control" data-name="question-score" placeholder="Enter your score" /> </div>
-                <p class="well">Select the checkbox, to mark this question as <i>rhetorical question</i>. If selected, any scores given to this question will have no effect on the results.
-                    <input type="checkbox" name="rhetorical-question" /> </p>
+                <div data-section="scoring">
+                    <div class="form-group">
+                        <label>Have scores on: </label>
+                        <select class="form-control" data-name="scoring-method"> {{#each scoring_configuration.scoring_at }}
+                            <option value="{{ value }}">{{ title }}</option> {{/each }} </select>
+                    </div>
+                    <div class="form-group" data-section="question-scoring">
+                        <input type="number" class="form-control" data-name="question-score" placeholder="Enter your score" /> </div>
+                    <p class="well">Select the checkbox, to mark this question as <i>rhetorical question</i>. If selected, any scores given to this question will have no effect on the results.
+                        <input type="checkbox" name="rhetorical-question" /> </p>
+                </div>
+                
+                <div class="form-group">
+                    <div data-section="choice"> </div>
+                </div>
             </div>
-            <div class="form-group">
-                <select data-name="choice-types" class="form-control"> {{#each allowed_choice_types}}
-                    <option value="{{ value }}">{{ title }}</option> {{/each}} </select>
-            </div>
-            <div class="form-group">
-                <div data-section="choice"> </div>
+            <div data-section="tagging">
+                <div class="form-group">
+                    <!-- Tags should go here -->
+                    <h5>Tag Question:</h5>
+                    <select class="form-control" data-name="tags"></select>
+                </div>
             </div>
         </div>
-        <div data-section="tagging">
-            <div class="form-group">
-                <!-- Tags should go here -->
-                <h5>Tag Question:</h5>
-                <select class="form-control" data-name="tags"></select>
-            </div>
+        <div class="form-group">
+            <label>
+                <input type="checkbox" data-name="required" /> Required </label>
+            <label>
+                <input type="checkbox" data-name="shuffle" /> Randomize Choice </label>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" data-name="save-question">Preview Question</button>
+            <button class="btn btn-default" data-name="cancel-question">Reset</button>
         </div>
     </div>
-    <div class="form-group">
-        <label>
-            <input type="checkbox" data-name="required" /> Required </label>
-        <label>
-            <input type="checkbox" data-name="shuffle" /> Randomize Choice </label>
-    </div>
-    <div class="form-group">
-        <button class="btn btn-primary" data-name="save-question">Preview Question</button>
-        <button class="btn btn-default" data-name="cancel-question">Reset</button>
+    <div class="col-sm-3">
+        <select data-name="choice-types"> 
+            {{#each allowed_choice_types}}
+            <option value="{{ value }}">{{ title }}</option> 
+            {{/each}} 
+        </select>
     </div>
 </div>

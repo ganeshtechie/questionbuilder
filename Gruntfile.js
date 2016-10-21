@@ -54,7 +54,7 @@
 
         jsbeautifier: {
 
-            files: ["src/**/*.js", "templates/*.hbs", "dist/**/*.js", "!templates/templates.js"],
+            files: ["src/**/*.js", "dist/**/*.js", "!templates/templates.js"],
 
             options: {
 
@@ -106,9 +106,19 @@
                 src: [ 'templates/templates.js', 'src/app.state.js', 'src/core.js', 'src/base.js', 
                     'src/renderengine.js', 'src/choices.js', 'src/toggle.js', 'src/questionbuilder.js', 
                     'src/helper.js', 'src/singleline.js', 'src/multiline.js', 'src/shell.js', 
-                    'src/feedback.js', 'src/initialsetup.js'
+                    'src/feedback.js', 'src/initialsetup.js', 'src/util.js'
                 ],
-                dest: 'dist/assessment.builder.js',
+                dest: 'dist/assessment.builder.js'
+            },
+
+            blender: {
+
+                src: [ 'templates/templates.js', 'src/app.state.js', 'src/core.js', 'src/base.js', 
+                    'src/renderengine.js', 'src/choices.js', 'src/toggle.js', 'src/questionbuilder.js', 
+                    'src/helper.js', 'src/singleline.js', 'src/multiline.js', 'src/shell.js', 
+                    'src/feedback.js', 'src/initialsetup.js', 'src/util.js' ],
+
+                dest: 'D:\\TFS\\BlenderFamily\\Blender\\Branches\\DEV\\Source\\WebProjects\\BlenderWeb\\Scripts\\assessment.builder.js'
             },
 
             play: {
@@ -138,6 +148,6 @@
 
     grunt.registerTask("clean", ["removelogging:js", "jsbeautifier"]);
 
-    grunt.registerTask("bundle", ["concat:builder", "concat:play", "jsbeautifier"]);
+    grunt.registerTask("bundle", ["concat:builder", "concat:blender", "concat:play", "jsbeautifier"]);
 
 };

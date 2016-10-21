@@ -1,10 +1,5 @@
 (function() {
 
-    $("body").on("keydown keyup", "textarea", function() {
-
-        if (this.clientHeight < this.scrollHeight) $(this).height(this.scrollHeight);
-
-    });
 
     $.widget("dw.questionbuilder", {
 
@@ -103,6 +98,10 @@
 
             this.element.html(html);
 
+            this.element.find("[data-role='editor']").jqxEditor({
+                tools: 'bold italic underline | format font size | color background | left center right'
+            });
+
             if (this.options.data && this.options.data.choiceType) {
                 this.element.find("[data-name='choice-types']").val(this.options.data.choiceType); //.trigger("change");
                 this._rebindChoicePlugin();
@@ -120,9 +119,6 @@
             }
 
             this._hideTags();
-
-
-
 
             this._bindData();
         },
@@ -142,10 +138,23 @@
 
                 'click [name="rhetorical-question"]': this._markQuestionAsRhetorical,
 
-                'change [data-name="tags"]': this._tagChanged
+                'change [data-name="tags"]': this._tagChanged,
+
+                'click .question-box': this._onQuestionFocused,
+
+                'blur .question-box': this._onQuestionBlur
 
             });
 
+        },
+
+        _onQuestionFocused: function(event) {
+            $(this.element).find("[data-name='title']").closest('span.input--hoshi').addClass("active");
+        },
+
+
+        _onQuestionBlur: function(event) {
+            $(this.element).find("[data-name='title']").closest('span.input--hoshi').removeClass("active");
         },
 
         _tagChanged: function(event) {
@@ -288,7 +297,7 @@
 
             question.required = this.element.find("[data-name='required']").is(":checked");
             question.randomizeChoice = this.element.find("[data-name='shuffle']").is(":checked");
-            question.title = this.element.find("[data-name='title']").val();
+            question.title = this.element.find("[data-name='title']").jqxEditor("val");
             question.choiceType = this.element.find("[data-name='choice-types']").val();
 
             if (this.options.scoring_configuration) {
@@ -299,6 +308,8 @@
             }
 
             question.rhetorical = this.options.data.rhetorical;
+
+            if (typeof question.rhetorical === "undefined") question.rhetorical = false;
 
             var choice = this.choice.val();
 
