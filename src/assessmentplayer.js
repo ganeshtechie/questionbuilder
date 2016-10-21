@@ -65,6 +65,10 @@
 
         _render: function() {
 
+            var isArray = Object.prototype.toString.call(someVar) === '[object Array]';
+
+            if (!isArray) this.options.datasource = [this.options.datasource];
+
             this.options.datasource.map(function(q) {
 
                 q.id = parseInt(q.id);

@@ -1,18 +1,23 @@
 <div data-role="initial-setup">
     <div class="form-group">
-        <label>Title</label>
-        <input type="text" class="form-control" placeholder="Type the Assessment Title" data-name="assessment-title" /> </div>
-    <div class="form-group">
-        <label>Description</label>
-        <textarea class="form-control" placeholder="Type the Assessment Description" data-name="assessment-description"></textarea>
+        <span class="input input--hoshi">
+            <input data-name="assessment-title" class="input__field input__field--hoshi" type="text" id="input-4">
+            <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4">
+                <span class="input__label-content input__label-content--hoshi">Title</span>
+            </label>
+        </span>
     </div>
-    <hr />
+    <div class="form-group">
+        <span class="input input--hoshi">
+            <div data-role="editor" data-name="assessment-description" class="input__field input__field--hoshi jqx-widget jqx-editor-inline" contenteditable="true" data-placeholder="Enter your description" id="input-4"></div>
+            <label class="input__label input__label--hoshi input__label--hoshi-color-1" for="input-4"> </label>
+        </span>
+    </div>
     <div class="form-group" data-section="retake">
         <label>Retake Limit</label>
         <p class="well form-inline">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.
             <input type="number" class="form-control" data-name="retake" placeholder="Enter the retake limit for this assessment"> </p>
     </div>
-    <hr />
     <div class="form-group form-inline">
         <p>How you want to present your questions to the participant?</p>
         <div>
@@ -24,7 +29,7 @@
                 <input type="radio" value="all-at-once" name="staging-method" /> Show all questions in the same page</p>
         </div>
     </div>
-    <div class="form-group" data-section="scoring-method">
+    <div data-section="scoring-method">
         <div class="form-group">
             <label>Scoring Method</label>
             <dl class="dl-horizontal">

@@ -67,7 +67,7 @@
         getChoiceFactory: function(type, config, choiceId) {
 
             var choiceObj = {},
-                score = null;
+                score = 0;
 
             choiceId = choiceId || [1];
 
@@ -82,7 +82,8 @@
                     return {
                         id: e,
                         title: config.default_choice.replace(/\{0\}/, e.toString()),
-                        score: score
+                        score: score,
+                        correct: false
                     };
                 });
                 return choices;

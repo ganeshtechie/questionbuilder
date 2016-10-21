@@ -48,9 +48,19 @@
 
         // if default choices are provided, make it available in the UI for the user to modify
         for (var i = 0; i < this.options.data.length; i++) {
+
             var choiceHTML = $(this.getChoiceHtml(this.options.data[i]));
+
+            var title = this.options.data[i].title;
+
             this.choiceContainer.append(choiceHTML);
-            if (this.options.data[i].correct === true) choiceHTML.find("input[type='checkbox']").prop("checked", true);
+
+            choiceHTML.find("[data-name='choicetext']").val(title);
+
+
+            if (this.options.data[i].correct === true)
+                choiceHTML.find("input[type='checkbox']").prop("checked", true);
+
         }
 
 
@@ -71,6 +81,23 @@
         } else if (this.options.add_more_choice === "no" || this.options.max_no_of_chocies === 1) {
             this.addMoreChoice.addClass("hide");
         }
+
+        this.element.find("[data-role='editor']").jqxEditor({
+            tools: 'bold italic underline | format font size | color background | left center right'
+        });
+
+
+        var items = this.element.find("[data-role='choice-item']");
+
+
+        items.map(function(i, e) {
+
+            var title = $(e).find("[data-name='choicetext']").val();
+
+            $(e).find("[data-role='editor']").val(title);
+
+        });
+
 
         this.choiceContainer.sortable();
 
@@ -115,6 +142,10 @@
             var choice = this.options.templates.choice(data);
 
             this.choiceContainer.append(choice);
+
+            this.element.find("[data-role='editor']").jqxEditor({
+                tools: 'bold italic underline | format font size | color background | left center right'
+            });
 
             this.updateAddMoreChoice();
         },

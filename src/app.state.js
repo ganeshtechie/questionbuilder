@@ -20,7 +20,7 @@
         // a description which tells about the assessment
         description: "",
 
-        retakeLimit: -1,
+        retakeLimit: 5,
 
         questions: [],
 

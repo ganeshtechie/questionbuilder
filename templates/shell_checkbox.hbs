@@ -4,22 +4,30 @@
             <div>
                 <p>{{{ title }}}</p>
             </div>
-            <div> {{#each choice}}
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" data-value="{{ id }}" name="question{{ ../id  }}" /> {{ title }} </label>
-                </div> {{/each }} </div>
-            <div data-section="tags"> {{#each tags}}
-                <span class="label label-info">{{ this }}</span> {{/each}} </div>
-            <div>
-                <ul>
-                    <li> <a data-action="edit">Edit</a> </li>
-                    <li> <a data-action="delete">Delete</a> </li>
-                    <li> <a data-action="insert">Insert</a> </li>
-                    <li> <a data-action="moveup">Move Up</a> </li>
-                    <li> <a data-action="movedown">Move Down</a> </li>
-                </ul>
+            
+            <div> 
+            {{#each choice}}
+                <div>
+                    <input class="checkbox-custom" id="chk{{ ../id }}{{ id }}" data-value="{{ id }}" name="question{{ ../id  }}" type="checkbox" />
+                    <label id="text" for="chk{{ ../id }}{{ id }}" class="checkbox-custom-label">{{{ title }}}</label>
+                </div> 
+            {{/each }} 
             </div>
+
+            <div data-section="tags"> 
+                {{#each tags}}
+                <span class="label label-info">{{ this }}</span> 
+                {{/each}} 
+            </div>
+
+            <div class="as-attributes pull-right"> 
+                <i data-action="edit" class="fa fa-edit" title="Edit Question"></i> 
+                <i data-action="insert" class="fa fa-plus-circle" title="Insert Question"></i> 
+                <i data-action="moveup" class="fa fa-arrow-circle-up" title="Move Up"></i> 
+                <i data-action="movedown" class="fa fa-arrow-circle-down" title="Move Down"></i> 
+                <i data-action="delete" class="fa fa-trash-o" title="Delete Question"></i> 
+            </div>
+
         </div>
     </div>
     <div data-view="">

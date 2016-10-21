@@ -6,9 +6,17 @@
     <link href="../bower_components/bootstrap-vertical-tabs/bootstrap.vertical-tabs.css" rel="stylesheet" />
     <link href="../node_modules/choices.js/assets/styles/css/choices.min.css" rel="stylesheet" />
 
+    <link href="../bower_components/jqwidgets/jqwidgets/styles/jqx.base.css" rel="stylesheet" />
+
     <style type="text/css">
         .hide {
             display: none;
+        }
+        .question-editor{
+            padding-top: 50px;
+        }
+        [contentEditable=true]:empty:not(:focus):before{
+            content:attr(data-placeholder)
         }
     </style>
 
@@ -32,6 +40,9 @@
 
     <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script src="../bower_components/jquery-ui/jquery-ui.js"></script>
+
+    <script src="../bower_components/jqwidgets/jqwidgets/jqx-all.js"></script>
+
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="../node_modules/q/q.js"></script>
     <script src="../bower_components/handlebars/handlebars.runtime.js"></script>
@@ -50,8 +61,10 @@
     <script type="text/javascript">
 
     $("[data-section='question-edit']").questionbuilder({
-        
+       
     });
+
+    
         
     </script>
 
