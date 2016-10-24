@@ -289,7 +289,8 @@
         },
 
 
-        _saveQuestion: function() {
+        _saveQuestion: function(event) {
+            event.preventDefault();
 
             var question = {};
 
