@@ -6,30 +6,12 @@
 
             this["dw"]["templates"]["checkboxes"] = Handlebars.template({
                 "1": function(container, depth0, helpers, partials, data) {
-                    var helper;
-
-                    return "        <label>Score</label>\n        <input type=\"number\" data-name=\"score\" placeholder=\"Enter the score\" value=\"" +
-                        container.escapeExpression(((helper = (helper = helpers.score || (depth0 != null ? depth0.score : depth0)) != null ? helper : helpers.helperMissing), (typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {}, {
-                            "name": "score",
-                            "hash": {},
-                            "data": data
-                        }) : helper))) +
-                        "\" class=\"form-control\" /> \n";
-                },
-                "compiler": [7, ">= 4.0.0"],
-                "main": function(container, depth0, helpers, partials, data) {
-                    var stack1, helper, alias1 = depth0 != null ? depth0 : {},
+                    var helper, alias1 = depth0 != null ? depth0 : {},
                         alias2 = helpers.helperMissing,
                         alias3 = "function",
                         alias4 = container.escapeExpression;
 
-                    return "<div data-role=\"choice-item\" class=\"ui-state-default\">\n    <div class=\"form-group form-inline\">\n        <input type=\"hidden\" data-name=\"uniqueid\" value=\"" +
-                        alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-                            "name": "id",
-                            "hash": {},
-                            "data": data
-                        }) : helper))) +
-                        "\" />\n        <input type=\"hidden\" data-name=\"choicetext\" />\n\n        <input title=\"Mark this as answer\" class=\"checkbox-custom\" id=\"question" +
+                    return "        <input title=\"Mark this as answer\" class=\"checkbox-custom\" id=\"question" +
                         alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "id",
                             "hash": {},
@@ -47,7 +29,30 @@
                             "hash": {},
                             "data": data
                         }) : helper))) +
-                        "\"> </label>\n      \n        <span class=\"input input--hoshi active\">\n            <div data-role=\"editor\" data-name='choice' contenteditable=\"true\" class=\"input__field input__field--hoshi jqx-widget jqx-editor-inline\" data-placeholder=\"Type your choice here\"></div>\n            <label class=\"input__label input__label--hoshi input__label--hoshi-color-1\"> </label>\n        </span>\n\n" +
+                        "\"> </label>\n";
+                },
+                "3": function(container, depth0, helpers, partials, data) {
+                    var helper;
+
+                    return "        <label>Score</label>\n        <input type=\"number\" data-name=\"score\" placeholder=\"Enter the score\" value=\"" +
+                        container.escapeExpression(((helper = (helper = helpers.score || (depth0 != null ? depth0.score : depth0)) != null ? helper : helpers.helperMissing), (typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {}, {
+                            "name": "score",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "\" class=\"form-control\" /> \n";
+                },
+                "compiler": [7, ">= 4.0.0"],
+                "main": function(container, depth0, helpers, partials, data) {
+                    var stack1, helper, alias1 = depth0 != null ? depth0 : {};
+
+                    return "<div data-role=\"choice-item\" class=\"ui-state-default\">\n    <div class=\"form-group form-inline\">\n        <input type=\"hidden\" data-name=\"uniqueid\" value=\"" +
+                        container.escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helpers.helperMissing), (typeof helper === "function" ? helper.call(alias1, {
+                            "name": "id",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "\" />\n        <input type=\"hidden\" data-name=\"choicetext\" />\n\n" +
                         ((stack1 = helpers["if"].call(alias1, (depth0 != null ? depth0.enable_scoring : depth0), {
                             "name": "if",
                             "hash": {},
@@ -55,7 +60,15 @@
                             "inverse": container.noop,
                             "data": data
                         })) != null ? stack1 : "") +
-                        "		\n		<a data-role=\"delete-choice\"><i class=\"fa fa-trash\" aria-hidden=\"true\"></i></a>\n    </div>\n</div>";
+                        "        \n        <span class=\"input input--hoshi active\">\n            <div data-role=\"editor\" data-name='choice' contenteditable=\"true\" class=\"input__field input__field--hoshi jqx-widget jqx-editor-inline\" data-placeholder=\"Type your choice here\"></div>\n            <label class=\"input__label input__label--hoshi input__label--hoshi-color-1\"> </label>\n        </span>\n\n" +
+                        ((stack1 = helpers["if"].call(alias1, (depth0 != null ? depth0.enable_scoring : depth0), {
+                            "name": "if",
+                            "hash": {},
+                            "fn": container.program(3, data, 0),
+                            "inverse": container.noop,
+                            "data": data
+                        })) != null ? stack1 : "") +
+                        "		\n		<a data-role=\"delete-choice\" title=\"Delete Option\"><i class=\"fa fa-close\" aria-hidden=\"true\"></i></a>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -71,7 +84,7 @@
             this["dw"]["templates"]["initial_setup"] = Handlebars.template({
                 "compiler": [7, ">= 4.0.0"],
                 "main": function(container, depth0, helpers, partials, data) {
-                    return "<div data-role=\"initial-setup\">\n    <div class=\"form-group\">\n        <span class=\"input input--hoshi\">\n            <input data-name=\"assessment-title\" class=\"input__field input__field--hoshi\" type=\"text\" id=\"input-4\">\n            <label class=\"input__label input__label--hoshi input__label--hoshi-color-1\" for=\"input-4\">\n                <span class=\"input__label-content input__label-content--hoshi\">Title</span>\n            </label>\n        </span>\n    </div>\n    <div class=\"form-group\">\n        <span class=\"input input--hoshi\">\n            <div data-role=\"editor\" data-name=\"assessment-description\" class=\"input__field input__field--hoshi jqx-widget jqx-editor-inline\" contenteditable=\"true\" data-placeholder=\"Enter your description\" id=\"input-4\"></div>\n            <label class=\"input__label input__label--hoshi input__label--hoshi-color-1\" for=\"input-4\"> </label>\n        </span>\n    </div>\n    <div class=\"form-group\" data-section=\"retake\">\n        <label>Retake Limit</label>\n        <p class=\"well form-inline\">Note: Setting retake limit to -1, will allow the user to retake this assessment infinite times.\n            <input type=\"number\" class=\"form-control\" data-name=\"retake\" placeholder=\"Enter the retake limit for this assessment\"> </p>\n    </div>\n    <div class=\"form-group form-inline\">\n        <p>How you want to present your questions to the participant?</p>\n        <div>\n            <p>\n                <input type=\"radio\" value=\"one-by-one\" name=\"staging-method\" /> Show only one question at once</p>\n        </div>\n        <div>\n            <p>\n                <input type=\"radio\" value=\"all-at-once\" name=\"staging-method\" /> Show all questions in the same page</p>\n        </div>\n    </div>\n    <div data-section=\"scoring-method\">\n        <div class=\"form-group\">\n            <label>Scoring Method</label>\n            <dl class=\"dl-horizontal\">\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"any\" />Any</label>\n                </dt>\n                <dd>Full score will be given for a question, on selecting any one correct choice</dd>\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"divide\" />Divide</label>\n                </dt>\n                <dd>Scores will be divided based on the no.of.correct choices, the user selects for a question</dd>\n                <dt>\n                    <label>\n                        <input type=\"radio\" name=\"scoring-method\" value=\"all\" />All</label>\n                </dt>\n                <dd>Full score will be given for a question, only when the user selects all the correct choices</dd>\n            </dl>\n        </div>\n    </div>\n</div>";
+                    return "<div data-role=\"initial-setup\">\n   \n        <span class=\"input input--hoshi\">\n            <input data-name=\"assessment-title\" class=\"input__field input__field--hoshi\" type=\"text\" id=\"input-4\" data-placeholder=\"Title\">\n            <label class=\"input__label input__label--hoshi input__label--hoshi-color-1\" for=\"input-4\">\n            </label>\n        </span>\n  \n    \n        <span class=\"input input--hoshi\">\n            <div data-role=\"editor\" data-name=\"assessment-description\" class=\"input__field input__field--hoshi jqx-widget jqx-editor-inline\" contenteditable=\"true\" data-placeholder=\"Enter your description\" id=\"input-4\"></div>\n            <label class=\"input__label input__label--hoshi input__label--hoshi-color-1\" for=\"input-4\"> </label>\n        </span>\n  \n    <div class=\"form-group\" data-section=\"retake\">\n        <label>Retake Limit</label>\n        <div>\n       <input class=\"checkbox-custom\" id=\"checkbox-1\" type=\"checkbox\">\n       <label id=\"text\" class=\"checkbox-custom-label\" for=\"checkbox-1\">Infinite</label>\n       <input class=\"checkbox-custom\" id=\"checkbox-2\" type=\"checkbox\">\n       <label id=\"text\" class=\"checkbox-custom-label\" for=\"checkbox-2\">none</label>\n       <span class=\"retake-limit\">\n            <label>Enter the Limit:</label> <input type=\"number\" class=\"form-control\" data-name=\"retake\" placeholder=\"Enter the retake limit for this assessment\"> \n            </span>\n    </div>\n    </div>\n    <div class=\"form-group form-inline\">\n        <p>How you want to present your questions to the participant?</p>\n        <div>\n            <p>\n             <input class=\"radio-custom\" name=\"staging-method\" value=\"one-by-one\" id=\"checkbox-3\" type=\"radio\">\n       <label id=\"text\" class=\"radio-custom-label\" for=\"checkbox-3\">Show only one question at once</label>\n      </p>\n        </div>\n        <div>\n            <p>\n             <input class=\"radio-custom\" name=\"staging-method\" value=\"all-at-once\" id=\"checkbox-4\" type=\"radio\">\n       <label id=\"text\" class=\"radio-custom-label\" for=\"checkbox-4\">Show all questions in the same page</label>\n        </div>\n    </div>\n    <div data-section=\"scoring-method\">\n        <div class=\"form-group\">\n            <label>Scoring Method</label>\n                    <input class=\"radio-custom\" name=\"staging-method\" value=\"any\" id=\"checkbox-5\" type=\"radio\">\n       <label title=\"Full score will be given for a question, on selecting any one correct choice\" id=\"text\" class=\"radio-custom-label\" for=\"checkbox-5\">Any</label>              \n                    <input class=\"radio-custom\" name=\"staging-method\" value=\"divide\" id=\"checkbox-6\" type=\"radio\">\n       <label title=\"Scores will be divided based on the no.of.correct choices, the user selects for a question\" id=\"text\" class=\"radio-custom-label\" for=\"checkbox-6\">Divide</label> <input class=\"radio-custom\" name=\"staging-method\" value=\"all\" id=\"checkbox-7\" type=\"radio\">\n       <label title=\"Full score will be given for a question, only when the user selects all the correct choices\" id=\"text\" class=\"radio-custom-label\" for=\"checkbox-7\">All</label>\n        </div>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -314,26 +327,6 @@
                         alias3 = "function",
                         alias4 = container.escapeExpression;
 
-                    return "\n                            <option value=\"" +
-                        alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-                            "name": "value",
-                            "hash": {},
-                            "data": data
-                        }) : helper))) +
-                        "\">" +
-                        alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
-                            "name": "title",
-                            "hash": {},
-                            "data": data
-                        }) : helper))) +
-                        "</option> ";
-                },
-                "3": function(container, depth0, helpers, partials, data) {
-                    var helper, alias1 = depth0 != null ? depth0 : {},
-                        alias2 = helpers.helperMissing,
-                        alias3 = "function",
-                        alias4 = container.escapeExpression;
-
                     return "            <option value=\"" +
                         alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
                             "name": "value",
@@ -348,27 +341,47 @@
                         }) : helper))) +
                         "</option> \n";
                 },
+                "3": function(container, depth0, helpers, partials, data) {
+                    var helper, alias1 = depth0 != null ? depth0 : {},
+                        alias2 = helpers.helperMissing,
+                        alias3 = "function",
+                        alias4 = container.escapeExpression;
+
+                    return "\n                            <option value=\"" +
+                        alias4(((helper = (helper = helpers.value || (depth0 != null ? depth0.value : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "value",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "\">" +
+                        alias4(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2), (typeof helper === alias3 ? helper.call(alias1, {
+                            "name": "title",
+                            "hash": {},
+                            "data": data
+                        }) : helper))) +
+                        "</option> ";
+                },
                 "compiler": [7, ">= 4.0.0"],
                 "main": function(container, depth0, helpers, partials, data) {
                     var stack1, alias1 = depth0 != null ? depth0 : {};
 
-                    return "<div class=\"question-editor row question-box active\">\n    <div class=\"col-sm-9\">\n        <div data-container=\"question-editor\">\n            <div data-section=\"question\">\n                <div class=\"form-group\" data-role=\"question\">\n                    <div>\n                        <span class=\"input input--hoshi\">\n                            <div data-role=\"editor\" data-name=\"title\" class=\"input__field input__field--hoshi jqx-widget jqx-editor-inline\" contenteditable=\"true\" data-placeholder=\"Enter Your Question Here\" id=\"input-4\"></div>\n                            <label class=\"input__label input__label--hoshi input__label--hoshi-color-1\" for=\"input-4\"> </label>\n                        </span>\n                    </div>\n                </div>\n                <div data-section=\"scoring\">\n                    <div class=\"form-group\">\n                        <label>Have scores on: </label>\n                        <select class=\"form-control\" data-name=\"scoring-method\"> " +
-                        ((stack1 = helpers.each.call(alias1, ((stack1 = (depth0 != null ? depth0.scoring_configuration : depth0)) != null ? stack1.scoring_at : stack1), {
+                    return "<div class=\"question-editor row question-box active\">\n    <div class=\"col-sm-9\">\n        <div data-container=\"question-editor\">\n            <div data-section=\"question\">\n                <div class=\"form-group\" data-role=\"question\">\n                    <div>\n                        <span class=\"input input--hoshi\">\n                            <div data-role=\"editor\" data-name=\"title\" class=\"input__field input__field--hoshi jqx-widget jqx-editor-inline\" contenteditable=\"true\" data-placeholder=\"Enter Your Question Here\" id=\"input-4\"></div>\n                            <label class=\"input__label input__label--hoshi input__label--hoshi-color-1\" for=\"input-4\"> </label>\n                        </span>\n                    </div>\n                </div>\n               \n                \n                <div class=\"as-options\">\n                    <div data-section=\"choice\"> </div>\n                </div>\n            </div>\n            <div data-section=\"tagging\">\n                <div class=\"form-group\">\n                    <!-- Tags should go here -->\n                    <h5>Tag Question:</h5>\n                    <select class=\"form-control\" data-name=\"tags\"></select>\n                </div>\n            </div>\n        </div>\n        <div class=\"as-attributes pull-right\">\n\n            <span>Required :</span>\n            <div class=\"onoffswitch\">\n                <input type=\"checkbox\" data-name=\"required\" name=\"onoffswitch\" class=\"onoffswitch-checkbox\" id=\"myonoffswitch\">\n                <label class=\"onoffswitch-label\" for=\"myonoffswitch\">\n                    <span class=\"onoffswitch-inner\"></span>\n                    <span class=\"onoffswitch-switch\"></span>\n                </label>\n            </div>\n\n            <i class=\"fa fa-ellipsis-v dropdown\" data-toggle=\"dropdown\" title=\"more\"></i>\n            <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu\">\n                <li class=\"add-score-screen-question\">\n                    <input title=\"Shuffle the choices\" data-name=\"shuffle\" class=\"checkbox-custom\" id=\"shufflechoices\" type=\"checkbox\">\n                    <label class=\"checkbox-custom-label\" for=\"shufflechoices\">Shuffle Choices</label>\n                </li>\n            </ul>                                      \n        </div>\n\n        <div class=\"form-group\">\n            <button class=\"btn btn-primary\" data-name=\"save-question\">Preview Question</button>\n            <button class=\"btn btn-default\" data-name=\"cancel-question\">Reset</button>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <select data-name=\"choice-types\"> \n" +
+                        ((stack1 = helpers.each.call(alias1, (depth0 != null ? depth0.allowed_choice_types : depth0), {
                             "name": "each",
                             "hash": {},
                             "fn": container.program(1, data, 0),
                             "inverse": container.noop,
                             "data": data
                         })) != null ? stack1 : "") +
-                        " </select>\n                    </div>\n                    <div class=\"form-group\" data-section=\"question-scoring\">\n                        <input type=\"number\" class=\"form-control\" data-name=\"question-score\" placeholder=\"Enter your score\" /> </div>\n                    <p class=\"well\">Select the checkbox, to mark this question as <i>rhetorical question</i>. If selected, any scores given to this question will have no effect on the results.\n                        <input type=\"checkbox\" name=\"rhetorical-question\" /> </p>\n                </div>\n                \n                <div class=\"form-group\">\n                    <div data-section=\"choice\"> </div>\n                </div>\n            </div>\n            <div data-section=\"tagging\">\n                <div class=\"form-group\">\n                    <!-- Tags should go here -->\n                    <h5>Tag Question:</h5>\n                    <select class=\"form-control\" data-name=\"tags\"></select>\n                </div>\n            </div>\n        </div>\n        <div class=\"form-group\">\n            <label>\n                <input type=\"checkbox\" data-name=\"required\" /> Required </label>\n            <label>\n                <input type=\"checkbox\" data-name=\"shuffle\" /> Randomize Choice </label>\n        </div>\n\n        <div class=\"form-group\">\n            <button class=\"btn btn-primary\" data-name=\"save-question\">Preview Question</button>\n            <button class=\"btn btn-default\" data-name=\"cancel-question\">Reset</button>\n        </div>\n    </div>\n    <div class=\"col-sm-3\">\n        <select data-name=\"choice-types\"> \n" +
-                        ((stack1 = helpers.each.call(alias1, (depth0 != null ? depth0.allowed_choice_types : depth0), {
+                        "        </select>\n         <div data-section=\"scoring\" class=\"scoring-block\">\n                    \n                        <label>Assign Scores For: </label>\n                        <select class=\"form-control\" data-name=\"scoring-method\"> " +
+                        ((stack1 = helpers.each.call(alias1, ((stack1 = (depth0 != null ? depth0.scoring_configuration : depth0)) != null ? stack1.scoring_at : stack1), {
                             "name": "each",
                             "hash": {},
                             "fn": container.program(3, data, 0),
                             "inverse": container.noop,
                             "data": data
                         })) != null ? stack1 : "") +
-                        "        </select>\n    </div>\n</div>";
+                        " </select>\n                   \n\n                    <div data-section=\"question-scoring\">\n                        <input type=\"number\" class=\"form-control\" data-name=\"question-score\" placeholder=\"Enter your score\" /> </div>\n                    <p>\n                    <input class=\"checkbox-custom\" id=\"question3\" name=\"rhetorical-question\" type=\"checkbox\">\n<label id=\"text\" class=\"checkbox-custom-label\" for=\"question3\">  Select the checkbox, to mark this question as rhetorical question. If selected, any scores given to this question will have no effect on the results.</label>\n                   \n                        </p>\n                </div>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -521,7 +534,7 @@
                             "inverse": container.noop,
                             "data": data
                         })) != null ? stack1 : "") +
-                        "            </div>\n\n            <div class=\"as-attributes pull-right\"> \n                <i data-action=\"edit\" class=\"fa fa-edit\" title=\"Edit Question\"></i> \n                <i data-action=\"insert\" class=\"fa fa-plus-circle\" title=\"Insert Question\"></i> \n                <i data-action=\"moveup\" class=\"fa fa-arrow-circle-up\" title=\"Move Up\"></i> \n                <i data-action=\"movedown\" class=\"fa fa-arrow-circle-down\" title=\"Move Down\"></i> \n                <i data-action=\"delete\" class=\"fa fa-trash-o\" title=\"Delete Question\"></i> \n            </div>\n\n        </div>\n    </div>\n    <div data-view=\"\">\n        <h2>Edit Question</h2>\n        <div data-container=\"edit\"> </div>\n    </div>\n</div>";
+                        "            </div>\n\n            <div class=\"as-attributes pull-right\"> \n                <i data-action=\"edit\" class=\"fa fa-edit\" title=\"Edit Question\"></i> \n                <i data-action=\"insert\" class=\"fa fa-plus-circle\" title=\"Insert Question\"></i> \n                <i data-action=\"moveup\" class=\"fa fa-arrow-circle-up\" title=\"Move Up\"></i> \n                <i data-action=\"movedown\" class=\"fa fa-arrow-circle-down\" title=\"Move Down\"></i> \n                <i data-action=\"delete\" class=\"fa fa-trash-o\" title=\"Delete Question\"></i> \n            </div>\n\n        </div>\n    </div>\n    <div data-view=\"\">\n        <div data-container=\"edit\"> </div>\n    </div>\n</div>";
                 },
                 "useData": true,
                 "useDepths": true
@@ -558,7 +571,7 @@
                         alias4(alias5(((stack1 = (depth0 != null ? depth0.choice : depth0)) != null ? stack1.maximumlength : stack1), depth0)) +
                         "\" data-role=\"" +
                         alias4(alias5(((stack1 = (depth0 != null ? depth0.choice : depth0)) != null ? stack1.fieldformat : stack1), depth0)) +
-                        "\"></textarea>\n                </div>\n            </div>\n            \n            <div class=\"as-attributes pull-right\"> \n                <i data-action=\"edit\" class=\"fa fa-edit\" title=\"Edit Question\"></i> \n                <i data-action=\"insert\" class=\"fa fa-plus-circle\" title=\"Insert Question\"></i> \n                <i data-action=\"moveup\" class=\"fa fa-arrow-circle-up\" title=\"Move Up\"></i> \n                <i data-action=\"movedown\" class=\"fa fa-arrow-circle-down\" title=\"Move Down\"></i> \n                <i data-action=\"delete\" class=\"fa fa-trash-o\" title=\"Delete Question\"></i> \n            </div>\n\n            \n        </div>\n    </div>\n    <div data-view=\"\">\n        <h2>Edit Question</h2>\n        <div data-container=\"edit\"> </div>\n    </div>\n</div>";
+                        "\"></textarea>\n                </div>\n            </div>\n            \n            <div class=\"as-attributes pull-right\"> \n                <i data-action=\"edit\" class=\"fa fa-edit\" title=\"Edit Question\"></i> \n                <i data-action=\"insert\" class=\"fa fa-plus-circle\" title=\"Insert Question\"></i> \n                <i data-action=\"moveup\" class=\"fa fa-arrow-circle-up\" title=\"Move Up\"></i> \n                <i data-action=\"movedown\" class=\"fa fa-arrow-circle-down\" title=\"Move Down\"></i> \n                <i data-action=\"delete\" class=\"fa fa-trash-o\" title=\"Delete Question\"></i> \n            </div>\n\n            \n        </div>\n    </div>\n    <div data-view=\"\">\n        <div data-container=\"edit\"> </div>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -647,7 +660,7 @@
                             "inverse": container.noop,
                             "data": data
                         })) != null ? stack1 : "") +
-                        "            </div>\n\n            <div class=\"as-attributes pull-right\"> \n                <i data-action=\"edit\" class=\"fa fa-edit\" title=\"Edit Question\"></i> \n                <i data-action=\"insert\" class=\"fa fa-plus-circle\" title=\"Insert Question\"></i> \n                <i data-action=\"moveup\" class=\"fa fa-arrow-circle-up\" title=\"Move Up\"></i> \n                <i data-action=\"movedown\" class=\"fa fa-arrow-circle-down\" title=\"Move Down\"></i> \n                <i data-action=\"delete\" class=\"fa fa-trash-o\" title=\"Delete Question\"></i> \n            </div>\n\n        </div>\n    </div>\n    <div data-view=\"\">\n        <h2>Edit Question</h2>\n        <div data-container=\"edit\"> </div>\n    </div>\n</div>";
+                        "            </div>\n\n            <div class=\"as-attributes pull-right\"> \n                <i data-action=\"edit\" class=\"fa fa-edit\" title=\"Edit Question\"></i> \n                <i data-action=\"insert\" class=\"fa fa-plus-circle\" title=\"Insert Question\"></i> \n                <i data-action=\"moveup\" class=\"fa fa-arrow-circle-up\" title=\"Move Up\"></i> \n                <i data-action=\"movedown\" class=\"fa fa-arrow-circle-down\" title=\"Move Down\"></i> \n                <i data-action=\"delete\" class=\"fa fa-trash-o\" title=\"Delete Question\"></i> \n            </div>\n\n        </div>\n    </div>\n    <div data-view=\"\">\n        <div data-container=\"edit\"> </div>\n    </div>\n</div>";
                 },
                 "useData": true,
                 "useDepths": true
@@ -684,7 +697,7 @@
                         alias4(alias5(((stack1 = (depth0 != null ? depth0.choice : depth0)) != null ? stack1.maximumlength : stack1), depth0)) +
                         "\" data-role=\"" +
                         alias4(alias5(((stack1 = (depth0 != null ? depth0.choice : depth0)) != null ? stack1.fieldformat : stack1), depth0)) +
-                        "\" /> </div>\n            </div>\n            <div>\n                <ul>\n                    <li> <a data-action=\"edit\">Edit</a> </li>\n                    <li> <a data-action=\"delete\">Delete</a> </li>\n                    <li> <a data-action=\"insert\">Insert</a> </li>\n                    <li> <a data-action=\"moveup\">Move Up</a> </li>\n                    <li> <a data-action=\"movedown\">Move Down</a> </li>\n                </ul>\n            </div>\n        </div>\n    </div>\n    <div data-view=\"\">\n        <h2>Edit Question</h2>\n        <div data-container=\"edit\"> </div>\n    </div>\n</div>";
+                        "\" /> </div>\n            </div>\n            <div>\n                <ul>\n                    <li> <a data-action=\"edit\">Edit</a> </li>\n                    <li> <a data-action=\"delete\">Delete</a> </li>\n                    <li> <a data-action=\"insert\">Insert</a> </li>\n                    <li> <a data-action=\"moveup\">Move Up</a> </li>\n                    <li> <a data-action=\"movedown\">Move Down</a> </li>\n                </ul>\n            </div>\n        </div>\n    </div>\n    <div data-view=\"\">\n        <div data-container=\"edit\"> </div>\n    </div>\n</div>";
                 },
                 "useData": true
             });
@@ -692,7 +705,7 @@
             this["dw"]["templates"]["shell"] = Handlebars.template({
                 "compiler": [7, ">= 4.0.0"],
                 "main": function(container, depth0, helpers, partials, data) {
-                    return "<div>\n    <div data-section=\"head\"> </div>\n    <div data-section=\"body\"></div>\n    <div data-section=\"footer\">\n        <div class=\"form-group\">\n            <button class=\"btn btn-primary\" data-action=\"save\">Save</button>\n            <button class=\"btn btn-default\" data-action=\"cancel\">Cancel</button>\n        </div>\n    </div>\n</div>";
+                    return "<div>\n    <div data-section=\"head\"> </div>\n    <div data-section=\"body\"></div>\n    <div data-section=\"footer\">\n        <div class=\"form-group\">\n            <button class=\"btn btn-primary hide\" data-action=\"save\">Save</button>\n            <button class=\"btn btn-default hide\" data-action=\"cancel\">Cancel</button>\n        </div>\n    </div>\n</div>";
                 },
                 "useData": true
             });

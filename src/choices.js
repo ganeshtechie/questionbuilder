@@ -7,7 +7,7 @@
 
     var defaults = {
         templates: {
-            layout: '<div data-role="choice-list"></div><div><div><a data-name="add-more-choice">Add more choices</a></div></div>',
+            layout: '<div data-role="choice-list"></div><div><div class="add-choice"><a data-name="add-more-choice">Add more choices</a></div></div>',
             choice: window.dw.templates.checkboxes
         },
         min_no_of_choices: 2,
